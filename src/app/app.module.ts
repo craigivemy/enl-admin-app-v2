@@ -5,16 +5,32 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './app-material.module';
+import {MatButtonModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
+import { HomeComponent } from './home/home.component';
+import { NewSeasonComponent } from './new-season/new-season.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppWrapperComponent,
+    HomeComponent,
+    NewSeasonComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AppMaterialModule
+    AppMaterialModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    LayoutModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
