@@ -1,1 +1,26 @@
-<p>new-season works!</p>
+<mat-vertical-stepper linear>
+  <mat-step [stepControl]="basicDetailsForm">
+    <ng-template matStepLabel>Basic Details</ng-template>
+    <form [formGroup]="basicDetailsForm">
+      <div class="row">
+        <mat-form-field class="col-4">
+          <!-- todo make this dynamic eg 'Summer or winter option, then year(s) option -->
+          <input matInput placeholder="Name - eg 'Winter 2020'" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="col-4">
+          <input matInput [matDatepicker]="startDate" formControlName="startDate" placeholder="Start date">
+          <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+          <mat-datepicker #startDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </form>
+
+  </mat-step>
+  <mat-step label="Choose Divisions">
+    Choose Divisions
+  </mat-step>
+  <mat-step label="Choose Teams">
+    Choose teams
+  </mat-step>
+  <mat-step label="Finalise"></mat-step>
+</mat-vertical-stepper>

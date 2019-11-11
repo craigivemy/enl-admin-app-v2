@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatCardModule} from '@angular/material';
+import {MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatStepperModule} from '@angular/material';
 
 
 
@@ -8,10 +8,20 @@ import {MatCardModule} from '@angular/material';
   declarations: [],
   imports: [
     CommonModule,
-    MatCardModule
+    MatCardModule,
+    MatStepperModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
-    MatCardModule
-  ]
+    MatCardModule,
+    MatStepperModule,
+    MatInputModule,
+    MatDatepickerModule
+  ],
+  providers: [
+    MatNativeDateModule
+  ],
 })
 export class AppMaterialModule { }
