@@ -17,10 +17,19 @@
 
   </mat-step>
   <mat-step label="Choose Divisions">
-    Choose Divisions
+    <ul>
+      <li *ngFor="let division of divisions | async">
+        {{ division.name }}
+      </li>
+    </ul>
   </mat-step>
   <mat-step label="Choose Teams">
-    Choose teams
+    Choose teams <!-- either array with steps or perhaps better a horizontal stepper within this step? -->
+    <mat-horizontal-stepper linear>
+      <mat-step label="test">
+        select teams
+      </mat-step>
+    </mat-horizontal-stepper>
   </mat-step>
   <mat-step label="Finalise"></mat-step>
 </mat-vertical-stepper>

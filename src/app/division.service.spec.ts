@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DivisionsService } from './divisions.service';
+import { DivisionService } from './division.service';
 
-describe('DivisionsService', () => {
+describe('DivisionService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DivisionsService = TestBed.get(DivisionsService);
+    const service: DivisionService = TestBed.get(DivisionService);
     expect(service).toBeTruthy();
   });
 });

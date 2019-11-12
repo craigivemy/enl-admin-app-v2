@@ -13,6 +13,7 @@ import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
 import { HomeComponent } from './home/home.component';
 import { NewSeasonComponent } from './new-season/new-season.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppMaterialModule,
     MatToolbarModule,
     MatSidenavModule,
