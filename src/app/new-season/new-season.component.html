@@ -1,4 +1,4 @@
-<mat-vertical-stepper linear>
+<mat-vertical-stepper> <!-- todo - add linear -->
   <mat-step [stepControl]="basicDetailsForm">
     <ng-template matStepLabel>Basic Details</ng-template>
     <form [formGroup]="basicDetailsForm">
@@ -17,17 +17,19 @@
 
   </mat-step>
   <mat-step label="Choose Divisions">
-    <ul>
-      <li *ngFor="let division of divisions | async">
-        {{ division.name }}
-      </li>
-    </ul>
+    <div class="row">
+      <div class="col-4" *ngFor="let division of divisions | async">
+        <mat-checkbox (change)="updateDynamicDivisionSteps($event, division)">{{ division.name }}</mat-checkbox>
+      </div>
+    </div>
   </mat-step>
   <mat-step label="Choose Teams">
     Choose teams <!-- either array with steps or perhaps better a horizontal stepper within this step? -->
     <mat-horizontal-stepper linear>
-      <mat-step label="test">
-        select teams
+      <mat-step *ngFor="let divisionStep of dynamicDivisionSteps" [label]="divisionStep.name">
+
+        test
+
       </mat-step>
     </mat-horizontal-stepper>
   </mat-step>

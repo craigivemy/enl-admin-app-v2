@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './app-material.module';
-import {MatButtonModule, MatFormFieldModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -35,7 +35,8 @@ import {HttpClientModule} from '@angular/common/http';
     LayoutModule,
     MatIconModule,
     MatListModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
