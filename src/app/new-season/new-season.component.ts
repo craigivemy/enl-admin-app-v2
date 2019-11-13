@@ -3,6 +3,8 @@ import {FormArray, FormBuilder, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {Division} from '../models/division';
 import {DivisionService} from '../division.service';
+import {Team} from '../models/team';
+import {TeamService} from '../team.service';
 
 @Component({
   selector: 'app-new-season',
@@ -11,6 +13,7 @@ import {DivisionService} from '../division.service';
 })
 export class NewSeasonComponent implements OnInit {
   divisions: Observable<Division[]>;
+  teams: Observable<Team[]>;
   dynamicDivisionSteps: Division[] = [];
   basicDetailsForm = this.fb.group({
     name: ['', Validators.required],
@@ -19,10 +22,12 @@ export class NewSeasonComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private divisionsService: DivisionService) { }
+    private divisionService: DivisionService,
+    private teamService: TeamService) { }
 
   ngOnInit() {
-    this.divisions = this.divisionsService.getDivisions();
+    this.divisions = this.divisionService.getDivisions();
+    this.teams = this.teamService.getTeams();
   }
 
   updateDynamicDivisionSteps(event: any, division: Division) {
