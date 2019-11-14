@@ -48,15 +48,17 @@ export class NewSeasonComponent implements OnInit {
     }
   }
 
-  updateTeamsInDivisions(event: any, i: number, divisionId: number, team: Team) {
+  updateTeamsInDivisions(event: any, i: number, divisionId: number, team: Team): void {
     if (event.checked) {
       this.teamsInDivisions[divisionId].push(team);
+      team.addedToSeason = divisionId;
     } else {
       this.removeTeamFromDivision(i, divisionId);
+      team.addedToSeason = null;
     }
   }
 
-  removeTeamFromDivision(i: number, divisionId: number) {
+  removeTeamFromDivision(i: number, divisionId: number): void {
     for (let k = 0; k < this.teamsInDivisions[divisionId].length; k++) {
       this.teamsInDivisions[divisionId].splice(k, 1);
     }

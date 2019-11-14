@@ -6,4 +6,5 @@ export class Team {
   tertiaryColour?: string;
   logoUrl?: string;
   narrative?: string;
+  addedToSeason?: number;
 }
