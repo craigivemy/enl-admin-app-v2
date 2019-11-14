@@ -24,14 +24,15 @@
     </div>
   </mat-step>
   <mat-step label="Choose Teams">
-    Choose teams <!-- either array with steps or perhaps better a horizontal stepper within this step? -->
-    <mat-horizontal-stepper linear>
+    <p *ngIf="!dynamicDivisionSteps.length">Please select your divisions first</p>
+    <mat-horizontal-stepper>
       <mat-step *ngFor="let divisionStep of dynamicDivisionSteps" [label]="divisionStep.name">
-        <div class="col-4" *ngFor="let team of teams | async">
-          <mat-checkbox>{{ team.name }}</mat-checkbox>
+        <div class="col-4" *ngFor="let team of teams | async; let i = index;">
+          <mat-checkbox (change)="updateTeamsInDivisions($event, i, divisionStep.id, team)">{{ team.name }}</mat-checkbox>
         </div>
       </mat-step>
     </mat-horizontal-stepper>
+    <button (click)="test()">Test</button>
   </mat-step>
   <mat-step label="Finalise"></mat-step>
 </mat-vertical-stepper>

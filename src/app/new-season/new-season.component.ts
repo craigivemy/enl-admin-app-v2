@@ -15,6 +15,7 @@ export class NewSeasonComponent implements OnInit {
   divisions: Observable<Division[]>;
   teams: Observable<Team[]>;
   dynamicDivisionSteps: Division[] = [];
+  teamsInDivisions = {};
   basicDetailsForm = this.fb.group({
     name: ['', Validators.required],
     startDate: ['', Validators.required]
@@ -33,8 +34,10 @@ export class NewSeasonComponent implements OnInit {
   updateDynamicDivisionSteps(event: any, division: Division) {
     if (event.checked) {
       this.dynamicDivisionSteps.push(division);
+      this.teamsInDivisions[division.id] = [];
     } else {
       this.removeDivisionStep(division);
+      delete this.teamsInDivisions[division.id];
     }
   }
   removeDivisionStep(division: Division) {
@@ -43,6 +46,23 @@ export class NewSeasonComponent implements OnInit {
         this.dynamicDivisionSteps.splice(i);
       }
     }
+  }
+
+  updateTeamsInDivisions(event: any, i: number, divisionId: number, team: Team) {
+    if (event.checked) {
+      this.teamsInDivisions[divisionId].push(team);
+    } else {
+      this.removeTeamFromDivision(i, divisionId);
+    }
+  }
+
+  removeTeamFromDivision(i: number, divisionId: number) {
+    for (let k = 0; k < this.teamsInDivisions[divisionId].length; k++) {
+      this.teamsInDivisions[divisionId].splice(k, 1);
+    }
+  }
+  test(): void {
+    console.log(this.teamsInDivisions);
   }
 
 }
