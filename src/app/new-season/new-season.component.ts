@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {Division} from '../models/division';
 import {DivisionService} from '../division.service';
@@ -15,7 +15,7 @@ export class NewSeasonComponent implements OnInit {
   divisions: Observable<Division[]>;
   teams: Observable<Team[]>;
   dynamicDivisionSteps: Division[] = [];
-  teamsInDivisions = {};
+  teamsInDivisions = {}; // todo - need to use store
   basicDetailsForm = this.fb.group({
     name: ['', Validators.required],
     startDate: ['', Validators.required]
@@ -63,6 +63,11 @@ export class NewSeasonComponent implements OnInit {
       this.teamsInDivisions[divisionId].splice(k, 1);
     }
   }
+
+  isTeamInThisDivision(teamId: number, divisionId: number): boolean {
+    return this.teamsInDivisions[divisionId] && this.teamsInDivisions[divisionId].indexOf(teamId) !== -1; // is in division
+  }
+
   test(): void {
     console.log(this.teamsInDivisions);
   }

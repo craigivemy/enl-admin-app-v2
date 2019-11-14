@@ -6,7 +6,7 @@
     "enl-admin-app-v2": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
+        "@ngrx/schematics:component": {
           "style": "scss"
         }
       },
@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "enl-admin-app-v2"
+  "defaultProject": "enl-admin-app-v2",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
