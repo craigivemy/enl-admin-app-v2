@@ -44,7 +44,7 @@ import { AppEffects } from './app.effects';
     MatFormFieldModule,
     MatCheckboxModule,
     StoreModule.forRoot(reducers, {
-      metaReducers, 
+      metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
