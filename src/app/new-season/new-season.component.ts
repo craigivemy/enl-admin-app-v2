@@ -13,7 +13,7 @@ import {TeamService} from '../team.service';
 })
 export class NewSeasonComponent implements OnInit {
   divisions: Observable<Division[]>;
-  teams: Observable<Team[]>;
+  teams: Team[];
   dynamicDivisionSteps: Division[] = [];
   teamsInDivisions = {};
   basicDetailsForm = this.fb.group({
@@ -28,7 +28,7 @@ export class NewSeasonComponent implements OnInit {
 
   ngOnInit() {
     this.divisions = this.divisionService.getDivisions();
-    this.teams = this.teamService.getTeams();
+    this.teamService.getTeams().subscribe(teams => this.teams = teams);
   }
 
   updateDynamicDivisionSteps(event: any, division: Division) {
