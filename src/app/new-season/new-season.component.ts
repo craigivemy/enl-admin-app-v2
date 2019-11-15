@@ -37,6 +37,9 @@ export class NewSeasonComponent implements OnInit {
       this.teamsInDivisions[division.id] = [];
     } else {
       this.removeDivisionStep(division);
+      for (const team of this.teamsInDivisions[division.id]) {
+        team.addedToSeason = null;
+      }
       delete this.teamsInDivisions[division.id];
     }
   }
@@ -62,10 +65,6 @@ export class NewSeasonComponent implements OnInit {
     for (let k = 0; k < this.teamsInDivisions[divisionId].length; k++) {
       this.teamsInDivisions[divisionId].splice(k, 1);
     }
-  }
-
-  isTeamInThisDivision(teamId: number, divisionId: number): boolean {
-    return this.teamsInDivisions[divisionId] && this.teamsInDivisions[divisionId].indexOf(teamId) !== -1; // is in division
   }
 
   test(): void {
