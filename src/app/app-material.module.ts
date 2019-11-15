@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatStepperModule} from '@angular/material';
+import {MAT_DATE_LOCALE, MatCardModule, MatDatepickerModule, MatInputModule, MatStepperModule} from '@angular/material';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 
 
@@ -12,7 +13,7 @@ import {MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule,
     MatStepperModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatMomentDateModule
   ],
   exports: [
     MatCardModule,
@@ -21,7 +22,8 @@ import {MatCardModule, MatDatepickerModule, MatInputModule, MatNativeDateModule,
     MatDatepickerModule
   ],
   providers: [
-    MatNativeDateModule
+    MatMomentDateModule,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ],
 })
 export class AppMaterialModule { }

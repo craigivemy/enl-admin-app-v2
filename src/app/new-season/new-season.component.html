@@ -4,13 +4,19 @@
     <form [formGroup]="basicDetailsForm">
       <div class="row">
         <mat-form-field class="col-4">
+          <mat-label>Name</mat-label>
           <!-- todo make this dynamic eg 'Summer or winter option, then year(s) option -->
           <input matInput placeholder="Name - eg 'Winter 2020'" formControlName="name">
         </mat-form-field>
-        <mat-form-field class="col-4">
+        <mat-form-field class="col-2">
+          <mat-label>Start Date</mat-label>
           <input matInput [matDatepicker]="startDate" formControlName="startDate" placeholder="Start date">
           <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
           <mat-datepicker #startDate></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+          <mat-label>Rounds</mat-label>
+          <input matInput type="number" label="Rounds"  formControlName="rounds">
         </mat-form-field>
       </div>
     </form>
@@ -18,7 +24,7 @@
   </mat-step>
   <mat-step label="Choose Divisions">
     <div class="row">
-      <div class="col-4" *ngFor="let division of divisions | async">
+      <div class="col-2" *ngFor="let division of divisions | async">
         <mat-checkbox (change)="updateDynamicDivisionSteps($event, division)">{{ division.name }}</mat-checkbox>
       </div>
     </div>
@@ -35,7 +41,27 @@
         </div>
       </mat-step>
     </mat-horizontal-stepper>
-    <button (click)="test()">Test</button>
   </mat-step>
-  <mat-step label="Finalise"></mat-step>
+  <mat-step label="Review">
+    <div class="row">
+      <div class="col">
+        <h4 class="mb-4">Summary</h4>
+        <p><strong>Name:</strong> {{ basicDetailsForm.controls.name.value }}</p>
+        <p><strong>Start Date:</strong> {{ basicDetailsForm.controls.startDate.value | date: 'mediumDate' }}</p>
+        <p><strong>Rounds:</strong> {{ basicDetailsForm.controls.rounds.value }}</p>
+        <div class="row">
+          <div class="col-6" *ngFor="let division of dynamicDivisionSteps">
+            <h5 class="mb-3">{{ division.name }}</h5>
+            <ul>
+              <li *ngFor="let team of teamsInDivisions[division.id]">
+                {{ team.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button (click)="save(2)" color="accent" class="mr-2" mat-raised-button>Don't activate, just save</button>
+        <button (click)="save(1)" color="primary" mat-raised-button>Save and activate season</button>
+      </div>
+    </div>
+  </mat-step>
 </mat-vertical-stepper>
