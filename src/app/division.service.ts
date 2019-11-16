@@ -5,6 +5,7 @@ import { ApiRoutes} from '../data/api-routes';
 import {map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import {Season} from "./models/season";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,4 @@ export class DivisionService {
         map(divisions => divisions["data"])
       );
   }
-
 }

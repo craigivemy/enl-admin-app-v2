@@ -6,6 +6,8 @@ import {DivisionService} from '../division.service';
 import {Team} from '../models/team';
 import {TeamService} from '../team.service';
 import * as moment from 'moment';
+import {Season} from "../models/season";
+import {SeasonService} from "../season.service";
 
 @Component({
   selector: 'app-new-season',
@@ -16,7 +18,7 @@ export class NewSeasonComponent implements OnInit {
   divisions: Observable<Division[]>;
   teams: Team[];
   dynamicDivisionSteps: Division[] = [];
-  teamsInDivisions = {}; // todo - need to use store
+  teamsInDivisions = {};
   basicDetailsForm = this.fb.group({
     name: ['', Validators.required],
     startDate: ['', Validators.required],
@@ -26,7 +28,8 @@ export class NewSeasonComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private divisionService: DivisionService,
-    private teamService: TeamService) { }
+    private teamService: TeamService,
+    private seasonService: SeasonService) { }
 
   ngOnInit() {
     this.divisions = this.divisionService.getDivisions();
@@ -71,14 +74,17 @@ export class NewSeasonComponent implements OnInit {
 
   save(status: number) {
     const startDate = moment(this.basicDetailsForm.controls.startDate.value).format('YYYY-MM-DD');
-    const newSeason = {
+    const newSeason: Season = {
       name: this.basicDetailsForm.controls.name.value,
       startDate,
       rounds: this.basicDetailsForm.controls.rounds.value,
       current: status,
-      divisions: this.teamsInDivisions
     };
-    console.log(newSeason);
+    const divisionsTeams = this.teamsInDivisions;
+    console.log(this.teamsInDivisions);
+    this.seasonService.save(newSeason, divisionsTeams).subscribe(
+      // dispatch action to update current season id
+    );
   }
 
 }

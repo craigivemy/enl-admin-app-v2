@@ -20,13 +20,19 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
+import { SeasonEffects } from './season/season.effects';
+import * as fromSeason from './season/season.reducer';
+import { TeamListingComponent } from './team-listing/team-listing.component';
+import { PlayedUpComponent } from './played-up/played-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppWrapperComponent,
     HomeComponent,
-    NewSeasonComponent
+    NewSeasonComponent,
+    TeamListingComponent,
+    PlayedUpComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,9 @@ import { AppEffects } from './app.effects';
       }
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
+    StoreModule.forFeature('seasons', fromSeason.reducer),
+    EffectsModule.forFeature([SeasonEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
