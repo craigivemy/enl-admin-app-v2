@@ -32,9 +32,4 @@ export class TeamListingComponent implements OnInit {
         );
     });
   }
-
-  testChangeCurrentSeasonId() {
-    this.store.dispatch()
-  }
-
 }
