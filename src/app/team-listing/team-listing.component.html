@@ -1,1 +1,7 @@
 <p>team-listing works!</p>
+
+<ul>
+  <li *ngFor="let division of divisionsWithTeams$ | async">
+    {{ division.name }}
+  </li>
+</ul>

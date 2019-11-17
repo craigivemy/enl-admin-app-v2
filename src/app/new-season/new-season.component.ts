@@ -8,6 +8,9 @@ import {TeamService} from '../team.service';
 import * as moment from 'moment';
 import {Season} from "../models/season";
 import {SeasonService} from "../season.service";
+import {Store} from "@ngrx/store";
+import {AppState} from "../reducers";
+import {addSeason} from "../season/season.actions";
 
 @Component({
   selector: 'app-new-season',
@@ -27,6 +30,7 @@ export class NewSeasonComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private store: Store<AppState>,
     private divisionService: DivisionService,
     private teamService: TeamService,
     private seasonService: SeasonService) { }
@@ -83,7 +87,7 @@ export class NewSeasonComponent implements OnInit {
     const divisionsTeams = this.teamsInDivisions;
     console.log(this.teamsInDivisions);
     this.seasonService.save(newSeason, divisionsTeams).subscribe(
-      // dispatch action to update current season id
+      season => this.store.dispatch(addSeason({season}))
     );
   }
 

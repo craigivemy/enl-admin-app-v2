@@ -22,6 +22,9 @@ const seasonReducer = createReducer(
   initialSeasonState,
   on(SeasonActions.loadSeasonsSuccess, (state, {seasons}) => {
     return adapter.addAll(seasons, {...state, allSeasonsLoaded: true});
+  }),
+  on(SeasonActions.addSeason, (state, {season}) => {
+    return adapter.addOne(season, {...state});
   })
 );
 

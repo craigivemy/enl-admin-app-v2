@@ -22,8 +22,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { SeasonEffects } from './season/season.effects';
 import * as fromSeason from './season/season.reducer';
+import * as fromDivision from './division/division.reducer';
 import { TeamListingComponent } from './team-listing/team-listing.component';
 import { PlayedUpComponent } from './played-up/played-up.component';
+import { DivisionEffects } from './division/division.effects';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { PlayedUpComponent } from './played-up/played-up.component';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
     StoreModule.forFeature('seasons', fromSeason.reducer),
-    EffectsModule.forFeature([SeasonEffects])
+    StoreModule.forFeature('divisions', fromDivision.reducer),
+    EffectsModule.forFeature([SeasonEffects, DivisionEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

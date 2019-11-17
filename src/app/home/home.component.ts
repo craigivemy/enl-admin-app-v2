@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
-import {selectCurrentSeason} from "../season/season.selector";
+import {selectCurrentSeasonId} from "../season/season.selector";
 import {Observable} from "rxjs";
 
 @Component({
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.currentSeasonId = this.store
       .pipe(
-        select(selectCurrentSeason)
+        select(selectCurrentSeasonId)
       );
   }
 

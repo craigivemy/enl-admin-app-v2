@@ -8,6 +8,7 @@
       <a mat-list-item routerLink="home">Home</a>
       <a mat-list-item routerLink="new-season">New Season</a>
       <a mat-list-item routerLink="played-up">Played up table</a>
+      <a mat-list-item routerLink="teams">Teams</a>
       <ul>
         <li *ngFor="let season of seasons$ | async">
           {{ season.name }}

@@ -20,4 +20,11 @@ export class DivisionService {
         map(divisions => divisions["data"])
       );
   }
+
+  getDivisionsWithTeams(seasonId: number): Observable<Division[]> {
+    return this.http.get(`${this.divisionsApiUrl}?seasonId=${seasonId}`)
+      .pipe(
+        map(divisionsWithTeams => divisionsWithTeams["data"])
+      );
+  }
 }

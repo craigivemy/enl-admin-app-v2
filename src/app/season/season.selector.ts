@@ -15,7 +15,7 @@ export const selectIfAllSeasonsLoaded = createSelector(
   seasonState => seasonState.allSeasonsLoaded
 );
 
-export const selectCurrentSeason = createSelector(
+export const selectCurrentSeasonId = createSelector(
   selectAllSeasons,
   allSeasons => {
     const currentSeason = allSeasons.filter(
