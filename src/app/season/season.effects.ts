@@ -26,7 +26,15 @@ export class SeasonEffects {
       this.seasonService.getSeasons().pipe(
         map(seasons => SeasonActions.loadSeasonsSuccess({seasons}))
       )
-    ))
+    )
+  ));
+
+  addSeasonRedirect$ = createEffect(() => this.actions$.pipe(
+    // todo - should be add season success?
+    ofType(SeasonActions.addSeason),
+    tap(() => window.location.href = '/teams')
+  ),
+{dispatch: false}
   );
 
 
