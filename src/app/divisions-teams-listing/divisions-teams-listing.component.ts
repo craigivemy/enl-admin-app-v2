@@ -10,10 +10,10 @@ import {selectAllDivisions} from "../division/division.selector";
 
 @Component({
   selector: 'app-team-listing',
-  templateUrl: './team-listing.component.html',
-  styleUrls: ['./team-listing.component.scss']
+  templateUrl: './divisions-teams-listing.component.html',
+  styleUrls: ['./divisions-teams-listing.component.scss']
 })
-export class TeamListingComponent implements OnInit {
+export class DivisionsTeamsListingComponent implements OnInit {
   divisionsWithTeams$: Observable<Division[]>;
   divisions$: Observable<Division[]>;
   constructor(

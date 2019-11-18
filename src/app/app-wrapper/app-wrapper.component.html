@@ -4,18 +4,13 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>ENL</mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list class="d-flex flex-column">
       <a mat-list-item routerLink="home">Home</a>
-      <a mat-list-item routerLink="new-season">New Season</a>
+      <a mat-list-item routerLink="teams">Divisions</a>
+      <a mat-list-item routerLink="players">Players</a>
+      <a mat-list-item routerLink="umpires">Umpires</a>
       <a mat-list-item routerLink="played-up">Played up table</a>
-      <a mat-list-item routerLink="teams">Teams</a>
-      <ul>
-        <li *ngFor="let season of seasons$ | async">
-          {{ season.name }}
-        </li>
-      </ul>
-
-
+      <button class="mx-2" mat-raised-button color="primary" routerLink="new-season">New Season</button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

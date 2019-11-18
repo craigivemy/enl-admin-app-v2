@@ -23,9 +23,11 @@ import { AppEffects } from './app.effects';
 import { SeasonEffects } from './season/season.effects';
 import * as fromSeason from './season/season.reducer';
 import * as fromDivision from './division/division.reducer';
-import { TeamListingComponent } from './team-listing/team-listing.component';
+import { DivisionsTeamsListingComponent } from './divisions-teams-listing/divisions-teams-listing.component';
 import { PlayedUpComponent } from './played-up/played-up.component';
 import { DivisionEffects } from './division/division.effects';
+import { AllTeamsListingComponent } from './all-teams-listing/all-teams-listing.component';
+import { AllPlayersListingComponent } from './all-players-listing/all-players-listing.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,10 @@ import { DivisionEffects } from './division/division.effects';
     AppWrapperComponent,
     HomeComponent,
     NewSeasonComponent,
-    TeamListingComponent,
-    PlayedUpComponent
+    DivisionsTeamsListingComponent,
+    PlayedUpComponent,
+    AllTeamsListingComponent,
+    AllPlayersListingComponent
   ],
   imports: [
     BrowserModule,
