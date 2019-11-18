@@ -10,8 +10,8 @@ import {AllPlayersListingComponent} from './all-players-listing/all-players-list
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'new-season', component: NewSeasonComponent },
-  { path: 'divisions', component: DivisionsTeamsListingComponent },
-  { path: 'teams', component: AllTeamsListingComponent },
+  { path: 'teams', component: DivisionsTeamsListingComponent },
+  //{ path: 'teams', component: AllTeamsListingComponent },
   { path: 'players', component: AllPlayersListingComponent }
   // todo - have only players from this season listed to switch around?
   // then an add players page? Or a generic add page where can add teams, players etc?
