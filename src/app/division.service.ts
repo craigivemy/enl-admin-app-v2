@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Division} from './models/division';
 import { ApiRoutes} from '../data/api-routes';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {Season} from "./models/season";
@@ -24,6 +24,7 @@ export class DivisionService {
   getDivisionsWithTeams(seasonId: number): Observable<Division[]> {
     return this.http.get(`${this.divisionsApiUrl}?seasonId=${seasonId}`)
       .pipe(
+        tap(val => console.log(`${this.divisionsApiUrl}?seasonId=${seasonId}`)),
         map(divisionsWithTeams => divisionsWithTeams["data"])
       );
   }

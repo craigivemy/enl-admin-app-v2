@@ -21,7 +21,7 @@ export const selectCurrentSeasonId = createSelector(
     const currentSeason = allSeasons.filter(
       season => season.current === 1
     );
-    return currentSeason[0] ? currentSeason[0].id : 0;
+    return currentSeason[0] ? currentSeason[0].id : -1;
   }
 );
 

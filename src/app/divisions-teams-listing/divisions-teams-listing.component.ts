@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
-import {DivisionService} from "../division.service";
 import {selectCurrentSeasonId} from "../season/season.selector";
 import {loadDivisionsWithTeams} from "../division/division.actions";
 import {Division} from "../models/division";
@@ -15,10 +14,8 @@ import {selectAllDivisions} from "../division/division.selector";
 })
 export class DivisionsTeamsListingComponent implements OnInit {
   divisionsWithTeams$: Observable<Division[]>;
-  divisions$: Observable<Division[]>;
   constructor(
     private store: Store<AppState>,
-    private divisionService: DivisionService
   ) { }
 
   ngOnInit() {
@@ -26,10 +23,10 @@ export class DivisionsTeamsListingComponent implements OnInit {
       .pipe(
         select(selectCurrentSeasonId)
       ).subscribe(seasonId => {
-        this.store.dispatch(loadDivisionsWithTeams({seasonId}));
-        this.divisionsWithTeams$ = this.store.pipe(
-          select(selectAllDivisions)
-        );
+          this.store.dispatch(loadDivisionsWithTeams({seasonId}));
+          this.divisionsWithTeams$ = this.store.pipe(
+            select(selectAllDivisions)
+          );
     });
   }
 }
