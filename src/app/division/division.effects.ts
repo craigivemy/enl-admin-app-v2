@@ -4,7 +4,7 @@ import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
 import {DivisionService} from "../division.service";
 import * as DivisionActions from './division.actions';
-import {filter, map, mergeMap, switchMap, withLatestFrom} from "rxjs/operators";
+import {filter, map, mergeMap, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 import {selectIfAllDivisionsLoaded} from "./division.selector";
 import {selectCurrentSeasonId} from "../season/season.selector";
 
@@ -19,12 +19,13 @@ export class DivisionEffects {
     private divisionService: DivisionService
   ) {}
 
-  loadDivisionsWithTeams$ = createEffect(() => this.actions$.pipe(
+  loadDivisionsWithTeams$ =  createEffect(() => this.actions$.pipe(
     ofType(DivisionActions.loadDivisionsWithTeams),
     map (action => action.seasonId),
+    tap(test => console.log(test)),
     withLatestFrom(this.store.pipe(select(selectIfAllDivisionsLoaded))),
     filter(([action, allDivisionsLoaded]) => !allDivisionsLoaded),
-    switchMap((action) =>
+    mergeMap((divisions, action) =>
       this.divisionService.getDivisionsWithTeams(action).pipe(
         map(divisionsWithTeams => DivisionActions.loadDivisionsWithTeamsSuccess({divisionsWithTeams}))
       )
