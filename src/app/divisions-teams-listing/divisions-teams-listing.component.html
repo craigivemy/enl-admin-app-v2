@@ -1,9 +1,12 @@
-<p>team-listing works!</p>
-
-<div>
-  <ul *ngFor="let division of divisionsWithTeams$ | async">
-    {{ division.name }}
-  <li *ngFor="let team of division?.teams">{{ team.name }}</li>
-  </ul>
-
+<div class="container-fluid py-3">
+  <div class="row">
+    <div *ngFor="let division of divisionsWithTeams$ | async" class="col-6 mb-4">
+      <mat-toolbar>
+        {{ division.name }}
+      </mat-toolbar>
+      <mat-list>
+        <mat-list-item *ngFor="let team of division.teams">{{ team.name }}</mat-list-item>
+      </mat-list>
+    </div>
+  </div>
 </div>
