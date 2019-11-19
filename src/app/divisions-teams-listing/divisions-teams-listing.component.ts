@@ -14,6 +14,7 @@ import {selectAllDivisions} from "../division/division.selector";
 })
 export class DivisionsTeamsListingComponent implements OnInit {
   divisionsWithTeams$: Observable<Division[]>;
+  columnsToDisplay = ['teamName'];
   constructor(
     private store: Store<AppState>,
   ) { }

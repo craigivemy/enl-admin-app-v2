@@ -1,6 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MAT_DATE_LOCALE, MatCardModule, MatDatepickerModule, MatInputModule, MatStepperModule, MatToolbarModule} from '@angular/material';
+import {
+  MAT_DATE_LOCALE,
+  MatCardModule,
+  MatDatepickerModule,
+  MatInputModule,
+  MatStepperModule,
+  MatTableModule,
+  MatToolbarModule
+} from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 
@@ -14,14 +22,16 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatInputModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule
   ],
   exports: [
     MatCardModule,
     MatStepperModule,
     MatInputModule,
     MatDatepickerModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule
   ],
   providers: [
     MatMomentDateModule,
