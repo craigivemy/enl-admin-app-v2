@@ -5,16 +5,19 @@ import {NewSeasonComponent} from './new-season/new-season.component';
 import {DivisionsTeamsListingComponent} from "./divisions-teams-listing/divisions-teams-listing.component";
 import {AllTeamsListingComponent} from './all-teams-listing/all-teams-listing.component';
 import {AllPlayersListingComponent} from './all-players-listing/all-players-listing.component';
+import {TablesComponent} from './tables/tables.component';
+import {FixtureListingComponent} from './fixture-listing/fixture-listing.component';
+import {ResultListingComponent} from './result-listing/result-listing.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'new-season', component: NewSeasonComponent },
   { path: 'teams', component: DivisionsTeamsListingComponent },
-  //{ path: 'teams', component: AllTeamsListingComponent },
-  { path: 'players', component: AllPlayersListingComponent }
-  // todo - have only players from this season listed to switch around?
-  // then an add players page? Or a generic add page where can add teams, players etc?
+  { path: 'tables', component: TablesComponent },
+  { path: 'fixtures', component: FixtureListingComponent },
+  { path: 'results', component: ResultListingComponent },
+  { path: 'new-season', component: NewSeasonComponent }
+
 ];
 
 @NgModule({

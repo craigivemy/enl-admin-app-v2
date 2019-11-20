@@ -28,6 +28,9 @@ import { PlayedUpComponent } from './played-up/played-up.component';
 import { DivisionEffects } from './division/division.effects';
 import { AllTeamsListingComponent } from './all-teams-listing/all-teams-listing.component';
 import { AllPlayersListingComponent } from './all-players-listing/all-players-listing.component';
+import { TablesComponent } from './tables/tables.component';
+import { FixtureListingComponent } from './fixture-listing/fixture-listing.component';
+import { ResultListingComponent } from './result-listing/result-listing.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { AllPlayersListingComponent } from './all-players-listing/all-players-li
     DivisionsTeamsListingComponent,
     PlayedUpComponent,
     AllTeamsListingComponent,
-    AllPlayersListingComponent
+    AllPlayersListingComponent,
+    TablesComponent,
+    FixtureListingComponent,
+    ResultListingComponent
   ],
   imports: [
     BrowserModule,
