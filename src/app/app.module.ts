@@ -32,6 +32,8 @@ import { TablesComponent } from './tables/tables.component';
 import { FixtureListingComponent } from './fixture-listing/fixture-listing.component';
 import { ResultListingComponent } from './result-listing/result-listing.component';
 import { FixtureComponent } from './fixture/fixture.component';
+import { FixtureEffects } from './fixture/fixture.effects';
+import * as fromFixture from './fixture/fixture.reducer';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { FixtureComponent } from './fixture/fixture.component';
     EffectsModule.forRoot([AppEffects]),
     StoreModule.forFeature('seasons', fromSeason.reducer),
     StoreModule.forFeature('divisions', fromDivision.reducer),
-    EffectsModule.forFeature([SeasonEffects, DivisionEffects])
+    StoreModule.forFeature('fixtures', fromFixture.reducer),
+    EffectsModule.forFeature([SeasonEffects, DivisionEffects, FixtureEffects]),
+    StoreModule.forFeature(fromFixture.fixtureFeatureKey, fromFixture.reducer)
   ],
   providers: [],
   bootstrap: [AppComponent]
