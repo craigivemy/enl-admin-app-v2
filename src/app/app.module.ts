@@ -74,11 +74,10 @@ import * as fromFixture from './fixture/fixture.reducer';
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
-    StoreModule.forFeature('seasons', fromSeason.reducer),
-    StoreModule.forFeature('divisions', fromDivision.reducer),
-    StoreModule.forFeature('fixtures', fromFixture.reducer),
+    StoreModule.forFeature(fromSeason.seasonFeatureKey, fromSeason.reducer),
+    StoreModule.forFeature(fromDivision.divisionFeatureKey, fromDivision.reducer),
+    StoreModule.forFeature(fromFixture.fixtureFeatureKey, fromFixture.reducer),
     EffectsModule.forFeature([SeasonEffects, DivisionEffects, FixtureEffects]),
-    StoreModule.forFeature(fromFixture.fixtureFeatureKey, fromFixture.reducer)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Fixture} from '../models/fixture';
 
 @Component({
   selector: 'app-fixture',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fixture.component.scss']
 })
 export class FixtureComponent implements OnInit {
-
+  @Input() fixture: Fixture;
   constructor() { }
 
   ngOnInit() {

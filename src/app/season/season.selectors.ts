@@ -3,7 +3,7 @@ import {Season} from "../models/season";
 import {SeasonState} from "./season.reducer";
 import * as fromSeason from './season.reducer';
 
-export const selectSeasonState = createFeatureSelector<SeasonState>('seasons');
+export const selectSeasonState = createFeatureSelector<SeasonState>('season');
 
 export const selectAllSeasons = createSelector(
   selectSeasonState,

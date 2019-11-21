@@ -1,1 +1,10 @@
-<p>fixture works!</p>
+<mat-card *ngIf="fixture">
+  <mat-card-header>
+    <mat-card-title>
+      {{ fixture.matchDate | date: 'dd MMM yyyy' }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    {{ fixture.homeTeamName }} vs {{ fixture.awayTeamName }}
+  </mat-card-content>
+</mat-card>

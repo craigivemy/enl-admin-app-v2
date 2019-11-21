@@ -4,6 +4,8 @@ import {AppState} from '../reducers';
 import {Observable} from 'rxjs';
 import {Fixture} from '../models/fixture';
 import {selectCurrentSeasonId} from '../season/season.selectors';
+import {loadFixtures} from '../fixture/fixture.actions';
+import {selectAllFixtures} from '../fixture/fixture.selectors';
 
 @Component({
   selector: 'app-fixture-listing',
@@ -19,7 +21,12 @@ export class FixtureListingComponent implements OnInit {
   ngOnInit() {
     this.store.pipe(
       select(selectCurrentSeasonId)
-    ).subscribe(seasonId => '') // todo implement store here
+    ).subscribe(seasonId =>  {
+      this.store.dispatch(loadFixtures({seasonId}));
+      this.fixtures$ = this.store.pipe(
+        select(selectAllFixtures)
+      );
+    });
   }
 
 }

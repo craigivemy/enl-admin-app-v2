@@ -1,12 +1,14 @@
 import { createAction, props } from '@ngrx/store';
+import {Fixture} from '../models/fixture';
 
 export const loadFixtures = createAction(
-  '[Fixture] Load Fixtures'
+  '[Fixture] Load Fixtures',
+  props<{ seasonId: number }>()
 );
 
 export const loadFixturesSuccess = createAction(
   '[Fixture] Load Fixtures Success',
-  props<{ data: any }>()
+  props<{ fixtures: Fixture[] }>()
 );
 
 export const loadFixturesFailure = createAction(
