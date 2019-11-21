@@ -31,6 +31,7 @@ import { AllPlayersListingComponent } from './all-players-listing/all-players-li
 import { TablesComponent } from './tables/tables.component';
 import { FixtureListingComponent } from './fixture-listing/fixture-listing.component';
 import { ResultListingComponent } from './result-listing/result-listing.component';
+import { FixtureComponent } from './fixture/fixture.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ResultListingComponent } from './result-listing/result-listing.componen
     AllPlayersListingComponent,
     TablesComponent,
     FixtureListingComponent,
-    ResultListingComponent
+    ResultListingComponent,
+    FixtureComponent
   ],
   imports: [
     BrowserModule,
