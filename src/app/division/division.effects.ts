@@ -5,8 +5,8 @@ import {AppState} from "../reducers";
 import {DivisionService} from "../division.service";
 import * as DivisionActions from './division.actions';
 import {concatMap, filter, map, mergeMap, skip, skipWhile, switchMap, takeWhile, tap, withLatestFrom} from 'rxjs/operators';
-import {selectIfAllDivisionsLoaded} from "./division.selector";
-import {selectCurrentSeasonId} from "../season/season.selector";
+import {selectIfAllDivisionsLoaded} from "./division.selectors";
+import {selectCurrentSeasonId} from "../season/season.selectors";
 
 
 

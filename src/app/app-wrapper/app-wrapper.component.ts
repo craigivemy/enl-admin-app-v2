@@ -7,7 +7,7 @@ import {AppState} from "../reducers";
 import {SeasonService} from "../season.service";
 import {loadSeasons} from "../season/season.actions";
 import {Season} from "../models/season";
-import {selectAllSeasons} from "../season/season.selector";
+import {selectAllSeasons} from "../season/season.selectors";
 
 @Component({
   selector: 'app-app-wrapper',

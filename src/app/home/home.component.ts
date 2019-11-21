@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
-import {selectCurrentSeasonId} from "../season/season.selector";
+import {selectCurrentSeasonId} from "../season/season.selectors";
 import {Observable} from "rxjs";
 
 @Component({

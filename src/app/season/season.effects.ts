@@ -5,7 +5,7 @@ import * as SeasonActions from './season.actions';
 import {catchError, filter, map, mergeMap, tap, withLatestFrom} from "rxjs/operators";
 import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
-import {selectAllSeasons, selectIfAllSeasonsLoaded} from "./season.selector";
+import {selectAllSeasons, selectIfAllSeasonsLoaded} from "./season.selectors";
 import {EMPTY} from "rxjs";
 import {loadSeasonsSuccess} from "./season.actions";
 

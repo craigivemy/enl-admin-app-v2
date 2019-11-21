@@ -3,7 +3,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {Observable} from 'rxjs';
 import {Fixture} from '../models/fixture';
-import {selectCurrentSeasonId} from '../season/season.selector';
+import {selectCurrentSeasonId} from '../season/season.selectors';
 
 @Component({
   selector: 'app-fixture-listing',
