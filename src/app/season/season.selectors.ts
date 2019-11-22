@@ -15,13 +15,13 @@ export const selectIfAllSeasonsLoaded = createSelector(
   seasonState => seasonState.allSeasonsLoaded
 );
 
-export const selectCurrentSeasonId = createSelector(
+export const selectCurrentSeason = createSelector(
   selectAllSeasons,
-  allSeasons => {
-    const currentSeason = allSeasons.filter(
-      season => season.current === 1
-    );
-    return currentSeason[0] ? currentSeason[0].id : -1;
-  }
+  allSeasons => allSeasons.filter(season => season.current === 1)
+);
+
+export const selectCurrentSeasonId = createSelector(
+  selectCurrentSeason,
+  currentSeason => currentSeason[0] ? currentSeason[0].id : -1
 );
 
