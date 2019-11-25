@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
-<!--    <div *ngFor="let fixture of fixtures$ | async">-->
-<!--      {{ fixture }}-->
-<!--    </div>-->
+    <app-fixture *ngFor="let fixture of fixtures$ | async" [fixture]="fixture">
+      {{ fixture }}
+    </app-fixture>
   </div>
 </div>
