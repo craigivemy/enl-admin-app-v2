@@ -16,6 +16,7 @@ export class SeasonService {
   getSeasons(): Observable<Season[]> {
     return this.http.get(this.seasonsApiUrl)
       .pipe(
+        tap(data => console.log(data)),
         map(seasons => seasons["data"])
       );
   }

@@ -2,15 +2,16 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Fixture} from '../models/fixture';
 import * as FixtureActions from './fixture.actions';
+import {FixtureCollection} from '../models/fixture-collection';
 
 
 export const fixtureFeatureKey = 'fixture';
 
-export interface FixtureState extends EntityState<Fixture> {
+export interface FixtureState extends EntityState<FixtureCollection> {
   allFixturesLoaded: boolean;
 }
 
-const adapter: EntityAdapter<Fixture> = createEntityAdapter<Fixture>();
+const adapter: EntityAdapter<FixtureCollection> = createEntityAdapter<FixtureCollection>();
 
 export const initialDivisionState: FixtureState = adapter.getInitialState({
   allFixturesLoaded: false

@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import {Fixture} from '../models/fixture';
+import {FixtureCollection} from '../models/fixture-collection';
 
 export const loadFixtures = createAction(
   '[Fixture] Load Fixtures',
@@ -8,7 +9,7 @@ export const loadFixtures = createAction(
 
 export const loadFixturesSuccess = createAction(
   '[Fixture] Load Fixtures Success',
-  props<{ fixtures: Fixture[] }>()
+  props<{ fixtures: FixtureCollection[] }>()
 );
 
 export const loadFixturesFailure = createAction(

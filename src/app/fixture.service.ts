@@ -5,6 +5,7 @@ import {Fixture} from './models/fixture';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
+import {FixtureCollection} from './models/fixture-collection';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,12 @@ export class FixtureService {
     private http: HttpClient
   ) { }
 
-  getFixtures(seasonId: number): Observable<Fixture[]> {
-    return this.http.get(`${this.fixturesApiUrl}?seasonId=${seasonId}`).pipe(
-      map(fixtures => fixtures["data"])
-    );
+  getFixtures(seasonId: number): Observable<FixtureCollection[]> {
+    return this.http.get<FixtureCollection[]>(`${this.fixturesApiUrl}?seasonId=${seasonId}`)
+      .pipe(
+        tap(data => console.log(data)),
+        map(fixtures => fixtures["data"])
+      );
   }
 
 }
