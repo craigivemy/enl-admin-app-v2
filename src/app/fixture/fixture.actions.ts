@@ -9,7 +9,7 @@ export const loadFixtures = createAction(
 
 export const loadFixturesSuccess = createAction(
   '[Fixture] Load Fixtures Success',
-  props<{ fixtures: FixtureCollection[] }>()
+  props<{ fixtures: Fixture[] }>()
 );
 
 export const loadFixturesFailure = createAction(

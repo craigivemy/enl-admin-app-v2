@@ -17,10 +17,9 @@ export class FixtureService {
     private http: HttpClient
   ) { }
 
-  getFixtures(seasonId: number): Observable<FixtureCollection[]> {
+  getFixtures(seasonId: number): Observable<Fixture[]> {
     return this.http.get<FixtureCollection[]>(`${this.fixturesApiUrl}?seasonId=${seasonId}`)
       .pipe(
-        tap(data => console.log(data)),
         map(fixtures => fixtures["data"])
       );
   }

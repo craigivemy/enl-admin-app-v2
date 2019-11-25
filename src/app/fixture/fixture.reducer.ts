@@ -7,11 +7,11 @@ import {FixtureCollection} from '../models/fixture-collection';
 
 export const fixtureFeatureKey = 'fixture';
 
-export interface FixtureState extends EntityState<FixtureCollection> {
+export interface FixtureState extends EntityState<Fixture> {
   allFixturesLoaded: boolean;
 }
 
-const adapter: EntityAdapter<FixtureCollection> = createEntityAdapter<FixtureCollection>();
+const adapter: EntityAdapter<Fixture> = createEntityAdapter<Fixture>();
 
 export const initialDivisionState: FixtureState = adapter.getInitialState({
   allFixturesLoaded: false
