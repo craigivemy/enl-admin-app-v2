@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
-import {Observable, ReplaySubject} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Fixture} from '../models/fixture';
 import {selectCurrentSeasonId} from '../season/season.selectors';
 import {loadFixtures} from '../fixture/fixture.actions';
 import {selectAllFixtures} from '../fixture/fixture.selectors';
-import {delay, groupBy, map, mergeMap, tap, toArray} from 'rxjs/operators';
+import {groupBy, map, mergeMap, tap, toArray} from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -27,11 +27,10 @@ export class FixtureListingComponent implements OnInit {
       this.store.dispatch(loadFixtures({seasonId}));
       this.fixtures$ = this.store.pipe(
         select(selectAllFixtures),
-        groupBy(fixtures => fixtures.map(fixture => moment(fixture.matchDate).format('m')), null, null, () => new ReplaySubject()),
-        delay(100),
+        groupBy(fixtures => fixtures.map(fixture => moment(fixture.matchDate).format('m'))),
         tap(res => console.log(res)),
-        mergeMap(group => group.pipe(toArray())),
-      ).subscribe(test => this.fixtures$ = test);
+        mergeMap(group => group.pipe(toArray()))
+      );
     });
   }
 
