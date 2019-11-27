@@ -15,7 +15,7 @@ import * as moment from 'moment';
   styleUrls: ['./fixture-listing.component.scss']
 })
 export class FixtureListingComponent implements OnInit {
-  fixtures$;
+  fixtures$: Observable<Fixture[]>;
   constructor(
     private store: Store<AppState>
   ) { }
@@ -27,11 +27,12 @@ export class FixtureListingComponent implements OnInit {
       this.store.dispatch(loadFixtures({seasonId}));
       this.fixtures$ = this.store.pipe(
         select(selectAllFixtures),
-        groupBy(fixtures => fixtures.map(fixture => moment(fixture.matchDate).format('m'))),
-        tap(res => console.log(res)),
+        mergeMap(res => res),
+        groupBy(fixture => fixture.matchDate),
         mergeMap(group => group.pipe(toArray()))
       );
     });
   }
+
 
 }
