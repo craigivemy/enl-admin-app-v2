@@ -16,7 +16,7 @@ export const selectIfAllFixturesLoaded = createSelector(
 
 export const selectFixturesByDivisions = divisionId => createSelector(
   selectAllFixtures,
-  allFixtures => allFixtures.map(
+  allFixtures => allFixtures.filter(
     fixture => fixture.divisionId === divisionId
   )
 );
