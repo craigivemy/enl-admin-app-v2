@@ -19,7 +19,7 @@ import * as moment from 'moment';
 })
 export class FixtureListingComponent implements OnInit {
   fixtures$;
-  columnsToDisplay = ['homeTeamName', 'awayTeamName', 'division'];
+  columnsToDisplay = ['homeTeamName', 'awayTeamName', 'division', 'time'];
   constructor(
     private store: Store<AppState>
   ) { }
