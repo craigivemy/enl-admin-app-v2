@@ -8,6 +8,8 @@ import {loadFixtures} from '../fixture/fixture.actions';
 import {selectAllFixtures} from '../fixture/fixture.selectors';
 import {filter, groupBy, map, mergeMap, skipWhile, take, tap, toArray} from 'rxjs/operators';
 import {FixtureService} from '../fixture.service';
+import {DivisionService} from '../division.service';
+import {Division} from '../models/division';
 
 @Component({
   selector: 'app-fixture-listing',
@@ -16,9 +18,11 @@ import {FixtureService} from '../fixture.service';
 })
 export class FixtureListingComponent implements OnInit {
   fixtures$;
+  activeDivisions: Observable<Division[]>;
   constructor(
     private store: Store<AppState>,
-    private fixtureService: FixtureService
+    private fixtureService: FixtureService,
+    private divisionService: DivisionService
   ) { }
 
   ngOnInit() {
@@ -27,6 +31,7 @@ this.store.pipe(
 ).subscribe(seasonId =>  {
   // todo - request divisions for this season (maybe do this on app load like seasons
       this.store.dispatch(loadFixtures({seasonId}));
+      this.activeDivisions = this.divisionService.getActiveDivisions(seasonId);
       this.fixtures$ = this.store.pipe(
         select(selectAllFixtures),
         filter(arr => arr.length > 0),

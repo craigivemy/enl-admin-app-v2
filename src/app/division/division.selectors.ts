@@ -4,12 +4,12 @@ import * as fromDivision from './division.reducer';
 
 export const selectDivisionState = createFeatureSelector<DivisionState>('division');
 
-export const selectAllDivisions = createSelector(
+export const selectAllDivisionsWithTeams = createSelector(
   selectDivisionState,
   fromDivision.selectAll
 );
 
-export const selectIfAllDivisionsLoaded = createSelector(
+export const selectIfAllDivisionsWithTeamsLoaded = createSelector(
   selectDivisionState,
   divisionState => divisionState.allDivisionsWithTeamsLoaded
 );

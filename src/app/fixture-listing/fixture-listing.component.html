@@ -1,4 +1,15 @@
 <div class="container-fluid">
+  <mat-tab-group>
+    <mat-tab *ngFor="let division of activeDivisions | async">
+      <ng-template mat-tab-label>
+        {{ division.name }}
+      </ng-template>
+      <h1>Best pasta restaurants</h1>
+      <p>...</p>
+    </mat-tab>
+  </mat-tab-group>
+
+
   <div class="row">
     <div class="col-12" *ngFor="let group of fixtures$ | async">
       <h5>{{ group[0]?.matchDate | date: 'E dd MMM y' }}</h5>

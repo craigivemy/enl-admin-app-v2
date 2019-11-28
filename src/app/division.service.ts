@@ -14,9 +14,15 @@ export class DivisionService {
   divisionsApiUrl = environment.baseApiUrl + ApiRoutes.Divisions;
   constructor(private http: HttpClient) { }
 
-  // todo - need another method for just getting divisions not with teams, or rather change below to say we want teams too
   getDivisions(): Observable<Division[]> {
     return this.http.get(this.divisionsApiUrl)
+      .pipe(
+        map(divisions => divisions["data"])
+      );
+  }
+
+  getActiveDivisions(seasonId: number): Observable<Division[]> {
+    return this.http.get(`${this.divisionsApiUrl}?seasonId=${seasonId}&noTeams=true`)
       .pipe(
         map(divisions => divisions["data"])
       );

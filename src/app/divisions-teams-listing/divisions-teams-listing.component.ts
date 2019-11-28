@@ -5,7 +5,7 @@ import {AppState} from "../reducers";
 import {selectCurrentSeasonId} from "../season/season.selectors";
 import {loadDivisionsWithTeams} from "../division/division.actions";
 import {Division} from "../models/division";
-import {selectAllDivisions} from "../division/division.selectors";
+import {selectAllDivisionsWithTeams} from "../division/division.selectors";
 import {map} from 'rxjs/operators';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -29,7 +29,7 @@ export class DivisionsTeamsListingComponent implements OnInit {
       ).subscribe(seasonId => {
           this.store.dispatch(loadDivisionsWithTeams({seasonId}));
           this.divisionsWithTeams$ = this.store.pipe(
-            select(selectAllDivisions)
+            select(selectAllDivisionsWithTeams)
           );
     });
 
