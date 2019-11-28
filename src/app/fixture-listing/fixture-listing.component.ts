@@ -25,12 +25,7 @@ export class FixtureListingComponent implements OnInit {
 this.store.pipe(
   select(selectCurrentSeasonId)
 ).subscribe(seasonId =>  {
-  // this.fixtureService.getFixtures(seasonId).pipe(
-  //   mergeMap(fixtures => fixtures),
-  //   groupBy(fixture => fixture.matchDate),
-  //   mergeMap(group => group.pipe(toArray())),
-  //   tap(res => console.log(res))
-  // ).subscribe(fixtures => this.fixtures$ = fixtures);
+  // todo - request divisions for this season (maybe do this on app load like seasons
       this.store.dispatch(loadFixtures({seasonId}));
       this.fixtures$ = this.store.pipe(
         select(selectAllFixtures),
@@ -39,8 +34,7 @@ this.store.pipe(
         mergeMap(fixtures => fixtures),
         groupBy(fixture => fixture.matchDate),
         mergeMap(group => group.pipe(toArray())),
-        toArray(),
-        tap(res => console.log(res))
+        toArray()
       );
     });
   }

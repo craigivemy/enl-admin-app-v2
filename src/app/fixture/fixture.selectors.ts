@@ -13,3 +13,10 @@ export const selectIfAllFixturesLoaded = createSelector(
   selectFixtureState,
   fixtureState => fixtureState.allFixturesLoaded
 );
+
+export const selectFixturesByDivisions = divisionId => createSelector(
+  selectAllFixtures,
+  allFixtures => allFixtures.map(
+    fixture => fixture.divisionId === divisionId
+  )
+);
