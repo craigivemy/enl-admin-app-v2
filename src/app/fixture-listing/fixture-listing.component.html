@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div *ngFor="let group of fixtures$ | async">
-      <h3>{{ group }}</h3>
+      <h3>{{ group[0]?.matchDate | date: 'E dd MMM y' }}</h3>
       <app-fixture *ngFor="let fixture of group" [fixture]="fixture">
       </app-fixture>
     </div>
