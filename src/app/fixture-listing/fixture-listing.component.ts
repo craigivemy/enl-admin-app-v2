@@ -29,8 +29,8 @@ export class FixtureListingComponent implements OnInit {
 this.store.pipe(
   select(selectCurrentSeasonId)
 ).subscribe(seasonId =>  {
-  // todo - request divisions for this season (maybe do this on app load like seasons
       this.store.dispatch(loadFixtures({seasonId}));
+      // todo IMPORTANT - have these in store
       this.activeDivisions = this.divisionService.getActiveDivisions(seasonId);
       this.fixtures$ = this.store.pipe(
         select(selectAllFixtures),
