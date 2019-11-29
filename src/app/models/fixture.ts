@@ -7,5 +7,6 @@ export class Fixture {
   awayTeamName: string;
   awayId: number;
   matchDate: string;
+  court: number;
   round: number;
 }

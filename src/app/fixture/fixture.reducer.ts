@@ -2,8 +2,6 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Fixture} from '../models/fixture';
 import * as FixtureActions from './fixture.actions';
-import {FixtureCollection} from '../models/fixture-collection';
-
 
 export const fixtureFeatureKey = 'fixture';
 
