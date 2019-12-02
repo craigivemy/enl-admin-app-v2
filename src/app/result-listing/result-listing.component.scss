@@ -1,0 +1,8 @@
+td {
+  @media (min-width: 768px) {
+    width: 300px;
+  }
+  &.score-column {
+    width: 50px;
+  }
+}

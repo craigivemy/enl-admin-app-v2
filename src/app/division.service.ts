@@ -5,7 +5,6 @@ import { ApiRoutes} from '../data/api-routes';
 import {map, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {Season} from "./models/season";
 
 @Injectable({
   providedIn: 'root'
