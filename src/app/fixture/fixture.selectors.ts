@@ -1,6 +1,7 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {FixtureState} from './fixture.reducer';
 import * as fromFixture from './fixture.reducer';
+import * as moment from 'moment';
 
 export const selectFixtureState = createFeatureSelector<FixtureState>('fixture');
 
@@ -19,4 +20,14 @@ export const selectFixturesByDivisions = divisionId => createSelector(
   allFixtures => allFixtures.filter(
     fixture => fixture.divisionId === divisionId
   )
+);
+
+export const selectWeeksFromFixtures = createSelector(
+  selectAllFixtures,
+  allFixtures => {
+    const dates = allFixtures.map(
+      fixture => moment(fixture.matchDate).format('MMMM Do YYYY')
+    );
+    return [...new Set(dates)];
+  }
 );
