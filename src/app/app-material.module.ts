@@ -4,7 +4,7 @@ import {
   MAT_DATE_LOCALE,
   MatCardModule,
   MatDatepickerModule,
-  MatInputModule,
+  MatInputModule, MatSelectModule,
   MatStepperModule,
   MatTableModule, MatTabsModule,
   MatToolbarModule
@@ -24,7 +24,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatMomentDateModule,
     MatToolbarModule,
     MatTableModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule
   ],
   exports: [
     MatCardModule,
@@ -33,7 +34,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatDatepickerModule,
     MatToolbarModule,
     MatTableModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule
   ],
   providers: [
     MatMomentDateModule,
