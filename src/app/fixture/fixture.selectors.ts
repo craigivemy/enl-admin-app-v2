@@ -31,17 +31,3 @@ export const selectWeeksFromFixtures = createSelector(
     return [...new Set(dates)];
   }
 );
-
-// todo - either below or just get active divisions as observable not store though,
-// todo - and subscribe to changes which filter when clicking on new tab
-// export const selectDivisionsFromFixtures = createSelector(
-//   selectAllFixtures,
-//   allFixtures => {
-//     const divisions = allFixtures.map(
-//       fixture => ({
-//         id: fixture.divisionId,
-//         name: fixture.
-//       })
-//     )
-//   }
-// )
