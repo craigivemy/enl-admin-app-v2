@@ -39,15 +39,16 @@ export class ResultListingComponent implements OnInit {
       this.store.dispatch(loadFixtures({seasonId}));
       this.activeDivisions$ = this.divisionService.getActiveDivisions(seasonId);
       this.fixturesWeeks$ = this.store.pipe(
-        select(selectWeeksFromFixtures)
+        select(selectWeeksFromFixtures),
+        tap(vals => console.log(vals))
       );
       this.store.pipe(select(selectAllFixtures)).subscribe(fixtures => this.dataSource = new MatTableDataSource(fixtures));
     });
 
     this.selectedWeek.valueChanges.subscribe(
       week => {
-        console.log(moment(week).format('yyyy'));
-        //this.dataSource.filter = moment(week).calendar();
+        this.dataSource.filter = moment(week).format('YYYY-DD-MM');
+
       }
     );
 

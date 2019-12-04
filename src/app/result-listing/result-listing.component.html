@@ -4,8 +4,8 @@
       <mat-form-field>
         <mat-label>Select Match Week</mat-label>
         <mat-select [formControl]="selectedWeek">
-          <mat-option *ngFor="let week of fixturesWeeks$ | async" [value]="week | date: 'MM/dd/yyyy'">
-            {{ week | date: 'MM/dd/yyyy' }}
+          <mat-option *ngFor="let week of fixturesWeeks$ | async" [value]="week">
+            {{ week | date: 'yyyy-MM-dd' }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -21,7 +21,7 @@
           <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="matchDate">
               <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let fixture"> {{fixture.matchDate | date: 'MM/dd/yyyy'}} </td>
+              <td mat-cell *matCellDef="let fixture">{{ fixture.matchDate | date: 'yyyy-dd-MM' }}</td>
             </ng-container>
             <ng-container matColumnDef="homeTeamName">
               <th mat-header-cell *matHeaderCellDef>Team Name</th>

@@ -26,7 +26,7 @@ export const selectWeeksFromFixtures = createSelector(
   selectAllFixtures,
   allFixtures => {
     const dates = allFixtures.map(
-      fixture => moment(fixture.matchDate)
+      fixture => moment(fixture.matchDate).format('YYYY-DD-MM')
     );
     return [...new Set(dates)];
   }
