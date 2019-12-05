@@ -23,15 +23,16 @@ import {DivisionService} from '../division.service';
 import {FormControl} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material';
 
+moment.locale('en-gb');
+
 @Component({
   selector: 'app-result-listing',
   templateUrl: './result-listing.component.html',
   styleUrls: ['./result-listing.component.scss']
 })
 export class ResultListingComponent implements OnInit {
-  fixtures$;
   fixturesWeeks$;
-  columnsToDisplay = ['matchDate', 'homeTeamName', 'homeTeamScore', 'awayTeamScore', 'awayTeamName'];
+  columnsToDisplay = ['homeTeamName', 'homeTeamScore', 'awayTeamScore', 'awayTeamName'];
   activeDivisions$: Observable<Division[]>;
   selectedWeek = new FormControl('');
   dataSource;
@@ -52,14 +53,12 @@ export class ResultListingComponent implements OnInit {
         select(selectWeeksFromFixtures),
         tap(val => console.log(val))
       );
-      this.store.pipe(select(selectAllFixtures)).subscribe(fixtures => this.dataSource = new MatTableDataSource(fixtures));
+      this.store.pipe(select(selectAllFixtures), tap(fix => console.log(fix))).subscribe(fixtures => this.dataSource = new MatTableDataSource(fixtures));
     });
 
     this.selectedWeek.valueChanges.subscribe(
       week => {
-        console.log(week);
-        console.log(moment(week).format('YYYY-DD-MM'));
-        this.dataSource.filter = moment(week).format('YYYY-DD-MM');
+        this.dataSource.filter = moment(week).format('YYYY-MM-DD');
       }
     );
 

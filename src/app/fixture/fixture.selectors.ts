@@ -3,6 +3,8 @@ import {FixtureState} from './fixture.reducer';
 import * as fromFixture from './fixture.reducer';
 import * as moment from 'moment';
 
+moment.locale('en-gb');
+
 export const selectFixtureState = createFeatureSelector<FixtureState>('fixture');
 
 export const selectAllFixtures = createSelector(
@@ -26,7 +28,7 @@ export const selectWeeksFromFixtures = createSelector(
   selectAllFixtures,
   allFixtures => {
     const dates = allFixtures.map(
-      fixture => moment(fixture.matchDate).format('YYYY-DD-MM')
+      fixture => moment(fixture.matchDate).format('YYYY-MM-DD')
     );
     return [...new Set(dates)];
   }

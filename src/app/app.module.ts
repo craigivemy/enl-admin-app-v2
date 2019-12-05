@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +34,10 @@ import { ResultListingComponent } from './result-listing/result-listing.componen
 import { FixtureComponent } from './fixture/fixture.component';
 import { FixtureEffects } from './fixture/fixture.effects';
 import * as fromFixture from './fixture/fixture.reducer';
+import localeGb from '@angular/common/locales/en-GB';
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(localeGb);
 
 @NgModule({
   declarations: [
@@ -79,7 +83,9 @@ import * as fromFixture from './fixture/fixture.reducer';
     StoreModule.forFeature(fromFixture.fixtureFeatureKey, fromFixture.reducer),
     EffectsModule.forFeature([SeasonEffects, DivisionEffects, FixtureEffects]),
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'en-GB' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
