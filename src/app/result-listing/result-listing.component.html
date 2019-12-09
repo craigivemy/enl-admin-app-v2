@@ -30,6 +30,8 @@
             <ng-container matColumnDef="homeTeamScore">
               <th mat-header-cell *matHeaderCellDef></th>
               <td class="score-column" mat-cell *matCellDef="let fixture; let i = index;">
+<!--                {{ i }} &lt;!&ndash; won't work, filtered week view resets these &ndash;&gt;-->
+                {{ fixture.id }} <!-- this will work, valueChanges then triggers rise of save button that stays there no matter what filtering etc, change detection updates array of changes? -->
                 <mat-form-field>
                   <input matInput [value]="fixture.homeScore">
                 </mat-form-field>
