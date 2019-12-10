@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Match</h1>
+<h1 mat-dialog-title>Edit Result</h1>
 <div mat-dialog-content>
   <form [formGroup]="matchEditForm">
     <div>
@@ -21,5 +21,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button (click)="saveMatch()" cdkFocusInitial>Save</button>
+  <button mat-raised-button color="primary" (click)="saveMatch()">Save</button>
 </div>
