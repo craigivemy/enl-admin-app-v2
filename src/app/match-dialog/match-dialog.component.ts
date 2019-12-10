@@ -52,6 +52,7 @@ export class MatchDialogComponent implements OnInit {
   }
 
   saveMatch() {
+    // todo - only if changes have been made
     const changes = this.matchEditForm.value;
     this.matchService.saveMatch(this.matchId, changes).subscribe(
       () => {

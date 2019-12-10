@@ -58,7 +58,7 @@ export class ResultListingComponent implements OnInit {
     const dialogRef = this.dialog.open(MatchDialogComponent, {
       data: {match}
     });
-
+    // todo try to prevent having to do this
     dialogRef.afterClosed().subscribe(() => this.selectedWeek.setValue(this.selectedWeek.value));
 
   }
