@@ -4,5 +4,5 @@ export enum ApiRoutes {
   Umpires = 'umpires',
   Seasons = 'seasons',
   Divisions = 'divisions',
-  Fixtures = 'fixtures'
+  Matches = 'matches',
 }

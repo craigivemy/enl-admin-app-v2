@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FixtureService } from './fixture.service';
+import { MatchService } from './match.service';
 
-describe('FixtureService', () => {
+describe('MatchService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FixtureService = TestBed.get(FixtureService);
+    const service: MatchService = TestBed.get(MatchService);
     expect(service).toBeTruthy();
   });
 });

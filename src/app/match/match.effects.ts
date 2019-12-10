@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
-import {FixtureService} from '../fixture.service';
+import {MatchService} from '../match.service';
 import * as MatchActions from './match.actions';
 import {concatMap, filter, map, skipWhile, withLatestFrom} from 'rxjs/operators';
 import {selectIfAllMatchesLoaded} from './match.selectors';
@@ -14,7 +14,7 @@ export class MatchEffects {
   constructor(
     private actions$: Actions,
     private store: Store<AppState>,
-    private fixtureService: FixtureService
+    private fixtureService: MatchService
     ) {}
 
     loadAllMatches$ = createEffect(() => this.actions$.pipe(
@@ -22,10 +22,10 @@ export class MatchEffects {
       map(action => action.seasonId),
       skipWhile(seasonId => seasonId <= 0),
       withLatestFrom(this.store.pipe(select(selectIfAllMatchesLoaded))),
-      filter(([action, allFixturesLoaded]) => !allFixturesLoaded),
-      concatMap(([action, fixtures]) =>
+      filter(([action, allMatchesLoaded]) => !allMatchesLoaded),
+      concatMap(([action, matches]) =>
         this.fixtureService.getFixtures(action).pipe(
-          map(allFixtures => MatchActions.loadMatchesSuccess({fixtures: allFixtures}))
+          map(allMatches => MatchActions.loadMatchesSuccess({matches: allMatches}))
         )
       ))
     );

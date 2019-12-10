@@ -30,24 +30,24 @@
             <ng-container matColumnDef="homeTeamScore">
               <th mat-header-cell *matHeaderCellDef></th>
               <td class="score-column" mat-cell *matCellDef="let fixture; let i = index;">
-<!--                {{ i }} &lt;!&ndash; won't work, filtered week view resets these &ndash;&gt;-->
-                {{ fixture.id }} <!-- this will work, valueChanges then triggers rise of save button that stays there no matter what filtering etc, change detection updates array of changes? -->
-                <mat-form-field>
-                  <input matInput [value]="fixture.homeScore">
-                </mat-form-field>
+                {{ fixture.homeScore }} <!-- todo if not walkover, otherwise show W or something -->
               </td>
             </ng-container>
             <ng-container matColumnDef="awayTeamScore">
               <th mat-header-cell *matHeaderCellDef></th>
               <td class="score-column" mat-cell *matCellDef="let fixture">
-                <mat-form-field>
-                  <input matInput [value]="fixture.awayScore">
-                </mat-form-field>
+               {{ fixture.awayScore }} <!-- todo if not walkover, otherwise show W or something -->
               </td>
             </ng-container>
             <ng-container matColumnDef="awayTeamName">
               <th mat-header-cell *matHeaderCellDef>Team Name</th>
               <td mat-cell *matCellDef="let fixture"> {{fixture.awayTeamName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td class="edit-column" mat-cell *matCellDef="let match">
+                <button (click)="openEditDialog(match)" color="accent" mat-icon-button><mat-icon>edit</mat-icon></button>
+              </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
             <tr [class.hidden]="division.id !== row.divisionId" mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>

@@ -2,27 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {selectCurrentSeasonId} from '../season/season.selectors';
-import {loadMatches} from '../match/match.actions';
+import {loadMatches, matchUpdated} from '../match/match.actions';
 import {selectAllMatches, selectWeeksFromMatches} from '../match/match.selectors';
-import {
-  delay,
-  distinct,
-  filter,
-  flatMap,
-  groupBy,
-  mergeMap,
-  skipWhile,
-  take,
-  tap,
-  toArray,
-  withLatestFrom
-} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 import * as moment from 'moment';
 import {Observable} from 'rxjs';
 import {Division} from '../models/division';
 import {DivisionService} from '../division.service';
 import {FormControl} from '@angular/forms';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatTableDataSource} from '@angular/material';
+import {Match} from '../models/match';
+import {MatchService} from '../match.service';
+import {MatchDialogComponent} from '../match-dialog/match-dialog.component';
 
 moment.locale('en-gb');
 
@@ -33,13 +24,14 @@ moment.locale('en-gb');
 })
 export class ResultListingComponent implements OnInit {
   matchesWeeks$;
-  columnsToDisplay = ['homeTeamName', 'homeTeamScore', 'awayTeamScore', 'awayTeamName'];
+  columnsToDisplay = ['homeTeamName', 'homeTeamScore', 'awayTeamScore', 'awayTeamName', 'edit'];
   activeDivisions$: Observable<Division[]>;
   selectedWeek = new FormControl('');
   dataSource;
   constructor(
     private store: Store<AppState>,
-    private divisionService: DivisionService
+    private divisionService: DivisionService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -60,8 +52,15 @@ export class ResultListingComponent implements OnInit {
         this.dataSource.filter = moment(week).format('YYYY-MM-DD');
       }
     );
+  }
 
-    // dispatch update action
+  openEditDialog(match: Match): void {
+    const dialogRef = this.dialog.open(MatchDialogComponent, {
+      data: {match}
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.selectedWeek.setValue(this.selectedWeek.value));
 
   }
+
 }

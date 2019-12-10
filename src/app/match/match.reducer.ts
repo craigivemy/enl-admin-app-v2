@@ -1,9 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Match} from '../models/match';
-import * as FixtureActions from './match.actions';
+import * as MatchActions from './match.actions';
 
-export const fixtureFeatureKey = 'match';
+export const matchFeatureKey = 'match';
 
 export interface MatchState extends EntityState<Match> {
   allMatchesLoaded: boolean;
@@ -17,8 +17,11 @@ export const initialDivisionState: MatchState = adapter.getInitialState({
 
 const matchReducer = createReducer(
   initialDivisionState,
-  on(FixtureActions.loadMatchesSuccess, (state, {fixtures}) => {
-    return adapter.addAll(fixtures, {...state, allMatchesLoaded: true});
+  on(MatchActions.loadMatchesSuccess, (state, {matches}) => {
+    return adapter.addAll(matches, {...state, allMatchesLoaded: true});
+  }),
+  on(MatchActions.matchUpdated, (state, {match}) => {
+    return adapter.updateOne(match, state);
   })
 );
 
