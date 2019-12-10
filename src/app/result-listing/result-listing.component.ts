@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {selectCurrentSeasonId} from '../season/season.selectors';
-import {loadFixtures} from '../fixture/fixture.actions';
-import {selectAllFixtures, selectWeeksFromFixtures} from '../fixture/fixture.selectors';
+import {loadMatches} from '../match/match.actions';
+import {selectAllMatches, selectWeeksFromMatches} from '../match/match.selectors';
 import {
+  delay,
   distinct,
   filter,
   flatMap,
@@ -31,7 +32,7 @@ moment.locale('en-gb');
   styleUrls: ['./result-listing.component.scss']
 })
 export class ResultListingComponent implements OnInit {
-  fixturesWeeks$;
+  matchesWeeks$;
   columnsToDisplay = ['homeTeamName', 'homeTeamScore', 'awayTeamScore', 'awayTeamName'];
   activeDivisions$: Observable<Division[]>;
   selectedWeek = new FormControl('');
@@ -45,15 +46,13 @@ export class ResultListingComponent implements OnInit {
     this.store.pipe(
       select(selectCurrentSeasonId),
       filter(seasonId => seasonId > 0),
-      tap(val => console.log(val)),
     ).subscribe(seasonId =>  {
-      this.store.dispatch(loadFixtures({seasonId}));
+      this.store.dispatch(loadMatches({seasonId}));
       this.activeDivisions$ = this.divisionService.getActiveDivisions(seasonId);
-      this.fixturesWeeks$ = this.store.pipe(
-        select(selectWeeksFromFixtures),
-        tap(val => console.log(val))
+      this.matchesWeeks$ = this.store.pipe(
+        select(selectWeeksFromMatches),
       );
-      this.store.pipe(select(selectAllFixtures), tap(fix => console.log(fix))).subscribe(fixtures => this.dataSource = new MatTableDataSource(fixtures));
+      this.store.pipe(select(selectAllMatches)).subscribe(matches => this.dataSource = new MatTableDataSource(matches));
     });
 
     this.selectedWeek.valueChanges.subscribe(
@@ -61,6 +60,8 @@ export class ResultListingComponent implements OnInit {
         this.dataSource.filter = moment(week).format('YYYY-MM-DD');
       }
     );
+
+    // dispatch update action
 
   }
 }

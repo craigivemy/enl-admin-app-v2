@@ -2,21 +2,21 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { FixtureEffects } from './fixture.effects';
+import { MatchEffects } from './match.effects';
 
-describe('FixtureEffects', () => {
+describe('MatchEffects', () => {
   let actions$: Observable<any>;
-  let effects: FixtureEffects;
+  let effects: MatchEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        FixtureEffects,
+        MatchEffects,
         provideMockActions(() => actions$)
       ]
     });
 
-    effects = TestBed.get<FixtureEffects>(FixtureEffects);
+    effects = TestBed.get<MatchEffects>(MatchEffects);
   });
 
   it('should be created', () => {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../environments/environment';
 import {ApiRoutes} from '../data/api-routes';
-import {Fixture} from './models/fixture';
+import {Match} from './models/match';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
@@ -16,8 +16,8 @@ export class FixtureService {
     private http: HttpClient
   ) { }
 
-  getFixtures(seasonId: number): Observable<Fixture[]> {
-    return this.http.get<Fixture[]>(`${this.fixturesApiUrl}?seasonId=${seasonId}`)
+  getFixtures(seasonId: number): Observable<Match[]> {
+    return this.http.get<Match[]>(`${this.fixturesApiUrl}?seasonId=${seasonId}`)
       .pipe(
         map(fixtures => fixtures["data"])
       );

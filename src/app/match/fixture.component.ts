@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Fixture} from '../models/fixture';
+import {Match} from '../models/match';
 import {Division} from '../models/division';
 import {Observable} from 'rxjs';
 import {AppState} from '../reducers';
@@ -7,7 +7,7 @@ import {select, Store} from '@ngrx/store';
 import {selectDivisionById} from '../division/division.selectors';
 import {map, mergeMap, tap} from 'rxjs/operators';
 import {selectCurrentSeasonId} from '../season/season.selectors';
-import {loadFixtures} from './fixture.actions';
+import {loadMatches} from './match.actions';
 import {DivisionService} from '../division.service';
 
 @Component({
@@ -16,7 +16,7 @@ import {DivisionService} from '../division.service';
   styleUrls: ['./fixture.component.scss']
 })
 export class FixtureComponent implements OnInit {
-  @Input() fixture: Fixture;
+  @Input() fixture: Match;
   constructor(
     private store: Store<AppState>,
     private divisionService: DivisionService

@@ -3,29 +3,29 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {FixtureService} from '../fixture.service';
-import * as FixtureActions from './fixture.actions';
+import * as MatchActions from './match.actions';
 import {concatMap, filter, map, skipWhile, withLatestFrom} from 'rxjs/operators';
-import {selectIfAllFixturesLoaded} from './fixture.selectors';
+import {selectIfAllMatchesLoaded} from './match.selectors';
 
 
 
 @Injectable()
-export class FixtureEffects {
+export class MatchEffects {
   constructor(
     private actions$: Actions,
     private store: Store<AppState>,
     private fixtureService: FixtureService
     ) {}
 
-    loadAllFixtures$ = createEffect(() => this.actions$.pipe(
-      ofType(FixtureActions.loadFixtures),
+    loadAllMatches$ = createEffect(() => this.actions$.pipe(
+      ofType(MatchActions.loadMatches),
       map(action => action.seasonId),
       skipWhile(seasonId => seasonId <= 0),
-      withLatestFrom(this.store.pipe(select(selectIfAllFixturesLoaded))),
+      withLatestFrom(this.store.pipe(select(selectIfAllMatchesLoaded))),
       filter(([action, allFixturesLoaded]) => !allFixturesLoaded),
       concatMap(([action, fixtures]) =>
         this.fixtureService.getFixtures(action).pipe(
-          map(allFixtures => FixtureActions.loadFixturesSuccess({fixtures: allFixtures}))
+          map(allFixtures => MatchActions.loadMatchesSuccess({fixtures: allFixtures}))
         )
       ))
     );

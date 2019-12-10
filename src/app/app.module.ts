@@ -31,9 +31,9 @@ import { AllPlayersListingComponent } from './all-players-listing/all-players-li
 import { TablesComponent } from './tables/tables.component';
 import { FixtureListingComponent } from './fixture-listing/fixture-listing.component';
 import { ResultListingComponent } from './result-listing/result-listing.component';
-import { FixtureComponent } from './fixture/fixture.component';
-import { FixtureEffects } from './fixture/fixture.effects';
-import * as fromFixture from './fixture/fixture.reducer';
+import { FixtureComponent } from './match/fixture.component';
+import { MatchEffects } from './match/match.effects';
+import * as fromFixture from './match/match.reducer';
 import localeGb from '@angular/common/locales/en-GB';
 import {registerLocaleData} from '@angular/common';
 
@@ -81,7 +81,7 @@ registerLocaleData(localeGb);
     StoreModule.forFeature(fromSeason.seasonFeatureKey, fromSeason.reducer),
     StoreModule.forFeature(fromDivision.divisionFeatureKey, fromDivision.reducer),
     StoreModule.forFeature(fromFixture.fixtureFeatureKey, fromFixture.reducer),
-    EffectsModule.forFeature([SeasonEffects, DivisionEffects, FixtureEffects]),
+    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects]),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },

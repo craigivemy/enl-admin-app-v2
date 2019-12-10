@@ -4,7 +4,7 @@
       <mat-form-field>
         <mat-label>Select Match Week</mat-label>
         <mat-select [formControl]="selectedWeek">
-          <mat-option *ngFor="let week of fixturesWeeks$ | async" [value]="week">
+          <mat-option *ngFor="let week of matchesWeeks$ | async" [value]="week">
             {{ week | date: 'E, MMMM d, y' }}
           </mat-option>
         </mat-select>

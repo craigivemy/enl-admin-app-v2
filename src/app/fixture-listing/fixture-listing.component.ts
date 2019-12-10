@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {selectCurrentSeasonId} from '../season/season.selectors';
-import {loadFixtures} from '../fixture/fixture.actions';
-import {selectAllFixtures} from '../fixture/fixture.selectors';
+import {loadMatches} from '../match/match.actions';
+import {selectAllMatches} from '../match/match.selectors';
 import {filter, groupBy, mergeMap, take, toArray} from 'rxjs/operators';
 import * as moment from 'moment';
 
@@ -23,9 +23,9 @@ export class FixtureListingComponent implements OnInit {
     this.store.pipe(
       select(selectCurrentSeasonId)
     ).subscribe(seasonId =>  {
-          this.store.dispatch(loadFixtures({seasonId}));
+          this.store.dispatch(loadMatches({seasonId}));
           this.fixtures$ = this.store.pipe(
-            select(selectAllFixtures),
+            select(selectAllMatches),
             filter(arr => arr.length > 0),
             take(1),
             mergeMap(fixtures => fixtures),
