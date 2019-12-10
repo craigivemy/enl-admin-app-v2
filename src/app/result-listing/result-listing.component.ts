@@ -59,7 +59,11 @@ export class ResultListingComponent implements OnInit {
       data: {match}
     });
     // todo try to prevent having to do this
-    dialogRef.afterClosed().subscribe(() => this.selectedWeek.setValue(this.selectedWeek.value));
+    dialogRef.afterClosed().subscribe(response => {
+      if (response.updated) {
+        this.selectedWeek.setValue(this.selectedWeek.value);
+      }
+    });
 
   }
 

@@ -6,7 +6,6 @@ import {Match} from '../models/match';
 import {matchUpdated} from '../match/match.actions';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Observable} from 'rxjs';
 import {distinctUntilChanged, tap} from 'rxjs/operators';
 import {Update} from '@ngrx/entity';
 
@@ -61,12 +60,12 @@ export class MatchDialogComponent implements OnInit {
           changes
         };
         this.store.dispatch(matchUpdated({match}));
-        this.dialogRef.close();
+        this.dialogRef.close({updated: true});
       }
     );
   }
   onCancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({updated: false});
   }
 
 }
