@@ -8,11 +8,25 @@ import {AllPlayersListingComponent} from './all-players-listing/all-players-list
 import {TablesComponent} from './tables/tables.component';
 import {FixtureListingComponent} from './fixture-listing/fixture-listing.component';
 import {ResultListingComponent} from './result-listing/result-listing.component';
+import {TeamComponent} from './team/team.component';
+import {TeamResolverService} from './team/team-resolver.service';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'teams', component: DivisionsTeamsListingComponent },
+  {
+    path: 'teams',
+    component: DivisionsTeamsListingComponent,
+    children: [
+      {
+        path: ':id',
+        component: TeamComponent,
+        resolve: {
+          team: TeamResolverService
+        }
+      }
+    ]
+  },
   { path: 'tables', component: TablesComponent },
   { path: 'fixtures', component: FixtureListingComponent },
   { path: 'results', component: ResultListingComponent },

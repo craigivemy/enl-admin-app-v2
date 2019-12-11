@@ -19,4 +19,12 @@ export class TeamService {
         map(teams => teams["data"])
       );
   }
+
+  getTeamById(teamId: number): Observable<Team> {
+    return this.http.get(`${this.teamsApiUrl}/${teamId}`)
+      .pipe(
+        map(team => team["data"])
+      );
+  }
+
 }

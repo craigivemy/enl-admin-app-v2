@@ -37,6 +37,9 @@ import * as fromMatch from './match/match.reducer';
 import localeGb from '@angular/common/locales/en-GB';
 import {registerLocaleData} from '@angular/common';
 import { MatchDialogComponent } from './match-dialog/match-dialog.component';
+import { TeamComponent } from './team/team.component';
+import * as fromTeam from './team/team.reducer';
+import { TeamEffects } from './team/team.effects';
 
 registerLocaleData(localeGb);
 
@@ -54,7 +57,8 @@ registerLocaleData(localeGb);
     FixtureListingComponent,
     ResultListingComponent,
     FixtureComponent,
-    MatchDialogComponent
+    MatchDialogComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +87,8 @@ registerLocaleData(localeGb);
     StoreModule.forFeature(fromSeason.seasonFeatureKey, fromSeason.reducer),
     StoreModule.forFeature(fromDivision.divisionFeatureKey, fromDivision.reducer),
     StoreModule.forFeature(fromMatch.matchFeatureKey, fromMatch.reducer),
-    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects]),
+    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects]),
+    StoreModule.forFeature(fromTeam.teamFeatureKey, fromTeam.reducer),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },
