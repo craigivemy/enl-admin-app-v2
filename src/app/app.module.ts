@@ -87,8 +87,8 @@ registerLocaleData(localeGb);
     StoreModule.forFeature(fromSeason.seasonFeatureKey, fromSeason.reducer),
     StoreModule.forFeature(fromDivision.divisionFeatureKey, fromDivision.reducer),
     StoreModule.forFeature(fromMatch.matchFeatureKey, fromMatch.reducer),
-    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects]),
     StoreModule.forFeature(fromTeam.teamFeatureKey, fromTeam.reducer),
+    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects])
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },

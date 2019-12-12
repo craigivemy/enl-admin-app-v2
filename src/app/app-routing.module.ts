@@ -14,19 +14,8 @@ import {TeamResolverService} from './team/team-resolver.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  {
-    path: 'teams',
-    component: DivisionsTeamsListingComponent,
-    children: [
-      {
-        path: ':id',
-        component: TeamComponent,
-        resolve: {
-          team: TeamResolverService
-        }
-      }
-    ]
-  },
+  { path: 'teams', component: DivisionsTeamsListingComponent },
+  { path: 'teams/:id', component: TeamComponent, resolve: { team: TeamResolverService }},
   { path: 'tables', component: TablesComponent },
   { path: 'fixtures', component: FixtureListingComponent },
   { path: 'results', component: ResultListingComponent },

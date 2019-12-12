@@ -21,7 +21,7 @@ export const loadTeam = createAction(
 );
 
 export const loadTeamSuccess = createAction(
-  '[Team] Load Team',
+  '[Team] Load Team Success',
   props<{team: Team}>()
 );
 

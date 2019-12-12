@@ -21,6 +21,7 @@ const teamReducer = createReducer(
     return adapter.addAll(teams, {...state, allTeamsLoaded: true});
   }),
   on(TeamActions.loadTeamSuccess, (state, {team}) => {
+    console.log(team);
     return adapter.addOne(team, state);
   })
 
