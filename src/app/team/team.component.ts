@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Team} from '../models/team';
 
 @Component({
   selector: 'app-team',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit {
-
-  constructor() { }
+  team: Team;
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.route.data.subscribe(
+      (data: { team: Team }) => {
+        this.team = data.team;
+      }
+    );
   }
 
 }
