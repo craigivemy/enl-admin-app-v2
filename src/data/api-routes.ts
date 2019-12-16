@@ -5,4 +5,5 @@ export enum ApiRoutes {
   Seasons = 'seasons',
   Divisions = 'divisions',
   Matches = 'matches',
+  Players = 'players'
 }

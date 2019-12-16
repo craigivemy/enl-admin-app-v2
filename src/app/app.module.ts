@@ -40,6 +40,7 @@ import { MatchDialogComponent } from './match-dialog/match-dialog.component';
 import { TeamComponent } from './team/team.component';
 import * as fromTeam from './team/team.reducer';
 import { TeamEffects } from './team/team.effects';
+import * as fromPlayer from './team/player.reducer';
 
 registerLocaleData(localeGb);
 
@@ -88,7 +89,8 @@ registerLocaleData(localeGb);
     StoreModule.forFeature(fromDivision.divisionFeatureKey, fromDivision.reducer),
     StoreModule.forFeature(fromMatch.matchFeatureKey, fromMatch.reducer),
     StoreModule.forFeature(fromTeam.teamFeatureKey, fromTeam.reducer),
-    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects])
+    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects]),
+    StoreModule.forFeature(fromPlayer.playerFeatureKey, fromPlayer.reducer)
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },

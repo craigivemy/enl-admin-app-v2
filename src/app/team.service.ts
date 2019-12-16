@@ -5,12 +5,14 @@ import {ApiRoutes} from '../data/api-routes';
 import {Observable} from 'rxjs';
 import {Team} from './models/team';
 import {map} from 'rxjs/operators';
+import {Player} from './models/player';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
   teamsApiUrl = environment.baseApiUrl + ApiRoutes.Teams;
+  playersApiUrl = environment.baseApiUrl + ApiRoutes.Players;
   constructor(private http: HttpClient) { }
 
   getTeams(): Observable<Team[]> {
@@ -24,6 +26,13 @@ export class TeamService {
     return this.http.get(`${this.teamsApiUrl}/${teamId}`)
       .pipe(
         map(team => team["data"])
+      );
+  }
+
+  getPlayersByTeamId(teamId: number): Observable<Player[]> {
+    return this.http.get(`${this.playersApiUrl}?teamId=${teamId}`)
+      .pipe(
+        map(players => players["data"])
       );
   }
 
