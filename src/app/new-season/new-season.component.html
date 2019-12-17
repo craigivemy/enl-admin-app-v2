@@ -36,7 +36,6 @@
         <div class="row">
           <div class="col-4" *ngFor="let team of teams; let i = index;">
             <mat-checkbox [disabled]="team.addedToSeason && team.addedToSeason != divisionStep.id" (change)="updateTeamsInDivisions($event, i, divisionStep.id, team)">{{ team.name }}</mat-checkbox>
-            {{ team.addedToSeason }}
           </div>
         </div>
       </mat-step>
