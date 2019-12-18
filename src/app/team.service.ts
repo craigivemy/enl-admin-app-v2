@@ -4,7 +4,7 @@ import {environment} from '../environments/environment';
 import {ApiRoutes} from '../data/api-routes';
 import {Observable} from 'rxjs';
 import {Team} from './models/team';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {Player} from './models/player';
 
 @Injectable({
@@ -33,6 +33,13 @@ export class TeamService {
     return this.http.get(`${this.playersApiUrl}?teamId=${teamId}`)
       .pipe(
         map(players => players["data"])
+      );
+  }
+
+  addPlayer(player: Player): Observable<Player> {
+    return this.http.post(`${this.playersApiUrl}`, {player})
+      .pipe(
+        map(newPlayer => newPlayer["data"])
       );
   }
 

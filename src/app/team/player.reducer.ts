@@ -25,7 +25,10 @@ const playerReducer = createReducer(
     };
   }),
   on(TeamActions.loadPlayersSuccess, (state, {players}) => {
-    return adapter.addMany(players, {...state, playersLoading: true});
+    return adapter.addAll(players, {...state, playersLoading: false});
+  }),
+  on(TeamActions.addPlayer, (state, {player}) => {
+    return adapter.addOne(player, state);
   })
 );
 

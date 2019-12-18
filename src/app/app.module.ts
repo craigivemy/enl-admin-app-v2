@@ -12,7 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
 import { HomeComponent } from './home/home.component';
 import { NewSeasonComponent } from './new-season/new-season.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
@@ -90,7 +90,8 @@ registerLocaleData(localeGb);
     StoreModule.forFeature(fromMatch.matchFeatureKey, fromMatch.reducer),
     StoreModule.forFeature(fromTeam.teamFeatureKey, fromTeam.reducer),
     EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects]),
-    StoreModule.forFeature(fromPlayer.playerFeatureKey, fromPlayer.reducer)
+    StoreModule.forFeature(fromPlayer.playerFeatureKey, fromPlayer.reducer),
+    FormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },

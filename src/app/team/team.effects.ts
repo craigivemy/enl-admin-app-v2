@@ -28,5 +28,4 @@ export class TeamEffects {
     mergeMap(action => this.teamService.getPlayersByTeamId(action.teamId)),
     map(players => TeamActions.loadPlayersSuccess({players}))
   ));
-
 }

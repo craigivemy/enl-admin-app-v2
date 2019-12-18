@@ -36,6 +36,11 @@ export const loadPlayersSuccess = createAction(
   props<{players: Player[]}>()
 );
 
+export const addPlayer = createAction(
+  '[Team] Add Player',
+  props<{player: Player}>()
+);
+
 /* todo - should I be loading all teams to start with, then just selecting based on divison ID?
   As long as only divisions that are active are there this would work???
  */

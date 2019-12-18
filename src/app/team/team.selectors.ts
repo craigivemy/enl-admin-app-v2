@@ -21,3 +21,14 @@ export const selectPlayers = createSelector(
   selectPlayerState,
   fromPlayer.selectAll
 );
+
+// todo get this to work ie datasource to update
+export const selectPlayersByTeamId = teamId => createSelector(
+  selectPlayers,
+  allPlayers => allPlayers.filter(player => player.teamId === teamId)
+);
+
+export const selectIfPlayersLoading = createSelector(
+  selectPlayerState,
+  playerState => playerState.playersLoading
+);
