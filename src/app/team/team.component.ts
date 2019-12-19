@@ -4,12 +4,13 @@ import {Team} from '../models/team';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {Player} from '../models/player';
-import {addPlayer, loadPlayersFromTeam} from './team.actions';
+import {addPlayer, loadPlayersFromTeam, updatePlayer} from './team.actions';
 import {selectIfPlayersLoading, selectPlayers, selectPlayersByTeamId} from './team.selectors';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material';
 import {TeamService} from '../team.service';
 import {Observable} from 'rxjs';
+import {Update} from '@ngrx/entity';
 
 @Component({
   selector: 'app-team',
@@ -19,8 +20,8 @@ import {Observable} from 'rxjs';
 export class TeamComponent implements OnInit {
   team: Team;
   selection = new SelectionModel<Player>(true, []);
-  columnsToDisplay = ['select', 'forename', 'surname'];
-  footerColumnsToDisplay = ['select', 'forename', 'surname'];
+  columnsToDisplay = ['select', 'forename', 'surname', 'playedUpCount'];
+  footerColumnsToDisplay = ['select', 'forename', 'surname', 'playedUpCount'];
   dataSource;
   newPlayer = new Player();
   playersLoading: Observable<boolean>;
@@ -63,14 +64,47 @@ export class TeamComponent implements OnInit {
     }
   }
 
-  test() {
-    const player = {forename:  this.newPlayer.forename, surname: this.newPlayer.surname, playedUpCount: 0, teamId: this.team.id};
-    this.teamService.addPlayer(player)
-      .subscribe(newPlayer => {
-        this.store.dispatch(addPlayer({player: newPlayer}));
-        this.newPlayer = new Player();
-      });
+  addPlayer() {
+    if (Object.keys(this.newPlayer).length && this.newPlayer.forename && this.newPlayer.forename.trim().length > 2 && this.newPlayer.surname && this.newPlayer.surname.trim().length > 2) {
+      const player = {forename:  this.newPlayer.forename.trim(), surname: this.newPlayer.surname.trim(), playedUpCount: 0, teamId: this.team.id};
+      this.teamService.addPlayer(player)
+        .subscribe(newPlayer => {
+          this.store.dispatch(addPlayer({player: newPlayer}));
+          this.newPlayer = new Player();
+        });
+    }
   }
+
+  playedUpSignals(count: number) {
+    switch (count) {
+      case 0:
+      case 1:
+        return 'primary';
+      case 2:
+        return 'accent';
+      default:
+        return 'warn';
+    }
+  }
+
+  updatePlayedUpCount(direction: string, player: Player) {
+    let changes;
+    if (direction === 'up') {
+      changes = {playedUpCount: player.playedUpCount + 1};
+    } else {
+      changes = {playedUpCount: player.playedUpCount - 1};
+    }
+    this.teamService.updatePlayer(changes, player.id).subscribe(
+      () => {
+        const updatedPlayer: Update<Player> = {
+          id: player.id,
+          changes
+        };
+        this.store.dispatch(updatePlayer({player: updatedPlayer}));
+      }
+    );
+  }
+
 }
 
 

@@ -29,6 +29,9 @@ const playerReducer = createReducer(
   }),
   on(TeamActions.addPlayer, (state, {player}) => {
     return adapter.addOne(player, state);
+  }),
+  on(TeamActions.updatePlayer, (state, {player}) => {
+    return adapter.updateOne(player, state);
   })
 );
 

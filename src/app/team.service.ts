@@ -43,4 +43,12 @@ export class TeamService {
       );
   }
 
+  updatePlayer(changes: Partial<Player>, playerId: number): Observable<Player> {
+    return this.http.put(`${this.playersApiUrl}/${playerId}`, {player: changes, id: playerId})
+      .pipe(
+        tap(val => console.log(val)),
+        map(updatedPlayer => updatedPlayer["data"])
+      );
+  }
+
 }
