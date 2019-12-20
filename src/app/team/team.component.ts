@@ -65,8 +65,17 @@ export class TeamComponent implements OnInit {
   }
 
   addPlayer() {
-    if (Object.keys(this.newPlayer).length && this.newPlayer.forename && this.newPlayer.forename.trim().length > 2 && this.newPlayer.surname && this.newPlayer.surname.trim().length > 2) {
-      const player = {forename:  this.newPlayer.forename.trim(), surname: this.newPlayer.surname.trim(), playedUpCount: 0, teamId: this.team.id};
+    if (Object.keys(this.newPlayer).length
+      && this.newPlayer.forename
+      && this.newPlayer.forename.trim().length > 2
+      && this.newPlayer.surname
+      && this.newPlayer.surname.trim().length > 2) {
+      const player = {
+        forename:  this.newPlayer.forename.trim(),
+        surname: this.newPlayer.surname.trim(),
+        playedUpCount: 0,
+        teamId: this.team.id
+      };
       this.teamService.addPlayer(player)
         .subscribe(newPlayer => {
           this.store.dispatch(addPlayer({player: newPlayer}));
