@@ -7,8 +7,6 @@ import * as MatchActions from './match.actions';
 import {concatMap, filter, map, skipWhile, withLatestFrom} from 'rxjs/operators';
 import {selectIfAllMatchesLoaded} from './match.selectors';
 
-
-
 @Injectable()
 export class MatchEffects {
   constructor(

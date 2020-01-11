@@ -1,3 +1,19 @@
 <!-- have division-table as component -->
+<div class="container py-4">
+  <div class="row">
+    <mat-tab-group>
+      <mat-tab *ngFor="let division of activeDivisions$ | async">
+        <ng-template mat-tab-label>
+          {{ division.name }}
+        </ng-template>
+        <div *ngFor="let tableRow of tables$ | async">
+          <div *ngIf="tableRow.division_id == division.id">
+            {{ tableRow.team_name }}
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
 
 <!-- inside tabs? -->

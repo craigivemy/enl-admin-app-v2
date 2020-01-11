@@ -41,6 +41,8 @@ import { TeamComponent } from './team/team.component';
 import * as fromTeam from './team/team.reducer';
 import { TeamEffects } from './team/team.effects';
 import * as fromPlayer from './team/player.reducer';
+import * as fromTable from './tables/table.reducer';
+import { TableEffects } from './tables/table.effects';
 
 registerLocaleData(localeGb);
 
@@ -89,9 +91,10 @@ registerLocaleData(localeGb);
     StoreModule.forFeature(fromDivision.divisionFeatureKey, fromDivision.reducer),
     StoreModule.forFeature(fromMatch.matchFeatureKey, fromMatch.reducer),
     StoreModule.forFeature(fromTeam.teamFeatureKey, fromTeam.reducer),
-    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects]),
+    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects, TableEffects]),
     StoreModule.forFeature(fromPlayer.playerFeatureKey, fromPlayer.reducer),
-    FormsModule
+    FormsModule,
+    StoreModule.forFeature(fromTable.tableFeatureKey, fromTable.reducer)
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },
