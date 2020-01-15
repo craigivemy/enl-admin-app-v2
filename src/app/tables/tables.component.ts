@@ -19,7 +19,6 @@ export class TablesComponent implements OnInit {
   activeDivisions$: Observable<Division[]>;
   tables$: Observable<Table[]>;
   columnsToDisplay = ['teamName', 'win', 'draw', 'loss', 'goalsFor', 'goalsAgainst', 'goalDifference', 'points'];
-  dataSource;
   constructor(
     private store: Store<AppState>,
     private divisionService: DivisionService,
