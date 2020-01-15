@@ -42,7 +42,7 @@ export class ResultListingComponent implements OnInit {
       this.store.dispatch(loadMatches({seasonId}));
       this.activeDivisions$ = this.divisionService.getActiveDivisions(seasonId);
       this.matchesWeeks$ = this.store.pipe(
-        select(selectWeeksFromMatches),
+        select(selectWeeksFromMatches)
       );
       this.store.pipe(select(selectAllMatches)).subscribe(matches => this.dataSource = new MatTableDataSource(matches));
     });

@@ -1,16 +1,47 @@
 <!-- have division-table as component -->
 <div class="container py-4">
   <div class="row">
-    <mat-tab-group>
-      <mat-tab *ngFor="let division of activeDivisions$ | async">
+    <mat-tab-group (selectedTabChange)="test($event)">
+      <mat-tab *ngFor="let division of activeDivisions$ | async" label="{{division.id}}">
         <ng-template mat-tab-label>
           {{ division.name }}
         </ng-template>
-        <div *ngFor="let tableRow of tables$ | async">
-          <div *ngIf="tableRow.division_id == division.id">
-            {{ tableRow.team_name }}
-          </div>
-        </div>
+          <table mat-table [dataSource]="tables$">
+            <ng-container matColumnDef="teamName">
+              <th mat-header-cell *matHeaderCellDef>Team Name</th>
+              <td mat-cell *matCellDef="let team"> {{team.team_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="win">
+              <th mat-header-cell *matHeaderCellDef>Wins</th>
+              <td mat-cell *matCellDef="let team"> {{team.win}} </td>
+            </ng-container>
+            <ng-container matColumnDef="loss">
+              <th mat-header-cell *matHeaderCellDef>Losses</th>
+              <td mat-cell *matCellDef="let team"> {{team.loss}} </td>
+            </ng-container>
+            <ng-container matColumnDef="draw">
+              <th mat-header-cell *matHeaderCellDef>Draws</th>
+              <td mat-cell *matCellDef="let team"> {{team.draw}} </td>
+            </ng-container>
+            <ng-container matColumnDef="goalsFor">
+              <th mat-header-cell *matHeaderCellDef>Goals For</th>
+              <td mat-cell *matCellDef="let team"> {{team.goals_for}} </td>
+            </ng-container>
+            <ng-container matColumnDef="goalsAgainst">
+              <th mat-header-cell *matHeaderCellDef>Goals Against</th>
+              <td mat-cell *matCellDef="let team"> {{team.goals_against}} </td>
+            </ng-container>
+            <ng-container matColumnDef="goalDifference">
+              <th mat-header-cell *matHeaderCellDef>Goal Difference</th>
+              <td mat-cell *matCellDef="let team"> {{team.goal_difference}} </td>
+            </ng-container>
+            <ng-container matColumnDef="points">
+              <th mat-header-cell *matHeaderCellDef>Points</th>
+              <td mat-cell *matCellDef="let team"> {{team.points}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+          </table>
       </mat-tab>
     </mat-tab-group>
   </div>

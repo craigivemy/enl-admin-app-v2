@@ -8,7 +8,7 @@ import {selectCurrentSeasonId} from "../season/season.selectors";
 import {filter} from "rxjs/operators";
 import {loadTables} from "./table.actions";
 import {Table} from "../models/table";
-import {selectAllTables} from "./table.selectors";
+import {selectAllTables, selectTableByDivisionId} from './table.selectors';
 
 @Component({
   selector: 'app-tables',
@@ -18,6 +18,8 @@ import {selectAllTables} from "./table.selectors";
 export class TablesComponent implements OnInit {
   activeDivisions$: Observable<Division[]>;
   tables$: Observable<Table[]>;
+  columnsToDisplay = ['teamName', 'win', 'draw', 'loss', 'goalsFor', 'goalsAgainst', 'goalDifference', 'points'];
+  dataSource;
   constructor(
     private store: Store<AppState>,
     private divisionService: DivisionService,
@@ -31,10 +33,14 @@ export class TablesComponent implements OnInit {
     ).subscribe(seasonId => {
       this.store.dispatch(loadTables({seasonId}));
       this.activeDivisions$ = this.divisionService.getActiveDivisions(seasonId);
-      this.tables$ = this.store.pipe(
-        select(selectAllTables)
-      );
     });
   }
+
+  test(event: any) {
+    this.tables$ = this.store.pipe(
+      select(selectTableByDivisionId(parseInt(event.tab.textLabel)))
+    );
+  }
+
 
 }
