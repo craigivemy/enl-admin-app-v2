@@ -5,13 +5,34 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>ENL</mat-toolbar>
     <mat-nav-list class="d-flex flex-column">
-      <a mat-list-item routerLink="home">Home</a>
-      <a mat-list-item routerLink="teams">Teams</a>
-      <a mat-list-item routerLink="tables">Tables</a>
-      <a mat-list-item routerLink="fixtures">Fixtures</a>
-      <a mat-list-item routerLink="results">Results</a>
-      <a mat-list-item routerLink="umpires">Umpires</a>
-      <a mat-list-item routerLink="played-up">Played up table</a>
+      <a mat-list-item routerLink="home" routerLinkActive="active-route">
+        <i class="material-icons pr-2">dashboard</i>
+        Dashboard
+      </a>
+      <a mat-list-item routerLink="teams" routerLinkActive="active-route">
+        <i class="material-icons pr-2">group</i>
+        Teams
+      </a>
+      <a mat-list-item routerLink="tables" routerLinkActive="active-route">
+        <i class="material-icons pr-2">table_chart</i>
+        Tables
+      </a>
+      <a mat-list-item routerLink="fixtures" routerLinkActive="active-route">
+        <i class="material-icons pr-2">date_range</i>
+        Fixtures
+      </a>
+      <a mat-list-item routerLink="results" routerLinkActive="active-route">
+        <i class="material-icons pr-2">assessment</i>
+        Results
+      </a>
+      <a mat-list-item routerLink="umpires" routerLinkActive="active-route">
+        <i class="material-icons pr-2">account_circle</i>
+        Umpires
+      </a>
+      <a mat-list-item routerLink="played-up" routerLinkActive="active-route">
+        <i class="material-icons pr-2">arrow_upward</i>
+        Played up table
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

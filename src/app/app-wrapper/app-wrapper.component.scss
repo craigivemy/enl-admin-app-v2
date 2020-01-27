@@ -12,3 +12,15 @@
   top: 0;
   z-index: 1;
 }
+.mat-nav-list {
+  padding: 0 10px;
+}
+.sidenav-container .sidenav .mat-list-item {
+  color: #3c4858;
+  border-radius: 3px;
+  &.active-route {
+    color: #FFF;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(156,39,176,.4);
+    background: #9c27b0;
+  }
+}
