@@ -3,7 +3,9 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>ENL</mat-toolbar>
+    <mat-toolbar>
+      <span class="navbar-brand"></span>
+    </mat-toolbar>
     <mat-nav-list class="d-flex flex-column">
       <a mat-list-item routerLink="home" routerLinkActive="active-route">
         <i class="material-icons pr-2">dashboard</i>
