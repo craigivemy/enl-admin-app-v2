@@ -6,8 +6,9 @@
   background: #4E546C;
 }
 .sidenav .mat-toolbar {
-  background: inherit;
-  height: 100px;
+  background: #555C78;
+  height: 75px;
+  margin-bottom: 20px;
 }
 .mat-toolbar.mat-primary {
   position: sticky;
@@ -23,16 +24,19 @@
   &.active-route {
     color: #FFF;
     box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(156,39,176,.4);
-    background-image: linear-gradient(27deg, #5A0891 8%, #830BD3 100%);
+    //background-image: linear-gradient(27deg, #5A0891 8%, #830BD3 100%);
+    background: #2DD1AC;
   }
 }
 .mat-toolbar {
-  background-image: linear-gradient(27deg, #5A0891 8%, #830BD3 100%);
+  //background-image: linear-gradient(27deg, #5A0891 8%, #830BD3 100%);
+  height: 75px;
+  background: #FFF;
 }
 .navbar-brand {
   background: url("../../assets/img/enl-logo-white.svg") no-repeat left center;
-  height: 75px;
-  width: 117px;
+  height: 55px;
+  width: 86px;
   display: block;
   background-size: contain;
 }

@@ -16,6 +16,7 @@ import {selectAllSeasons} from "../season/season.selectors";
 })
 export class AppWrapperComponent implements OnInit {
 seasons$: Observable<Season[]>;
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private seasonService: SeasonService,
