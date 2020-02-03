@@ -13,13 +13,13 @@ import {TeamResolverService} from './team/team-resolver.service';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'teams', component: DivisionsTeamsListingComponent },
-  { path: 'teams/:id', component: TeamComponent, resolve: { team: TeamResolverService }},
-  { path: 'tables', component: TablesComponent },
-  { path: 'fixtures', component: FixtureListingComponent },
-  { path: 'results', component: ResultListingComponent },
-  { path: 'new-season', component: NewSeasonComponent }
+  { path: 'home', component: HomeComponent, data: { displayTitle: 'Home' } },
+  { path: 'teams', component: DivisionsTeamsListingComponent, data: { displayTitle: 'Teams' } },
+  { path: 'teams/:id', component: TeamComponent },
+  { path: 'tables', component: TablesComponent, data: { displayTitle: 'Tables' } },
+  { path: 'fixtures', component: FixtureListingComponent, data: { displayTitle: 'Fixtures' } },
+  { path: 'results', component: ResultListingComponent, data: { displayTitle: 'Results' } },
+  { path: 'new-season', component: NewSeasonComponent, data: { displayTitle: 'New Season' } },
 
 ];
 

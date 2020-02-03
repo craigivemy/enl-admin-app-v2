@@ -40,6 +40,7 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button (click)="drawer.toggle()" mat-icon-button><mat-icon>menu</mat-icon></button>
+      <h1 class="mat-headline">{{ displayTitle }}</h1>
     </mat-toolbar>
     <router-outlet class="bg"></router-outlet>
   </mat-sidenav-content>

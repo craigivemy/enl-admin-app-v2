@@ -1,0 +1,35 @@
+mat-card-header.mat-card-header {
+  background: linear-gradient(60deg,#ab47bc,#8e24aa);
+  margin-top: -35px;
+  border-radius: 3px;
+}
+mat-card-title.mat-card-title {
+  margin-bottom: 0;
+  padding: 20px 0;
+  color: #FFF;
+}
+mat-card {
+  margin-top: 50px;
+}
+table.mat-table {
+  margin-top: 25px;
+}
+th.mat-header-cell {
+  border: none;
+}
+tr.mat-header-row {
+  height: 0;
+  border: none;
+}
+tr.mat-row:last-child {
+  td {
+    border: none;
+  }
+}
+td.mat-cell {
+  padding: 20px 15px 20px 0;
+  a {
+    color: rgba(33, 37, 41, 1);
+    font-weight: 300;
+  }
+}
