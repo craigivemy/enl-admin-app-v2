@@ -1,7 +1,19 @@
 mat-card-header.mat-card-header {
-  background: linear-gradient(60deg,#ab47bc,#8e24aa);
   margin-top: -35px;
   border-radius: 3px;
+  background: linear-gradient(60deg,#ab47bc,#8e24aa);
+}
+.bg-1 .mat-card-header {
+  background: linear-gradient(60deg, #66bb6a, #43a047);
+}
+.bg-2 .mat-card-header {
+  background: linear-gradient(60deg,#ffa726,#fb8c00);
+}
+.bg-3 .mat-card-header {
+  background: linear-gradient(60deg,#ef5350,#e53935);
+}
+.bg-4 .mat-card-header {
+  background: linear-gradient(60deg,#26c6da,#00acc1);
 }
 mat-card-title.mat-card-title {
   margin-bottom: 0;
@@ -31,5 +43,10 @@ td.mat-cell {
   a {
     color: rgba(33, 37, 41, 1);
     font-weight: 300;
+    transition: all 0.25s ease;
+    &:hover {
+      text-decoration: none;
+      color: #2DD1AC;
+    }
   }
 }

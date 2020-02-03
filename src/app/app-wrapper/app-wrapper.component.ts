@@ -38,7 +38,7 @@ displayTitle: string;
     this.seasons$ = this.store.pipe(select(selectAllSeasons));
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.displayTitle = this.route.root.firstChild.snapshot.data["displayTitle"]
+        this.displayTitle = this.route.root.firstChild.snapshot.data["displayTitle"];
       }
     });
   }
