@@ -30,9 +30,10 @@ export class MatchDialogComponent implements OnInit {
       this.awayTeamName = data.match.awayTeamName;
 
       this.matchEditForm = this.fb.group({
-        homeScore: [{ value: data.match.homeScore, disabled: data.match.walkover}],
-        awayScore: [{ value: data.match.awayScore, disabled: data.match.walkover}],
-        walkover: [data.match.walkover]
+        homeScore: [{ value: data.match.homeScore, disabled: () => data.match.homeWalkover || data.match.awayWalkover}],
+        awayScore: [{ value: data.match.awayScore, disabled: () => data.match.homeWalkover || data.match.awayWalkover}],
+        walkoverHome: [data.match.walkoverHome],
+        walkoverAway: [data.match.walkoverAway]
       });
     }
 
@@ -40,7 +41,7 @@ export class MatchDialogComponent implements OnInit {
     this.matchEditForm.valueChanges.pipe(
       distinctUntilChanged()
     ).subscribe(values => {
-      if (values.walkover) {
+      if (values.walkoverHome || values.walkoverAway) {
         this.matchEditForm.get('homeScore').disable({onlySelf: true});
         this.matchEditForm.get('awayScore').disable({onlySelf: true});
       } else {
