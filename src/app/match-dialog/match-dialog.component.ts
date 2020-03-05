@@ -56,6 +56,7 @@ export class MatchDialogComponent implements OnInit {
     const changes = this.matchEditForm.value;
     this.matchService.saveMatch(this.matchId, changes).subscribe(
       () => {
+        console.log(changes);
         const match: Update<Match> = {
           id: this.matchId,
           changes
