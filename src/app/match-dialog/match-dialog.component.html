@@ -7,7 +7,7 @@
         <input type="number" matInput formControlName="homeScore">
       </mat-form-field>
       <div>
-        <mat-slide-toggle formControlName="walkoverHome">Walkover</mat-slide-toggle>
+        <mat-slide-toggle (change)="walkoverToggle($event, 1)" formControlName="walkoverHome">Walkover</mat-slide-toggle>
       </div>
     </div>
     <div>
@@ -16,7 +16,7 @@
         <input type="number" matInput formControlName="awayScore">
       </mat-form-field>
       <div>
-        <mat-slide-toggle formControlName="walkoverAway">Walkover</mat-slide-toggle>
+        <mat-slide-toggle (change)="walkoverToggle($event, 2)" formControlName="walkoverAway">Walkover</mat-slide-toggle>
       </div>
     </div>
   </form>

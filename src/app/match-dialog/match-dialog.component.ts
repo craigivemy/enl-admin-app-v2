@@ -5,7 +5,7 @@ import {MatchService} from '../match.service';
 import {Match} from '../models/match';
 import {matchUpdated} from '../match/match.actions';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSlideToggleChange} from '@angular/material';
 import {distinctUntilChanged, tap} from 'rxjs/operators';
 import {Update} from '@ngrx/entity';
 
@@ -68,6 +68,16 @@ export class MatchDialogComponent implements OnInit {
   }
   onCancel(): void {
     this.dialogRef.close({updated: false});
+  }
+
+  walkoverToggle(event: MatSlideToggleChange, index: number) {
+    if (event.checked) {
+      if (index === 1) {
+        this.matchEditForm.controls.walkoverAway.setValue(false);
+      } else {
+        this.matchEditForm.controls.walkoverHome.setValue(false);
+      }
+    }
   }
 
 }

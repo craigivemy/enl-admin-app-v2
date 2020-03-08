@@ -12,7 +12,6 @@ import {DivisionService} from '../division.service';
 import {FormControl} from '@angular/forms';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {Match} from '../models/match';
-import {MatchService} from '../match.service';
 import {MatchDialogComponent} from '../match-dialog/match-dialog.component';
 
 moment.locale('en-gb');
@@ -66,5 +65,4 @@ export class ResultListingComponent implements OnInit {
     });
 
   }
-
 }
