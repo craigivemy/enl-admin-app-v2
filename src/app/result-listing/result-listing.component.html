@@ -30,13 +30,33 @@
             <ng-container matColumnDef="homeTeamScore">
               <th mat-header-cell *matHeaderCellDef></th>
               <td class="score-column" mat-cell *matCellDef="let fixture; let i = index;">
-                {{ fixture.homeScore }} <!-- todo if not walkover, otherwise show W or something -->
+                <span *ngIf="fixture.walkoverHome; else scoreBlock">
+                  W
+                </span>
+                <ng-template #scoreBlock>
+                  <span *ngIf="fixture.walkoverAway; else innerScoreBlock">
+                    ---
+                  </span>
+                  <ng-template #innerScoreBlock>
+                    {{ fixture.homeScore }}
+                  </ng-template>
+                </ng-template>
               </td>
             </ng-container>
             <ng-container matColumnDef="awayTeamScore">
               <th mat-header-cell *matHeaderCellDef></th>
               <td class="score-column" mat-cell *matCellDef="let fixture">
-               {{ fixture.awayScore }} <!-- todo if not walkover, otherwise show W or something -->
+               <span *ngIf="fixture.walkoverAway; else scoreBlock">
+                  W
+                </span>
+                <ng-template #scoreBlock>
+                   <span *ngIf="fixture.walkoverHome; else innerScoreBlock">
+                    ---
+                  </span>
+                  <ng-template #innerScoreBlock>
+                    {{ fixture.awayScore }}
+                  </ng-template>
+                </ng-template>
               </td>
             </ng-container>
             <ng-container matColumnDef="awayTeamName">
