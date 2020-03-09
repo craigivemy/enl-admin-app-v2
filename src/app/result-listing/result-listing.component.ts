@@ -48,7 +48,9 @@ export class ResultListingComponent implements OnInit {
 
     this.selectedWeek.valueChanges.subscribe(
       week => {
-        this.dataSource.filter = moment(week).format('YYYY-MM-DD');
+        if (week) {
+          this.dataSource.filter = moment(week).format('YYYY-MM-DD');
+        }
       }
     );
   }
