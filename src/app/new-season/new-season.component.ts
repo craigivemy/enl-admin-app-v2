@@ -11,6 +11,8 @@ import {SeasonService} from "../season.service";
 import {Store} from "@ngrx/store";
 import {AppState} from "../reducers";
 import {addSeason} from "../season/season.actions";
+import {Setting} from '../models/setting';
+import {SettingService} from '../setting.service';
 
 @Component({
   selector: 'app-new-season',
@@ -19,6 +21,7 @@ import {addSeason} from "../season/season.actions";
 })
 export class NewSeasonComponent implements OnInit {
   divisions: Observable<Division[]>;
+  settings: Setting[];
   teams: Team[];
   dynamicDivisionSteps: Division[] = [];
   teamsInDivisions = {};
@@ -27,16 +30,21 @@ export class NewSeasonComponent implements OnInit {
     startDate: ['', Validators.required],
     rounds: [2, Validators.required]
   });
+  scoringDetailsForm = this.fb.group({
+    //name: [this.settings.]
+  });
 
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
     private divisionService: DivisionService,
+    private settingService: SettingService,
     private teamService: TeamService,
     private seasonService: SeasonService) { }
 
   ngOnInit() {
     this.divisions = this.divisionService.getDivisions();
+    this.settingService.getSettings().subscribe(settings => this.settings = settings);
     this.teamService.getTeams().subscribe(teams => this.teams = teams);
   }
 

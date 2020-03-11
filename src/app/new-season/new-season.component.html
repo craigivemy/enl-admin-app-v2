@@ -1,6 +1,11 @@
 <div class="container-fluid py-3">
   <div class="row">
     <div class="col-12">
+      <ul>
+        <li *ngFor="let setting of settings">
+          {{ setting.name }}
+        </li>
+      </ul>
       <mat-vertical-stepper linear class="col-12">
         <mat-step [stepControl]="basicDetailsForm">
           <ng-template matStepLabel>Basic Details</ng-template>
@@ -23,7 +28,11 @@
               </mat-form-field>
             </div>
           </form>
-
+        </mat-step>
+        <mat-step [stepControl]="scoringDetailsForm">
+          <ng-template matStepLabel>Scoring Settings</ng-template>
+          <form [formGroup]="scoringDetailsForm">
+          </form>
         </mat-step>
         <mat-step label="Choose Divisions">
           <div class="row">
