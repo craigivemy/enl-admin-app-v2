@@ -27,16 +27,13 @@ export class NewSeasonComponent implements OnInit {
   dynamicDivisionSteps: Division[] = [];
   teamsInDivisions = {};
 
-
   basicDetailsForm = this.fb.group({
     name: ['', Validators.required],
     startDate: ['', Validators.required],
     rounds: [2, Validators.required]
   });
   scoringDetailsForm = this.fb.group({
-    fields: this.fb.array([
-      this.fb.control('')
-    ])
+    winValue: [2]
   });
 
   constructor(
@@ -49,25 +46,26 @@ export class NewSeasonComponent implements OnInit {
 
   ngOnInit() {
     this.divisions = this.divisionService.getDivisions();
+    // this.settingService.getSettings().pipe(
+    //   map(settings => {
+    //     settings.map(
+    //       setting => this.addFields(setting)
+    //     );
+    //   }
+    // )).subscribe();
     this.settingService.getSettings().pipe(
       map(settings => {
-        settings.map(
-          setting => this.addFields(setting)
-        );
-      }
-    )).subscribe();
+        settings.map(setting => {
+          if (setting.name === 'win_value') {
+            this.scoringDetailsForm.setValue({winValue: setting.settingValue});
+          }
+        });
+      })
+    ).subscribe();
     this.teamService.getTeams().subscribe(teams => this.teams = teams);
 
-  }
-
-  get fields(): FormArray {
-    return this.scoringDetailsForm.get('fields') as FormArray;
-  }
-  addFields(item) {
-    this.fields.push(this.fb.control({
-      name: item.name,
-      value: item.settingValue
-    })
+    this.scoringDetailsForm.valueChanges.subscribe(
+      changes => console.log(changes)
     );
   }
 
