@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {Division} from '../models/division';
 import {DivisionService} from '../division.service';
@@ -13,6 +13,7 @@ import {AppState} from "../reducers";
 import {addSeason} from "../season/season.actions";
 import {Setting} from '../models/setting';
 import {SettingService} from '../setting.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-season',
@@ -25,13 +26,17 @@ export class NewSeasonComponent implements OnInit {
   teams: Team[];
   dynamicDivisionSteps: Division[] = [];
   teamsInDivisions = {};
+
+
   basicDetailsForm = this.fb.group({
     name: ['', Validators.required],
     startDate: ['', Validators.required],
     rounds: [2, Validators.required]
   });
   scoringDetailsForm = this.fb.group({
-    //name: [this.settings.]
+    fields: this.fb.array([
+      this.fb.control('')
+    ])
   });
 
   constructor(
@@ -44,8 +49,26 @@ export class NewSeasonComponent implements OnInit {
 
   ngOnInit() {
     this.divisions = this.divisionService.getDivisions();
-    this.settingService.getSettings().subscribe(settings => this.settings = settings);
+    this.settingService.getSettings().pipe(
+      map(settings => {
+        settings.map(
+          setting => this.addFields(setting)
+        );
+      }
+    )).subscribe();
     this.teamService.getTeams().subscribe(teams => this.teams = teams);
+
+  }
+
+  get fields(): FormArray {
+    return this.scoringDetailsForm.get('fields') as FormArray;
+  }
+  addFields(item) {
+    this.fields.push(this.fb.control({
+      name: item.name,
+      value: item.settingValue
+    })
+    );
   }
 
   updateDynamicDivisionSteps(event: any, division: Division) {
