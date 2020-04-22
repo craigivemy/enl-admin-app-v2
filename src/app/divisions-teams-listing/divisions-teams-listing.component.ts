@@ -51,7 +51,7 @@ export class DivisionsTeamsListingComponent implements OnInit {
 
   }
 
-  editName(index: number) {
-
+  addTeam() {
+    alert('hello');
   }
 }
