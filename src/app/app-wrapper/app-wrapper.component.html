@@ -35,6 +35,30 @@
         <i class="material-icons pr-2">arrow_upward</i>
         Played up table
       </a>
+      <mat-accordion class="nav-submenu">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <i class="material-icons pr-2">build</i>
+              Configure
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list class="d-flex flex-column">
+            <a mat-list-item routerLink="new-season" routerLinkActive="active-route">
+              <i class="material-icons pr-2">supervised_user_circle</i>
+              New Season
+            </a>
+            <a mat-list-item routerLink="configure-teams" routerLinkActive="active-route">
+              <i class="material-icons pr-2">group</i>
+              Teams
+            </a>
+            <a mat-list-item routerLink="configure-teams" routerLinkActive="active-route">
+              <i class="material-icons pr-2">face</i>
+              Players
+            </a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

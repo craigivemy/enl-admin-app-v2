@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   MAT_DATE_LOCALE, MatBadgeModule,
   MatCardModule,
-  MatDatepickerModule, MatDialogModule,
+  MatDatepickerModule, MatDialogModule, MatExpansionModule,
   MatInputModule, MatSelectModule, MatSlideToggleModule,
   MatStepperModule,
   MatTableModule, MatTabsModule,
@@ -28,7 +28,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatSelectModule,
     MatDialogModule,
     MatSlideToggleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatExpansionModule
   ],
   exports: [
     MatCardModule,
@@ -41,7 +42,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatSelectModule,
     MatDialogModule,
     MatSlideToggleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatExpansionModule
   ],
   providers: [
     MatMomentDateModule,
