@@ -53,6 +53,7 @@ export class NewSeasonComponent implements OnInit {
     //     );
     //   }
     // )).subscribe();
+    // todo - finish this
     this.settingService.getSettings().pipe(
       map(settings => {
         settings.map(setting => {

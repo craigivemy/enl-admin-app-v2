@@ -12,6 +12,11 @@ export const selectAllTeams = createSelector(
   fromTeam.selectAll
 );
 
+export const selectIfAllTeamsLoaded = createSelector(
+  selectTeamState,
+  teamState => teamState.allTeamsLoaded
+);
+
 export const selectTeamById = teamId => createSelector(
   selectTeamState,
   teamState => teamState.entities[teamId]

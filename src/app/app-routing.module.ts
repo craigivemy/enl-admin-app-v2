@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'tables', component: TablesComponent, data: { displayTitle: 'Tables' } },
   { path: 'fixtures', component: FixtureListingComponent, data: { displayTitle: 'Fixtures' } },
   { path: 'results', component: ResultListingComponent, data: { displayTitle: 'Results' } },
-  { path: 'new-season', component: NewSeasonComponent, data: { displayTitle: 'New Season' } }
+  { path: 'new-season', component: NewSeasonComponent, data: { displayTitle: 'New Season' } },
+  { path: 'configure-teams', component: AllTeamsListingComponent, data: { displayTitle: 'Configure Teams' } }
 
 ];
 

@@ -10,4 +10,5 @@ export class Team {
   narrative?: string;
   players?: Player[];
   addedToSeason?: number;
+  deletedAt?: string;
 }

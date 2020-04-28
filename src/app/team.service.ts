@@ -22,6 +22,13 @@ export class TeamService {
       );
   }
 
+  getTeamsWithSoftDeletes(): Observable<Team[]> {
+    return this.http.get(`${this.teamsApiUrl}?softDeletes=1`)
+      .pipe(
+        map(teams => teams["data"])
+      );
+  }
+
   getTeamById(teamId: number): Observable<Team> {
     return this.http.get(`${this.teamsApiUrl}/${teamId}`)
       .pipe(
