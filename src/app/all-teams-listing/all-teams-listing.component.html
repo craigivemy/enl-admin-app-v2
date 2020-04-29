@@ -1,9 +1,20 @@
 <div class="container-fluid py-3">
   <div class="row">
-    <ul>
-    <li *ngFor="let team of teams$ | async">
-      {{ team.name }}
-    </li>
-    </ul>
+    <div class="col-4">
+      <h4>All Teams</h4>
+      <mat-selection-list>
+        <mat-list-option *ngFor="let team of activeTeams$ | async">
+          {{ team.name }}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+    <div class="col-4 ml-auto">
+      <h4>Deleted Teams</h4>
+      <mat-selection-list>
+        <mat-list-option *ngFor="let team of deletedTeams$ | async">
+          {{ team.name }}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
   </div>
 </div>

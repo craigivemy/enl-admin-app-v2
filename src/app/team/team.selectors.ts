@@ -27,6 +27,11 @@ export const selectOnlyNonDeletedTeams = createSelector(
   teams => teams.filter(team => !team.deletedAt)
 );
 
+export const selectDeletedTeams = createSelector(
+  selectAllTeams,
+  teams => teams.filter(team => team.deletedAt)
+);
+
 export const selectPlayers = createSelector(
   selectPlayerState,
   fromPlayer.selectAll

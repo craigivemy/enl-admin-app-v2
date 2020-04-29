@@ -3,7 +3,7 @@ import {AppState} from "../reducers";
 import {select, Store} from "@ngrx/store";
 import {Team} from "../models/team";
 import {loadTeams} from "../team/team.actions";
-import {selectAllTeams} from "../team/team.selectors";
+import {selectDeletedTeams, selectOnlyNonDeletedTeams} from "../team/team.selectors";
 import {Observable} from "rxjs";
 
 @Component({
@@ -12,13 +12,17 @@ import {Observable} from "rxjs";
   styleUrls: ['./all-teams-listing.component.scss']
 })
 export class AllTeamsListingComponent implements OnInit {
-  teams$: Observable<Team[]>;
+  activeTeams$: Observable<Team[]>;
+  deletedTeams$: Observable<Team[]>;
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
     this.store.dispatch(loadTeams());
-    this.teams$ = this.store.pipe(
-      select(selectAllTeams)
+    this.activeTeams$ = this.store.pipe(
+      select(selectOnlyNonDeletedTeams)
+    );
+    this.deletedTeams$ = this.store.pipe(
+      select(selectDeletedTeams)
     );
   }
 
