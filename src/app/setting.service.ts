@@ -22,6 +22,7 @@ export class SettingService {
     }
     return this.http.get(`${this.settingsApiUrl}`)
       .pipe(
+        tap(data => console.log(data)),
         map(settings => settings["data"])
       );
   }

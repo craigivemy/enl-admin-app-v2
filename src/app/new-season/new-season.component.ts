@@ -33,7 +33,14 @@ export class NewSeasonComponent implements OnInit {
     rounds: [2, Validators.required]
   });
   scoringDetailsForm = this.fb.group({
-    winValue: [2]
+    winValue: [3],
+    drawValue: [1],
+    lossValue: [0],
+    bonusWithin5: [0],
+    bonusOverHalf: [0],
+    walkoverAwarded: [0],
+    walkoverDeducted: [0],
+    walkoverAwardedGoals: [0],
   });
 
   constructor(
@@ -46,24 +53,32 @@ export class NewSeasonComponent implements OnInit {
 
   ngOnInit() {
     this.divisions = this.divisionService.getDivisions();
-    // this.settingService.getSettings().pipe(
-    //   map(settings => {
-    //     settings.map(
-    //       setting => this.addFields(setting)
-    //     );
-    //   }
-    // )).subscribe();
-    // todo - finish this
     this.settingService.getSettings().pipe(
       map(settings => {
         settings.map(setting => {
           if (setting.name === 'win_value') {
-            this.scoringDetailsForm.setValue({winValue: setting.settingValue});
+            this.scoringDetailsForm.patchValue({winValue: setting.settingValue});
+          } else if (setting.name === 'draw_value') {
+            this.scoringDetailsForm.patchValue({drawValue: setting.settingValue});
+          } else if (setting.name === 'loss_value') {
+            this.scoringDetailsForm.patchValue({lossValue: setting.settingValue});
+          } else if (setting.name === 'bonus_point_within_5_value') {
+            this.scoringDetailsForm.patchValue({bonusWithin5: setting.settingValue});
+          } else if (setting.name === 'bonus_point_over_50_percent_value') {
+            this.scoringDetailsForm.patchValue({bonusOverHalf: setting.settingValue});
+          } else if (setting.name === 'walkover_awarded_points') {
+            this.scoringDetailsForm.patchValue({walkoverAwarded: setting.settingValue});
+          } else if (setting.name === 'walkover_deducted_points') {
+            this.scoringDetailsForm.patchValue({walkoverDeducted: setting.settingValue});
+          } else if (setting.name === 'walkover_awarded_goals') {
+            this.scoringDetailsForm.patchValue({walkoverAwardedGoals: setting.settingValue});
           }
         });
       })
     ).subscribe();
-    this.teamService.getTeams().subscribe(teams => this.teams = teams);
+    this.teamService.getTeams().subscribe(teams => {
+      this.teams = teams.filter(team => !team.deletedAt);
+    });
 
     this.scoringDetailsForm.valueChanges.subscribe(
       changes => console.log(changes)

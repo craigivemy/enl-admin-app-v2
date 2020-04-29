@@ -22,6 +22,11 @@ export const selectTeamById = teamId => createSelector(
   teamState => teamState.entities[teamId]
 );
 
+export const selectOnlyNonDeletedTeams = createSelector(
+  selectAllTeams,
+  teams => teams.filter(team => !team.deletedAt)
+);
+
 export const selectPlayers = createSelector(
   selectPlayerState,
   fromPlayer.selectAll
