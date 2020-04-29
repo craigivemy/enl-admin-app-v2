@@ -22,7 +22,6 @@ import {map} from 'rxjs/operators';
 })
 export class NewSeasonComponent implements OnInit {
   divisions: Observable<Division[]>;
-  settings: Setting[];
   teams: Team[];
   dynamicDivisionSteps: Division[] = [];
   teamsInDivisions = {};
@@ -33,14 +32,14 @@ export class NewSeasonComponent implements OnInit {
     rounds: [2, Validators.required]
   });
   scoringDetailsForm = this.fb.group({
-    winValue: [3],
-    drawValue: [1],
-    lossValue: [0],
-    bonusWithin5: [0],
-    bonusOverHalf: [0],
-    walkoverAwarded: [0],
-    walkoverDeducted: [0],
-    walkoverAwardedGoals: [0],
+    win_value: [3],
+    draw_value: [1],
+    loss_value: [0],
+    bonus_point_within_5_value: [0],
+    bonus_point_over_50_percent_value: [0],
+    walkover_awarded_points: [0],
+    walkover_deducted_points: [0],
+    walkover_awarded_goals: [0],
   });
 
   constructor(
@@ -57,21 +56,21 @@ export class NewSeasonComponent implements OnInit {
       map(settings => {
         settings.map(setting => {
           if (setting.name === 'win_value') {
-            this.scoringDetailsForm.patchValue({winValue: setting.settingValue});
+            this.scoringDetailsForm.patchValue({win_value: setting.settingValue});
           } else if (setting.name === 'draw_value') {
-            this.scoringDetailsForm.patchValue({drawValue: setting.settingValue});
+            this.scoringDetailsForm.patchValue({draw_value: setting.settingValue});
           } else if (setting.name === 'loss_value') {
-            this.scoringDetailsForm.patchValue({lossValue: setting.settingValue});
+            this.scoringDetailsForm.patchValue({loss_value: setting.settingValue});
           } else if (setting.name === 'bonus_point_within_5_value') {
-            this.scoringDetailsForm.patchValue({bonusWithin5: setting.settingValue});
+            this.scoringDetailsForm.patchValue({bonus_point_within_5_value: setting.settingValue});
           } else if (setting.name === 'bonus_point_over_50_percent_value') {
-            this.scoringDetailsForm.patchValue({bonusOverHalf: setting.settingValue});
+            this.scoringDetailsForm.patchValue({bonus_point_over_50_percent_value: setting.settingValue});
           } else if (setting.name === 'walkover_awarded_points') {
-            this.scoringDetailsForm.patchValue({walkoverAwarded: setting.settingValue});
+            this.scoringDetailsForm.patchValue({walkover_awarded_points: setting.settingValue});
           } else if (setting.name === 'walkover_deducted_points') {
-            this.scoringDetailsForm.patchValue({walkoverDeducted: setting.settingValue});
+            this.scoringDetailsForm.patchValue({walkover_deducted_points: setting.settingValue});
           } else if (setting.name === 'walkover_awarded_goals') {
-            this.scoringDetailsForm.patchValue({walkoverAwardedGoals: setting.settingValue});
+            this.scoringDetailsForm.patchValue({walkover_awarded_goals: setting.settingValue});
           }
         });
       })
@@ -79,10 +78,6 @@ export class NewSeasonComponent implements OnInit {
     this.teamService.getTeams().subscribe(teams => {
       this.teams = teams.filter(team => !team.deletedAt);
     });
-
-    this.scoringDetailsForm.valueChanges.subscribe(
-      changes => console.log(changes)
-    );
   }
 
   updateDynamicDivisionSteps(event: any, division: Division) {
@@ -130,8 +125,8 @@ export class NewSeasonComponent implements OnInit {
       current: status,
     };
     const divisionsTeams = this.teamsInDivisions;
-    console.log(this.teamsInDivisions);
-    this.seasonService.save(newSeason, divisionsTeams).subscribe(
+
+    this.seasonService.save(newSeason, divisionsTeams, this.scoringDetailsForm.value).subscribe(
       season => this.store.dispatch(addSeason({season}))
     );
   }
