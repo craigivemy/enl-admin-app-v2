@@ -26,4 +26,12 @@ export class AllTeamsListingComponent implements OnInit {
     );
   }
 
+  restoreTeam() {
+
+  }
+
+  deleteTeam() {
+
+  }
+
 }
