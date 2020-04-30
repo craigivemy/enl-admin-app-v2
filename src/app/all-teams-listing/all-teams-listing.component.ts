@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AppState} from "../reducers";
 import {select, Store} from "@ngrx/store";
 import {Team} from "../models/team";
@@ -14,6 +14,8 @@ import {Observable} from "rxjs";
 export class AllTeamsListingComponent implements OnInit {
   activeTeams$: Observable<Team[]>;
   deletedTeams$: Observable<Team[]>;
+  selectedActiveTeams;
+  selectedDeletedTeams;
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
@@ -27,11 +29,11 @@ export class AllTeamsListingComponent implements OnInit {
   }
 
   restoreTeam() {
-
+    console.log(this.selectedDeletedTeams);
   }
 
   deleteTeam() {
-
+    console.log(this.selectedActiveTeams);
   }
 
 }

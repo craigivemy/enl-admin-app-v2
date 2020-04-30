@@ -8,8 +8,8 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <mat-selection-list>
-          <mat-list-option *ngFor="let team of activeTeams$ | async">
+          <mat-selection-list [(ngModel)]="selectedActiveTeams">
+          <mat-list-option *ngFor="let team of activeTeams$ | async" [value]="team.id">
             {{ team.name }}
           </mat-list-option>
           </mat-selection-list>
@@ -36,8 +36,8 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <mat-selection-list>
-            <mat-list-option *ngFor="let team of deletedTeams$ | async">
+          <mat-selection-list [(ngModel)]="selectedDeletedTeams">
+            <mat-list-option *ngFor="let team of deletedTeams$ | async" [value]="team.id">
               {{ team.name }}
             </mat-list-option>
           </mat-selection-list>
