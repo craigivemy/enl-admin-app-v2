@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {ApiRoutes} from '../data/api-routes';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Team} from './models/team';
 import {map, tap} from 'rxjs/operators';
 import {Player} from './models/player';
@@ -48,6 +48,23 @@ export class TeamService {
       .pipe(
         tap(val => console.log(val)),
         map(updatedPlayer => updatedPlayer["data"])
+      );
+  }
+
+  batchDeleteTeams($ids: number[]) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        ids: $ids
+      },
+    };
+    console.log(`${environment.baseApiUrl}batch/teams`);
+    return this.http.delete(`${environment.baseApiUrl}batch/teams`, options)
+      .pipe(
+        tap((q) => console.log(123)),
+        () =>  of(1)
       );
   }
 

@@ -5,6 +5,7 @@ import {Team} from "../models/team";
 import {loadTeams} from "../team/team.actions";
 import {selectDeletedTeams, selectOnlyNonDeletedTeams} from "../team/team.selectors";
 import {Observable} from "rxjs";
+import {TeamService} from "../team.service";
 
 @Component({
   selector: 'app-all-teams-listing',
@@ -16,7 +17,7 @@ export class AllTeamsListingComponent implements OnInit {
   deletedTeams$: Observable<Team[]>;
   selectedActiveTeams;
   selectedDeletedTeams;
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, private teamService: TeamService) { }
 
   ngOnInit() {
     this.store.dispatch(loadTeams());
@@ -28,12 +29,12 @@ export class AllTeamsListingComponent implements OnInit {
     );
   }
 
-  restoreTeam() {
-    console.log(this.selectedDeletedTeams);
+  restoreTeams() {
+
   }
 
-  deleteTeam() {
-    console.log(this.selectedActiveTeams);
+  deleteTeams() {
+    this.teamService.batchDeleteTeams(this.selectedActiveTeams);
   }
 
 }
