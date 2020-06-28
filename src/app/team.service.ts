@@ -60,11 +60,10 @@ export class TeamService {
         ids: $ids
       },
     };
-    console.log(`${environment.baseApiUrl}batch/teams`);
+    console.log(options);
     return this.http.delete(`${environment.baseApiUrl}batch/teams`, options)
       .pipe(
-        tap((q) => console.log(123)),
-        () =>  of(1)
+        tap((q) => console.log(123))
       );
   }
 

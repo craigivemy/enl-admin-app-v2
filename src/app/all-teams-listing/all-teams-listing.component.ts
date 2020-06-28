@@ -34,7 +34,7 @@ export class AllTeamsListingComponent implements OnInit {
   }
 
   deleteTeams() {
-    this.teamService.batchDeleteTeams(this.selectedActiveTeams);
+    this.teamService.batchDeleteTeams(this.selectedActiveTeams).subscribe();
   }
 
 }
