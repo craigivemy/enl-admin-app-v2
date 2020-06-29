@@ -39,6 +39,7 @@ export class TeamService {
   addPlayer(player: Player): Observable<Player> {
     return this.http.post(`${this.playersApiUrl}`, {player})
       .pipe(
+        tap(player => console.log(player)),
         map(newPlayer => newPlayer["data"])
       );
   }
@@ -60,7 +61,6 @@ export class TeamService {
         ids: $ids
       },
     };
-    console.log(options);
     return this.http.delete(`${environment.baseApiUrl}batch/teams`, options)
       .pipe(
         tap((q) => console.log(123))

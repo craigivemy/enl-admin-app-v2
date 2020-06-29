@@ -15,8 +15,8 @@ import {TeamService} from "../team.service";
 export class AllTeamsListingComponent implements OnInit {
   activeTeams$: Observable<Team[]>;
   deletedTeams$: Observable<Team[]>;
-  selectedActiveTeams;
-  selectedDeletedTeams;
+  selectedActiveTeams = [];
+  selectedDeletedTeams = [];
   constructor(private store: Store<AppState>, private teamService: TeamService) { }
 
   ngOnInit() {
@@ -34,7 +34,12 @@ export class AllTeamsListingComponent implements OnInit {
   }
 
   deleteTeams() {
-    this.teamService.batchDeleteTeams(this.selectedActiveTeams).subscribe();
+    this.teamService.batchDeleteTeams(this.selectedActiveTeams).subscribe(
+      () => this.reloadPage()
+    );
+  }
+  reloadPage() {
+    window.location.reload();
   }
 
 }
