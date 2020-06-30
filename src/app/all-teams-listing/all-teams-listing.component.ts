@@ -29,10 +29,6 @@ export class AllTeamsListingComponent implements OnInit {
     );
   }
 
-  restoreTeams() {
-
-  }
-
   deleteTeams() {
     this.teamService.batchDeleteTeams(this.selectedActiveTeams).subscribe(
       () => this.reloadPage()
@@ -40,6 +36,11 @@ export class AllTeamsListingComponent implements OnInit {
   }
   reloadPage() {
     window.location.reload();
+  }
+  restoreTeams() {
+    this.teamService.batchRestoreTeams(this.selectedDeletedTeams).subscribe(
+      () => this.reloadPage()
+    );
   }
 
 }

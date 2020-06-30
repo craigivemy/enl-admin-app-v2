@@ -67,4 +67,8 @@ export class TeamService {
       );
   }
 
+  batchRestoreTeams($ids: number[]) {
+    return this.http.post(`${environment.baseApiUrl}batchRestore/teams`, {ids: $ids});
+  }
+
 }
