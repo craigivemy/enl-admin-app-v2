@@ -6,6 +6,8 @@ import {loadTeams} from "../team/team.actions";
 import {selectDeletedTeams, selectOnlyNonDeletedTeams} from "../team/team.selectors";
 import {Observable} from "rxjs";
 import {TeamService} from "../team.service";
+import {MatDialog} from "@angular/material";
+import {TeamDialogComponent} from "../team-dialog/team-dialog.component";
 
 @Component({
   selector: 'app-all-teams-listing',
@@ -17,7 +19,11 @@ export class AllTeamsListingComponent implements OnInit {
   deletedTeams$: Observable<Team[]>;
   selectedActiveTeams = [];
   selectedDeletedTeams = [];
-  constructor(private store: Store<AppState>, private teamService: TeamService) { }
+  constructor(
+    private store: Store<AppState>,
+    private teamService: TeamService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.store.dispatch(loadTeams());
@@ -27,6 +33,10 @@ export class AllTeamsListingComponent implements OnInit {
     this.deletedTeams$ = this.store.pipe(
       select(selectDeletedTeams)
     );
+  }
+
+  addTeam() {
+    const dialogRef = this.dialog.open(TeamDialogComponent);
   }
 
   deleteTeams() {

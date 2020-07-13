@@ -31,6 +31,14 @@ export class TeamEffects {
     map(players => TeamActions.loadPlayersSuccess({players}))
   ));
 
+  loadPlayedUpPlayers = createEffect(() => this.actions$.pipe(
+    ofType(TeamActions.loadAllPlayedUpPlayers),
+    mergeMap(() =>
+      this.teamService.getPlayedUpPlayers().pipe(
+        map(players => TeamActions.loadAllPlayedUpPlayersSuccess({players}))
+      )),
+  ));
+
   // todo - makes the call eveb when they are all ready loaded at the moment
   loadTeams$ = createEffect(() => this.actions$.pipe(
     ofType(TeamActions.loadTeams),

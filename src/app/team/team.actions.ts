@@ -37,6 +37,15 @@ export const loadPlayersSuccess = createAction(
   props<{players: Player[]}>()
 );
 
+export const loadAllPlayedUpPlayers = createAction(
+  '[Player] Load Played Up Players'
+);
+
+export const loadAllPlayedUpPlayersSuccess = createAction(
+  '[Player] Load Played Up Players Success',
+  props<{players: Player[]}>()
+);
+
 export const addPlayer = createAction(
   '[Team] Add Player',
   props<{player: Player}>()

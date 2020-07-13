@@ -10,6 +10,7 @@ import {FixtureListingComponent} from './fixture-listing/fixture-listing.compone
 import {ResultListingComponent} from './result-listing/result-listing.component';
 import {TeamComponent} from './team/team.component';
 import {TeamResolverService} from './team/team-resolver.service';
+import {PlayedUpComponent} from "./played-up/played-up.component";
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'fixtures', component: FixtureListingComponent, data: { displayTitle: 'Fixtures' } },
   { path: 'results', component: ResultListingComponent, data: { displayTitle: 'Results' } },
   { path: 'new-season', component: NewSeasonComponent, data: { displayTitle: 'New Season' } },
-  { path: 'configure-teams', component: AllTeamsListingComponent, data: { displayTitle: 'Configure Teams' } }
+  { path: 'configure-teams', component: AllTeamsListingComponent, data: { displayTitle: 'Configure Teams' } },
+  { path: 'played-up-table', component: PlayedUpComponent, data: { displayTitle: 'Played Up Table' } }
 
 ];
 

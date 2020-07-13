@@ -36,6 +36,13 @@ export class TeamService {
       );
   }
 
+  getPlayedUpPlayers(): Observable<Player[]> {
+    return this.http.get(`${this.playersApiUrl}?playedUp=1`)
+      .pipe(
+        map(players => players["data"])
+      );
+  }
+
   addPlayer(player: Player): Observable<Player> {
     return this.http.post(`${this.playersApiUrl}`, {player})
       .pipe(

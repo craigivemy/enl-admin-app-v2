@@ -43,6 +43,7 @@ import { TeamEffects } from './team/team.effects';
 import * as fromPlayer from './team/player.reducer';
 import * as fromTable from './tables/table.reducer';
 import { TableEffects } from './tables/table.effects';
+import { TeamDialogComponent } from './team-dialog/team-dialog.component';
 
 registerLocaleData(localeGb);
 
@@ -61,7 +62,8 @@ registerLocaleData(localeGb);
     ResultListingComponent,
     FixtureComponent,
     MatchDialogComponent,
-    TeamComponent
+    TeamComponent,
+    TeamDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +102,8 @@ registerLocaleData(localeGb);
     { provide: LOCALE_ID, useValue: 'en-GB' },
   ],
   entryComponents: [
-    MatchDialogComponent
+    MatchDialogComponent,
+    TeamDialogComponent
   ],
   bootstrap: [AppComponent]
 })

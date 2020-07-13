@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Edit Result</h1>
+<div mat-dialog-content>
+  <form [formGroup]="addTeamForm">
+    <div>
+      <mat-form-field>
+        <mat-label>Team Name</mat-label>
+        <input matInput formControlName="teamName">
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="saveTeam()">Save</button>
+</div>

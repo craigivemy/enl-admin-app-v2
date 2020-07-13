@@ -1,4 +1,9 @@
 <div class="container-fluid py-3">
+    <div class="row">
+      <div class="col justify-content-end d-flex">
+        <button (click)="addTeam()" mat-fab color="accent"><mat-icon>add</mat-icon></button>
+      </div>
+    </div>
   <div class="row">
     <div class="col-4">
       <mat-card class="bg-1 card mat-card">
@@ -32,7 +37,7 @@
       <mat-card class="bg-2 card mat-card">
         <mat-card-header class="mat-elevation-z3">
           <mat-card-title>
-            <h4 class="mb-0">Deleted Teams</h4>
+            <h4 class="mb-0">Inactive Teams</h4>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
