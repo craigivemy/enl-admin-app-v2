@@ -16,4 +16,11 @@ h4 {
   transform: scale(3);
 }
 
+.wide-dialog {
+  width: 80vw;
+  @media (min-width: 768px) {
+    width: 600px;
+  }
+}
+
 

@@ -10,22 +10,94 @@
     <div>
       <mat-form-field>
         <mat-label>About {{ teamName }}</mat-label>
-        <input matInput formControlName="teamNarrative">
+        <textarea matInput formControlName="teamNarrative"></textarea>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="fill">
         <mat-select formControlName="primaryColour">
           <mat-option>-- None --</mat-option>
-          <mat-option class="red" value="red">Red</mat-option>
-          <mat-option class="pink" value="option">Pink</mat-option>
-          <mat-option class="purple" value="option">Purple</mat-option>
-          <mat-option class="deep-purple" value="option">Deep Purple</mat-option>
-          <mat-option class="indigo" value="option">Indigo</mat-option>
-          <mat-option class="blue" value="option">Blue</mat-option>
-          <mat-option class="light-blue" value="option">Light Blue</mat-option>
+          <mat-option class="red" value="244, 67, 54">Red</mat-option>
+          <mat-option class="pink" value="233, 30, 99">Pink</mat-option>
+          <mat-option class="purple" value="156, 39, 176">Purple</mat-option>
+          <mat-option class="deep-purple" value="103, 58, 183">Deep Purple</mat-option>
+          <mat-option class="indigo" value="63, 81, 181">Indigo</mat-option>
+          <mat-option class="blue" value="33, 150, 243">Blue</mat-option>
+          <mat-option class="light-blue" value="3, 169, 244">Light Blue</mat-option>
+          <mat-option class="cyan" value="0, 188, 212">Cyan</mat-option>
+          <mat-option class="teal" value="0, 150, 136">Teal</mat-option>
+          <mat-option class="green" value="76, 175, 80">Green</mat-option>
+          <mat-option class="light-green" value="139, 195, 74">Light Green</mat-option>
+          <mat-option class="lime" value="205, 220, 57">Lime</mat-option>
+          <mat-option class="yellow" value="255, 235, 59">Yellow</mat-option>
+          <mat-option class="amber" value="255, 193, 7">Amber</mat-option>
+          <mat-option class="orange" value="255, 152, 0">Orange</mat-option>
+          <mat-option class="deep-orange" value="255, 87, 34">Deep Orange</mat-option>
+          <mat-option class="brown" value="121, 85, 72">Brown</mat-option>
+          <mat-option class="grey" value="158, 158, 158">Grey</mat-option>
+          <mat-option class="blue-grey" value="96, 125, 139">Blue-grey</mat-option>
+          <mat-option class="black" value="0, 0, 0">Black</mat-option>
+          <mat-option class="white" value="255, 255, 255">White</mat-option>
         </mat-select>
         <mat-label><mat-icon color="accent">color_lens</mat-icon>Primary Colour</mat-label>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-select formControlName="secondaryColour">
+          <mat-option>-- None --</mat-option>
+          <mat-option class="red" value="244, 67, 54">Red</mat-option>
+          <mat-option class="pink" value="233, 30, 99">Pink</mat-option>
+          <mat-option class="purple" value="156, 39, 176">Purple</mat-option>
+          <mat-option class="deep-purple" value="103, 58, 183">Deep Purple</mat-option>
+          <mat-option class="indigo" value="63, 81, 181">Indigo</mat-option>
+          <mat-option class="blue" value="33, 150, 243">Blue</mat-option>
+          <mat-option class="light-blue" value="3, 169, 244">Light Blue</mat-option>
+          <mat-option class="cyan" value="0, 188, 212">Cyan</mat-option>
+          <mat-option class="teal" value="0, 150, 136">Teal</mat-option>
+          <mat-option class="green" value="76, 175, 80">Green</mat-option>
+          <mat-option class="light-green" value="139, 195, 74">Light Green</mat-option>
+          <mat-option class="lime" value="205, 220, 57">Lime</mat-option>
+          <mat-option class="yellow" value="255, 235, 59">Yellow</mat-option>
+          <mat-option class="amber" value="255, 193, 7">Amber</mat-option>
+          <mat-option class="orange" value="255, 152, 0">Orange</mat-option>
+          <mat-option class="deep-orange" value="255, 87, 34">Deep Orange</mat-option>
+          <mat-option class="brown" value="121, 85, 72">Brown</mat-option>
+          <mat-option class="grey" value="158, 158, 158">Grey</mat-option>
+          <mat-option class="blue-grey" value="96, 125, 139">Blue-grey</mat-option>
+          <mat-option class="black" value="0, 0, 0">Black</mat-option>
+          <mat-option class="white" value="255, 255, 255">White</mat-option>
+        </mat-select>
+        <mat-label><mat-icon color="accent">color_lens</mat-icon>Secondary Colour</mat-label>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-select formControlName="tertiaryColour">
+          <mat-option>-- None --</mat-option>
+          <mat-option class="red" value="244, 67, 54">Red</mat-option>
+          <mat-option class="pink" value="233, 30, 99">Pink</mat-option>
+          <mat-option class="purple" value="156, 39, 176">Purple</mat-option>
+          <mat-option class="deep-purple" value="103, 58, 183">Deep Purple</mat-option>
+          <mat-option class="indigo" value="63, 81, 181">Indigo</mat-option>
+          <mat-option class="blue" value="33, 150, 243">Blue</mat-option>
+          <mat-option class="light-blue" value="3, 169, 244">Light Blue</mat-option>
+          <mat-option class="cyan" value="0, 188, 212">Cyan</mat-option>
+          <mat-option class="teal" value="0, 150, 136">Teal</mat-option>
+          <mat-option class="green" value="76, 175, 80">Green</mat-option>
+          <mat-option class="light-green" value="139, 195, 74">Light Green</mat-option>
+          <mat-option class="lime" value="205, 220, 57">Lime</mat-option>
+          <mat-option class="yellow" value="255, 235, 59">Yellow</mat-option>
+          <mat-option class="amber" value="255, 193, 7">Amber</mat-option>
+          <mat-option class="orange" value="255, 152, 0">Orange</mat-option>
+          <mat-option class="deep-orange" value="255, 87, 34">Deep Orange</mat-option>
+          <mat-option class="brown" value="121, 85, 72">Brown</mat-option>
+          <mat-option class="grey" value="158, 158, 158">Grey</mat-option>
+          <mat-option class="blue-grey" value="96, 125, 139">Blue-grey</mat-option>
+          <mat-option class="black" value="0, 0, 0">Black</mat-option>
+          <mat-option class="white" value="255, 255, 255">White</mat-option>
+        </mat-select>
+        <mat-label><mat-icon color="accent">color_lens</mat-icon>Tertiary Colour</mat-label>
       </mat-form-field>
     </div>
   </form>

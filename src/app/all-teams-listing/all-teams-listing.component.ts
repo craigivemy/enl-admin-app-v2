@@ -36,7 +36,9 @@ export class AllTeamsListingComponent implements OnInit {
   }
 
   addTeam() {
-    const dialogRef = this.dialog.open(TeamDialogComponent);
+    const dialogRef = this.dialog.open(TeamDialogComponent, {
+      panelClass: 'wide-dialog'
+    });
   }
 
   deleteTeams() {

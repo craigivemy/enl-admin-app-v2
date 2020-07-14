@@ -19,7 +19,9 @@ export class TeamDialogComponent implements OnInit {
     this.addTeamForm = this.fb.group({
       teamName: ['', Validators.required],
       teamNarrative: ['', Validators.required],
-      primaryColour: ['']
+      primaryColour: [''],
+      secondaryColour: [''],
+      tertiaryColour: ['']
     });
   }
 

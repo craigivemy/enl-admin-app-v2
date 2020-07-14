@@ -1,3 +1,7 @@
+
+mat-option {
+  color: #FFF;
+}
 mat-option.red {
   background: rgb(244, 67, 54);
   &:hover {
@@ -35,48 +39,93 @@ mat-option.blue {
   }
 }
 mat-option.light-blue {
-
+  background: rgb(3, 169, 244);
+  &:hover {
+    background: rgb(3, 169, 244);
+  }
 }
 mat-option.cyan {
-
+  background: rgb(0, 188, 212);
+  &:hover {
+    background: rgb(0, 188, 212);
+  }
 }
 mat-option.teal {
-
+  background: rgb(0, 150, 136);
+  &:hover {
+    background: rgb(0, 150, 136);
+  }
 }
 mat-option.green {
-
+  background: rgb(76, 175, 80);
+  &:hover {
+    background: rgb(76, 175, 80);
+  }
 }
 mat-option.light-green {
-
+  background: rgb(139, 195, 74);
+  &:hover {
+    background: rgb(139, 195, 74);
+  }
 }
 mat-option.lime {
-
+  background: rgb(205, 220, 57);
+  &:hover {
+    background: rgb(205, 220, 57);
+  }
 }
 mat-option.yellow {
-
+  background: rgb(255, 235, 59);
+  &:hover {
+    background: rgb(255, 235, 59);
+  }
 }
 mat-option.amber {
-
+  background: rgb(255, 193, 7);
+  &:hover {
+    background: rgb(255, 193, 7);
+  }
 }
 mat-option.orange {
-
+  background: rgb(255, 152, 0);
+  &:hover {
+    background: rgb(255, 152, 0);
+  }
 }
 mat-option.deep-orange {
-
+  background: rgb(255, 87, 34);
+  &:hover {
+    background: rgb(255, 87, 34);
+  }
 }
 mat-option.brown {
-
+  background: rgb(121, 85, 72);
+  &:hover {
+    background: rgb(121, 85, 72);
+  }
 }
 mat-option.grey {
-
+  background: rgb(158, 158, 158);
+  &:hover {
+    background: rgb(158, 158, 158);
+  }
 }
 mat-option.blue-grey {
-
+  background: rgb(96, 125, 139);
+  &:hover {
+    background: rgb(96, 125, 139);
+  }
 }
 mat-option.white {
-
+  background: rgb(255, 255, 255);
+  &:hover {
+    background: rgb(255, 255, 255);
+  }
 }
 mat-option.black {
-
+  background: rgb(0, 0, 0);
+  &:hover {
+    background: rgb(0, 0, 0);
+  }
 }
 
