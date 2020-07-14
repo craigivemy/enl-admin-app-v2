@@ -7,6 +7,27 @@
         <input matInput formControlName="teamName">
       </mat-form-field>
     </div>
+    <div>
+      <mat-form-field>
+        <mat-label>About {{ teamName }}</mat-label>
+        <input matInput formControlName="teamNarrative">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-select formControlName="primaryColour">
+          <mat-option>-- None --</mat-option>
+          <mat-option class="red" value="red">Red</mat-option>
+          <mat-option class="pink" value="option">Pink</mat-option>
+          <mat-option class="purple" value="option">Purple</mat-option>
+          <mat-option class="deep-purple" value="option">Deep Purple</mat-option>
+          <mat-option class="indigo" value="option">Indigo</mat-option>
+          <mat-option class="blue" value="option">Blue</mat-option>
+          <mat-option class="light-blue" value="option">Light Blue</mat-option>
+        </mat-select>
+        <mat-label><mat-icon color="accent">color_lens</mat-icon>Primary Colour</mat-label>
+      </mat-form-field>
+    </div>
   </form>
 </div>
 <div mat-dialog-actions>

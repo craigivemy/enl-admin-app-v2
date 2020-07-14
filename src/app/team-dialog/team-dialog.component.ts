@@ -17,7 +17,9 @@ export class TeamDialogComponent implements OnInit {
     private teamService: TeamService
   ) {
     this.addTeamForm = this.fb.group({
-      teamName: ['', Validators.required]
+      teamName: ['', Validators.required],
+      teamNarrative: ['', Validators.required],
+      primaryColour: ['']
     });
   }
 
@@ -31,6 +33,10 @@ export class TeamDialogComponent implements OnInit {
     if (this.addTeamForm.valid) {
 
     }
+  }
+
+  get teamName() {
+    return this.addTeamForm.get('teamName').value;
   }
 
 }
