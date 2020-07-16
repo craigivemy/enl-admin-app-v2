@@ -3,6 +3,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {AppState} from "../reducers";
 import {TeamService} from "../team.service";
+import {MatDialogRef} from "@angular/material";
+import {Team} from "../models/team";
+import {addTeam} from "../team/team.actions";
 
 @Component({
   selector: 'app-team-dialog',
@@ -14,11 +17,12 @@ export class TeamDialogComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
-    private teamService: TeamService
+    private teamService: TeamService,
+    public dialogRef: MatDialogRef<TeamDialogComponent>
   ) {
     this.addTeamForm = this.fb.group({
-      teamName: ['', Validators.required],
-      teamNarrative: ['', Validators.required],
+      name: ['', Validators.required],
+      narrative: ['', Validators.required],
       primaryColour: [''],
       secondaryColour: [''],
       tertiaryColour: ['']
@@ -33,12 +37,25 @@ export class TeamDialogComponent implements OnInit {
 
   saveTeam() {
     if (this.addTeamForm.valid) {
-
+      const team: Team = this.addTeamForm.value;
+      this.teamService.addTeam(team).subscribe(
+        newTeam => {
+          this.store.dispatch(addTeam({team: newTeam}));
+          this.dialogRef.close();
+        }
+      );
     }
   }
 
+  onCancel(): void {
+    this.dialogRef.close({updated: false});
+  }
+
   get teamName() {
-    return this.addTeamForm.get('teamName').value;
+    return this.addTeamForm.get('name').value;
+  }
+  get primaryColour() {
+     return this.addTeamForm.get('primaryColour').value;
   }
 
 }

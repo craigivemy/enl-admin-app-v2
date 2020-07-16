@@ -1,4 +1,6 @@
-
+.mat-form-field {
+  width: 100%;
+}
 mat-option {
   color: #FFF;
 }
@@ -118,6 +120,7 @@ mat-option.blue-grey {
 }
 mat-option.white {
   background: rgb(255, 255, 255);
+  color: #000;
   &:hover {
     background: rgb(255, 255, 255);
   }

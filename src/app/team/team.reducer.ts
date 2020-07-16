@@ -22,7 +22,10 @@ const teamReducer = createReducer(
   }),
   on(TeamActions.loadTeamSuccess, (state, {team}) => {
     return adapter.addOne(team, state);
-  })
+  }),
+  on(TeamActions.addTeam, (state, {team}) => {
+    return adapter.addOne(team, state);
+})
 
 );
 

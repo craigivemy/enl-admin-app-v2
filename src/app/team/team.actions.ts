@@ -27,6 +27,16 @@ export const loadTeamSuccess = createAction(
   props<{team: Team}>()
 );
 
+export const addTeam = createAction(
+  '[Team] Add Team',
+  props<{team: Team}>()
+);
+
+export const updateTeam = createAction(
+  'Team Update Team',
+  props<{team: Update<Team>}>()
+);
+
 export const loadPlayersFromTeam = createAction(
   '[Team] Load Players',
   props<{teamId: number}>()

@@ -43,10 +43,16 @@ export class TeamService {
       );
   }
 
+  addTeam(team: Team): Observable<Team> {
+    return this.http.post(`${this.teamsApiUrl}`, {team})
+      .pipe(
+        map(newTeam => newTeam["data"])
+      );
+  }
+
   addPlayer(player: Player): Observable<Player> {
     return this.http.post(`${this.playersApiUrl}`, {player})
       .pipe(
-        tap(player => console.log(player)),
         map(newPlayer => newPlayer["data"])
       );
   }
