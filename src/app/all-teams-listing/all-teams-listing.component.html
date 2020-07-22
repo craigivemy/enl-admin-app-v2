@@ -5,49 +5,65 @@
       </div>
     </div>
   <div class="row">
-    <div class="col-4">
-      <mat-card class="bg-1 card mat-card">
-        <mat-card-header class="mat-elevation-z3">
-          <mat-card-title>
-            <h4 class="mb-0">Active Teams</h4>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-selection-list [(ngModel)]="selectedActiveTeams">
-          <mat-list-option *ngFor="let team of activeTeams$ | async" [value]="team.id">
-            {{ team.name }}
-          </mat-list-option>
-          </mat-selection-list>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div class="col-4">
-      <div class="text-center my-5">
-        <button (click)="deleteTeams()" mat-icon-button color="warn" aria-label="Move selected teams to deleted">
-          <mat-icon class="icon-size-2">arrow_forward</mat-icon>
-        </button>
-      </div>
-      <div class="text-center">
-        <button (click)="restoreTeams()" mat-icon-button color="primary" aria-label="Move selected teams to active">
-          <mat-icon class="icon-size-2">arrow_back</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div class="col-4 ml-auto">
-      <mat-card class="bg-2 card mat-card">
-        <mat-card-header class="mat-elevation-z3">
-          <mat-card-title>
-            <h4 class="mb-0">Inactive Teams</h4>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-selection-list [(ngModel)]="selectedDeletedTeams">
-            <mat-list-option *ngFor="let team of deletedTeams$ | async" [value]="team.id">
-              {{ team.name }}
-            </mat-list-option>
-          </mat-selection-list>
-        </mat-card-content>
-      </mat-card>
+    <div class="col-12">
+      <mat-tab-group class="w-100">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Edit Teams
+          </ng-template>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Add / Remove Teams
+          </ng-template>
+          <div class="row">
+            <div class="col-4">
+              <mat-card class="bg-1 card mat-card">
+                <mat-card-header class="mat-elevation-z3">
+                  <mat-card-title>
+                    <h4 class="mb-0">Active Teams</h4>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <mat-selection-list [(ngModel)]="selectedActiveTeams">
+                    <mat-list-option *ngFor="let team of activeTeams$ | async" [value]="team.id">
+                      {{ team.name }}
+                    </mat-list-option>
+                  </mat-selection-list>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="col-4">
+              <div class="text-center my-5">
+                <button (click)="deleteTeams()" mat-icon-button color="warn" aria-label="Move selected teams to deleted">
+                  <mat-icon class="icon-size-2">arrow_forward</mat-icon>
+                </button>
+              </div>
+              <div class="text-center">
+                <button (click)="restoreTeams()" mat-icon-button color="primary" aria-label="Move selected teams to active">
+                  <mat-icon class="icon-size-2">arrow_back</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="col-4 ml-auto">
+              <mat-card class="bg-2 card mat-card">
+                <mat-card-header class="mat-elevation-z3">
+                  <mat-card-title>
+                    <h4 class="mb-0">Inactive Teams</h4>
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <mat-selection-list [(ngModel)]="selectedDeletedTeams">
+                    <mat-list-option *ngFor="let team of deletedTeams$ | async" [value]="team.id">
+                      {{ team.name }}
+                    </mat-list-option>
+                  </mat-selection-list>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>

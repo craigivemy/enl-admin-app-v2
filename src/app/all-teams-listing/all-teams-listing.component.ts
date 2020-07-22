@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import {TeamService} from "../team.service";
 import {MatDialog} from "@angular/material";
 import {TeamDialogComponent} from "../team-dialog/team-dialog.component";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-all-teams-listing',
@@ -28,10 +29,28 @@ export class AllTeamsListingComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(loadTeams());
     this.activeTeams$ = this.store.pipe(
-      select(selectOnlyNonDeletedTeams)
+      select(selectOnlyNonDeletedTeams),
+      tap(teams => {
+        teams.sort((a,b) => {
+          if (a.name > b.name) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      })
     );
     this.deletedTeams$ = this.store.pipe(
-      select(selectDeletedTeams)
+      select(selectDeletedTeams),
+      tap(teams => {
+        teams.sort((a,b) => {
+          if (a.name > b.name) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      })
     );
   }
 
