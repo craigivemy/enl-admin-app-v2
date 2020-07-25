@@ -20,6 +20,7 @@ export class AllTeamsListingComponent implements OnInit {
   deletedTeams$: Observable<Team[]>;
   selectedActiveTeams = [];
   selectedDeletedTeams = [];
+  teamsPath = '/teams';
   constructor(
     private store: Store<AppState>,
     private teamService: TeamService,

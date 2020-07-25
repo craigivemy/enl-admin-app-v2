@@ -1,52 +1,92 @@
-mat-card-header.mat-card-header {
-  margin-top: -35px;
-  border-radius: 3px;
-  background: linear-gradient(60deg,#ab47bc,#8e24aa);
-}
-.bg-1 .mat-card-header {
-  background: linear-gradient(60deg, #66bb6a, #43a047);
-}
-.bg-2 .mat-card-header {
-  background: linear-gradient(60deg,#ffa726,#fb8c00);
-}
-.bg-3 .mat-card-header {
-  background: linear-gradient(60deg,#ef5350,#e53935);
-}
-.bg-4 .mat-card-header {
-  background: linear-gradient(60deg,#26c6da,#00acc1);
-}
-mat-card-title.mat-card-title {
-  margin-bottom: 0;
-  padding: 20px 0;
-  color: #FFF;
-}
-mat-card {
-  margin-top: 50px;
-}
-table.mat-table {
-  margin-top: 25px;
-}
-th.mat-header-cell {
-  border: none;
-}
-tr.mat-header-row {
-  height: 0;
-  border: none;
-}
-tr.mat-row:last-child {
-  td {
+.restore-teams-tab {
+  mat-card-header.mat-card-header {
+    margin-top: -35px;
+    border-radius: 3px;
+    background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  }
+
+  .bg-1 .mat-card-header {
+    background: linear-gradient(60deg, #66bb6a, #43a047);
+  }
+
+  .bg-2 .mat-card-header {
+    background: linear-gradient(60deg, #ffa726, #fb8c00);
+  }
+
+  .bg-3 .mat-card-header {
+    background: linear-gradient(60deg, #ef5350, #e53935);
+  }
+
+  .bg-4 .mat-card-header {
+    background: linear-gradient(60deg, #26c6da, #00acc1);
+  }
+
+  mat-card-title.mat-card-title {
+    margin-bottom: 0;
+    padding: 20px 0;
+    color: #FFF;
+  }
+
+  mat-card {
+    margin-top: 50px;
+  }
+
+  table.mat-table {
+    margin-top: 25px;
+  }
+
+  th.mat-header-cell {
     border: none;
   }
+
+  tr.mat-header-row {
+    height: 0;
+    border: none;
+  }
+
+  tr.mat-row:last-child {
+    td {
+      border: none;
+    }
+  }
+
+  td.mat-cell {
+    padding: 20px 15px 20px 0;
+
+    a {
+      color: rgba(33, 37, 41, 1);
+      font-weight: 300;
+      transition: all 0.25s ease;
+
+      &:hover {
+        text-decoration: none;
+        color: #2DD1AC;
+      }
+    }
+  }
 }
-td.mat-cell {
-  padding: 20px 15px 20px 0;
-  a {
-    color: rgba(33, 37, 41, 1);
-    font-weight: 300;
-    transition: all 0.25s ease;
-    &:hover {
-      text-decoration: none;
-      color: #2DD1AC;
+.edit-teams-tab {
+  padding-top: 50px;
+  .card-footer {
+    margin-left: 0;
+  }
+  mat-card {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .team-bib-card {
+    svg {
+      max-width: 100px;
+    }
+
+    .bib-icon {
+      position: absolute;
+      top: -30px;
+      right: -20px;
+    }
+
+    mat-card-title {
+
     }
   }
 }
