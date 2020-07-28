@@ -32,7 +32,7 @@ export class AllTeamsListingComponent implements OnInit {
     this.activeTeams$ = this.store.pipe(
       select(selectOnlyNonDeletedTeams),
       tap(teams => {
-        teams.sort((a,b) => {
+        teams.sort((a, b) => {
           if (a.name > b.name) {
             return 1;
           } else {
@@ -44,7 +44,7 @@ export class AllTeamsListingComponent implements OnInit {
     this.deletedTeams$ = this.store.pipe(
       select(selectDeletedTeams),
       tap(teams => {
-        teams.sort((a,b) => {
+        teams.sort((a, b) => {
           if (a.name > b.name) {
             return 1;
           } else {
