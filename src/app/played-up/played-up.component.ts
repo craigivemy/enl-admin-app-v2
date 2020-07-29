@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Player} from "../models/player";
 import {selectPlayers} from "../team/team.selectors";
 import {loadAllPlayedUpPlayers} from "../team/team.actions";
+import {selectCurrentSeasonId} from "../season/season.selectors";
 
 @Component({
   selector: 'app-played-up',
@@ -19,10 +20,15 @@ export class PlayedUpComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(loadAllPlayedUpPlayers());
-    this.players$ = this.store.pipe(
-      select(selectPlayers)
-    );
+    this.store
+      .pipe(
+        select(selectCurrentSeasonId)
+      ).subscribe(seasonId => {
+        this.store.dispatch(loadAllPlayedUpPlayers({seasonId}));
+        this.players$ = this.store.pipe(
+          select(selectPlayers)
+        );
+    });
   }
 
 }

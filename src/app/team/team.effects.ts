@@ -27,14 +27,14 @@ export class TeamEffects {
   // todo - necessary to make another call here - or just get players from above call?
   loadPlayers$ = createEffect(() => this.actions$.pipe(
     ofType(TeamActions.loadPlayersFromTeam),
-    mergeMap(action => this.teamService.getPlayersByTeamId(action.teamId)),
+    mergeMap(action => this.teamService.getPlayersByTeamId(action.teamId)), // + action.seasonId
     map(players => TeamActions.loadPlayersSuccess({players}))
   ));
 
   loadPlayedUpPlayers = createEffect(() => this.actions$.pipe(
     ofType(TeamActions.loadAllPlayedUpPlayers),
-    mergeMap(() =>
-      this.teamService.getPlayedUpPlayers().pipe(
+    mergeMap((action) =>
+      this.teamService.getPlayedUpPlayers(action.seasonId).pipe(
         map(players => TeamActions.loadAllPlayedUpPlayersSuccess({players}))
       )),
   ));

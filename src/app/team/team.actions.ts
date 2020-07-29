@@ -48,7 +48,8 @@ export const loadPlayersSuccess = createAction(
 );
 
 export const loadAllPlayedUpPlayers = createAction(
-  '[Player] Load Played Up Players'
+  '[Player] Load Played Up Players',
+  props<{seasonId: number}>()
 );
 
 export const loadAllPlayedUpPlayersSuccess = createAction(
