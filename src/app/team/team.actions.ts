@@ -39,7 +39,7 @@ export const updateTeam = createAction(
 
 export const loadPlayersFromTeam = createAction(
   '[Team] Load Players',
-  props<{teamId: number}>()
+  props<{teamId: number, seasonId: number}>()
 );
 
 export const loadPlayersSuccess = createAction(

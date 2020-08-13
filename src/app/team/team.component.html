@@ -47,13 +47,13 @@
           <td mat-cell *matCellDef="let player">
             <div class="row text-left">
               <div class="col-12">
-                <button (click)="updatePlayedUpCount('up', player)" class="mb-2" mat-icon-button color="warn"><mat-icon>arrow_upward</mat-icon></button>
+                <button (click)="updatePlayedUpCount(player)" class="mb-2" mat-icon-button color="warn"><mat-icon>arrow_upward</mat-icon></button>
               </div>
               <div class="col-12 d-flex">
                 <span class="d-inline-block table-badge" matBadge="{{ player.playedUpCount }}" [matBadgeColor]="playedUpSignals(player.playedUpCount)"></span>
               </div>
               <div class="col-12">
-                <button (click)="updatePlayedUpCount('down', player)" class="mt-2" mat-icon-button color="accent"><mat-icon>arrow_downward</mat-icon></button>
+                <button (click)="updatePlayedUpCount(player)" class="mt-2" mat-icon-button color="accent"><mat-icon>arrow_downward</mat-icon></button>
               </div>
             </div>
           </td>

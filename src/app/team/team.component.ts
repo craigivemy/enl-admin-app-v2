@@ -7,10 +7,12 @@ import {Player} from '../models/player';
 import {addPlayer, loadPlayersFromTeam, updatePlayer} from './team.actions';
 import {selectIfPlayersLoading, selectPlayers, selectPlayersByTeamId} from './team.selectors';
 import {SelectionModel} from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatTableDataSource} from '@angular/material';
 import {TeamService} from '../team.service';
 import {Observable} from 'rxjs';
 import {Update} from '@ngrx/entity';
+import {selectCurrentSeasonId} from "../season/season.selectors";
+import {PlayedUpDialogComponent} from "../played-up-dialog/played-up-dialog.component";
 
 @Component({
   selector: 'app-team',
@@ -29,20 +31,25 @@ export class TeamComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
-    private teamService: TeamService
+    private teamService: TeamService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.route.data.subscribe(
-      (data: { team: Team }) => {
-        this.team = data.team;
-        this.store.dispatch(loadPlayersFromTeam({teamId: data.team.id}));
-        this.store.pipe(select(selectPlayers)).subscribe(players => this.dataSource = new MatTableDataSource(players));
-        this.playersLoading = this.store.pipe(select(selectIfPlayersLoading));
-      }
-    );
+    this.store
+      .pipe(
+        select(selectCurrentSeasonId)
+      ).subscribe(seasonId => {
+      this.route.data.subscribe(
+        (data: { team: Team }) => {
+          this.team = data.team;
+          this.store.dispatch(loadPlayersFromTeam({teamId: data.team.id, seasonId}));
+          this.store.pipe(select(selectPlayers)).subscribe(players => this.dataSource = new MatTableDataSource(players));
+          this.playersLoading = this.store.pipe(select(selectIfPlayersLoading));
+        }
+      );
+    });
   }
-
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -65,6 +72,7 @@ export class TeamComponent implements OnInit {
   }
 
   addPlayer() {
+    // todo this also needs to be adjusted maybe just backend though
     if (Object.keys(this.newPlayer).length
       && this.newPlayer.forename
       && this.newPlayer.forename.trim().length > 2
@@ -74,6 +82,7 @@ export class TeamComponent implements OnInit {
         forename:  this.newPlayer.forename.trim(),
         surname: this.newPlayer.surname.trim(),
         playedUpCount: 0,
+        playedUps: [],
         teamId: this.team.id
       };
       this.teamService.addPlayer(player)
@@ -96,22 +105,21 @@ export class TeamComponent implements OnInit {
     }
   }
 
-  updatePlayedUpCount(direction: string, player: Player) {
-    let changes;
-    if (direction === 'up') {
-      changes = {playedUpCount: player.playedUpCount + 1};
-    } else {
-      changes = {playedUpCount: player.playedUpCount - 1};
-    }
-    this.teamService.updatePlayer(changes, player.id).subscribe(
-      () => {
-        const updatedPlayer: Update<Player> = {
-          id: player.id,
-          changes
-        };
-        this.store.dispatch(updatePlayer({player: updatedPlayer}));
-      }
-    );
+  updatePlayedUpCount(player: Player) {
+    const dialogRef = this.dialog.open(PlayedUpDialogComponent, {
+      data: {player}
+    });
+
+    // let changes;
+    // this.teamService.updatePlayer(changes, player.id).subscribe(
+    //   () => {
+    //     const updatedPlayer: Update<Player> = {
+    //       id: player.id,
+    //       changes
+    //     };
+    //     this.store.dispatch(updatePlayer({player: updatedPlayer}));
+    //   }
+    // );
   }
 
 }

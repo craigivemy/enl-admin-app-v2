@@ -29,9 +29,10 @@ export class TeamService {
       );
   }
 
-  getPlayersByTeamId(teamId: number): Observable<Player[]> {
-    return this.http.get(`${this.playersApiUrl}?teamId=${teamId}`)
+  getPlayersByTeamId(teamId: number, seasonId: number): Observable<Player[]> {
+    return this.http.get(`${this.playersApiUrl}?teamId=${teamId}&seasonId=${seasonId}`)
       .pipe(
+        tap(() => console.log(`${this.playersApiUrl}?teamId=${teamId}&seasonId=${seasonId}`)),
         map(players => players["data"])
       );
   }

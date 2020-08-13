@@ -11,7 +11,6 @@ import {SeasonService} from "../season.service";
 import {Store} from "@ngrx/store";
 import {AppState} from "../reducers";
 import {addSeason} from "../season/season.actions";
-import {Setting} from '../models/setting';
 import {SettingService} from '../setting.service';
 import {map} from 'rxjs/operators';
 

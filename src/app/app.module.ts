@@ -44,6 +44,7 @@ import * as fromPlayer from './team/player.reducer';
 import * as fromTable from './tables/table.reducer';
 import { TableEffects } from './tables/table.effects';
 import { TeamDialogComponent } from './team-dialog/team-dialog.component';
+import { PlayedUpDialogComponent } from './played-up-dialog/played-up-dialog.component';
 
 registerLocaleData(localeGb);
 
@@ -63,7 +64,8 @@ registerLocaleData(localeGb);
     FixtureComponent,
     MatchDialogComponent,
     TeamComponent,
-    TeamDialogComponent
+    TeamDialogComponent,
+    PlayedUpDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +105,8 @@ registerLocaleData(localeGb);
   ],
   entryComponents: [
     MatchDialogComponent,
-    TeamDialogComponent
+    TeamDialogComponent,
+    PlayedUpDialogComponent,
   ],
   bootstrap: [AppComponent]
 })

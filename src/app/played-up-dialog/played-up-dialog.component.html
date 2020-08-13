@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>{{ forename }} Played Up Data</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-chip-list #playedUpDates>
+      <mat-chip *ngFor="let playedUp of copyOfPlayedUpData" removable="true" (removed)="removePlayedUp(playedUp.id)">
+        {{ playedUp.played_up_date | date:'dd/MM/yyyy'}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input matInput
+             [matChipInputFor]="playedUpDates"
+             (matChipInputTokenEnd)="addPlayedUpDate($event)"
+             [matDatepicker]="startDate" placeholder="Start date">
+      <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+      <mat-datepicker #startDate></mat-datepicker>
+    </mat-chip-list>
+  </mat-form-field>
+  <mat-datepicker></mat-datepicker>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button (click)="save()" color="primary">Save</button>
+</div>
