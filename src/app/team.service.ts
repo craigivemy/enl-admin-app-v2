@@ -6,6 +6,7 @@ import {Observable, of} from 'rxjs';
 import {Team} from './models/team';
 import {map, tap} from 'rxjs/operators';
 import {Player} from './models/player';
+import {PlayedUp} from "./models/playedUp";
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,12 @@ export class TeamService {
         tap(val => console.log(val)),
         map(updatedPlayer => updatedPlayer["data"])
       );
+  }
+
+  addPlayedUp(playedUpDate: any, playerId: number, seasonId: number) {
+    return this.http.put(`${this.playersApiUrl}/${playerId}?addPlayedUp=1`, {playedUpDate, id: playerId, seasonId}).pipe(
+      map(updatedPlayer => updatedPlayer["data"])
+    );
   }
 
   batchDeleteTeams($ids: number[]) {

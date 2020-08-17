@@ -1,11 +1,15 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatChipInputEvent, MatDialogRef} from "@angular/material";
-import {Store} from "@ngrx/store";
+import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
 import {TeamService} from "../team.service";
 import {Player} from "../models/player";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import * as moment from 'moment';
+import {addPlayedUp, updatePlayer} from "../team/team.actions";
+import {selectCurrentSeasonId} from "../season/season.selectors";
+import {PlayedUp} from "../models/playedUp";
+import {Update} from "@ngrx/entity";
 
 @Component({
   selector: 'app-played-up-dialog',
@@ -14,10 +18,11 @@ import * as moment from 'moment';
 })
 export class PlayedUpDialogComponent implements OnInit {
   player: Player;
-  copyOfPlayedUpData;
-  playedUpData = [];
+  form: FormGroup;
   forename;
+  seasonId: number;
   playedUpDatesInput: FormGroup;
+  test;
   constructor(
     private store: Store<AppState>,
     private teamService: TeamService,
@@ -26,34 +31,38 @@ export class PlayedUpDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data
   ) {
     this.forename = data.player.forename;
-    this.playedUpData = data.player.playedUps;
-    this.copyOfPlayedUpData = [...this.playedUpData];
-    // todo - https://ngrx.io/guide/data/entity-change-tracker
-    // this.playedUpDatesInput = this.fb.group({
-    //   // should this be formArray?
-    //   pp: [this.copyOfPlayedUpData]
-    // });
-
+    this.player = data.player;
   }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      playedUps: new FormControl(this.player.playedUps)
+
+    });
+    this.store.pipe(select(selectCurrentSeasonId)).subscribe(seasonId => this.seasonId = seasonId);
+  }
+  addPlayedUpDate(value) {
+    this.teamService.addPlayedUp(value, this.player.id, this.seasonId).subscribe(
+      (player) => {
+        const updatedPlayer: Update<Player> = {
+          id: player.id,
+          changes: player
+        };
+        this.store.dispatch(updatePlayer({player: updatedPlayer}));
+      }
+    );
+  }
+  get playedUps() {
+    return this.form.get('playedUps');
   }
 
-  removePlayedUp(id) {
-    const index = this.copyOfPlayedUpData.findIndex(pu => pu.id === id);
-    this.copyOfPlayedUpData.splice(index);
-  }
-
-  addPlayedUpDate(event: MatChipInputEvent) {
-    this.copyOfPlayedUpData.push({id: 23});
-  }
 
   onCancel(): void {
     //
   }
 
   save() {
-    console.log(this.copyOfPlayedUpData);
+   // console.log(this.copyOfPlayedUpData);
   }
 
 }
