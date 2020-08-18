@@ -3,15 +3,14 @@
   <form [formGroup]="form">
     <mat-form-field>
       <mat-chip-list #playedUpDates formControlName="playedUps">
-        <mat-chip *ngFor="let playedUp of form.get('playedUps').value" removable="true" (removed)="removePlayedUp(playedUp.id)">
-          {{ playedUp.played_up_date | date:'dd/MM/yyyy'}}
+        <mat-chip *ngFor="let playedUp of form.get('playedUps').value; let i = index" removable="true" (removed)="removePlayedUpDate(i, playedUp.id)">
+          {{ playedUp.played_up_date | date:'dd/MM/yyyy' }}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
-        <!-- todo, make hidden field that hasValueCHanges on it? -->
         <input matInput
                [matChipInputFor]="playedUpDates"
                (matChipInputTokenEnd)="addPlayedUpDate($event)"
-
+               (dateChange)="addPlayedUpDate($event)"
                [matDatepicker]="startDate" placeholder="Start date">
         <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
         <mat-datepicker #startDate></mat-datepicker>
@@ -21,7 +20,6 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button (click)="save()" color="primary">Save</button>
+  <button mat-raised-button (click)="close()" color="primary">Done</button>
 </div>
 <!--(dateChange)="addPlayedUpDate($event);"-->

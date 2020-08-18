@@ -69,6 +69,14 @@ export class TeamService {
 
   addPlayedUp(playedUpDate: any, playerId: number, seasonId: number) {
     return this.http.put(`${this.playersApiUrl}/${playerId}?addPlayedUp=1`, {playedUpDate, id: playerId, seasonId}).pipe(
+      tap(player => console.log(player["data"])),
+      map(updatedPlayer => updatedPlayer["data"])
+    );
+  }
+
+  removePlayedUp(id: number, playerId: number, seasonId: number) {
+    return this.http.put(`${this.playersApiUrl}/${playerId}?deletePlayedUp=1`, {playedUpId: id, playerId, seasonId}).pipe(
+      tap(val => console.log(val)),
       map(updatedPlayer => updatedPlayer["data"])
     );
   }

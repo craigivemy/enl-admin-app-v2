@@ -21,8 +21,6 @@ export class PlayedUpDialogComponent implements OnInit {
   form: FormGroup;
   forename;
   seasonId: number;
-  playedUpDatesInput: FormGroup;
-  test;
   constructor(
     private store: Store<AppState>,
     private teamService: TeamService,
@@ -37,32 +35,41 @@ export class PlayedUpDialogComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       playedUps: new FormControl(this.player.playedUps)
-
     });
     this.store.pipe(select(selectCurrentSeasonId)).subscribe(seasonId => this.seasonId = seasonId);
   }
-  addPlayedUpDate(value) {
-    this.teamService.addPlayedUp(value, this.player.id, this.seasonId).subscribe(
+  addPlayedUpDate(event: any) {
+    this.teamService.addPlayedUp(moment(event.value, 'DD/MM/YYYY').format('YYYY-MM-DD'), this.player.id, this.seasonId).subscribe(
       (player) => {
         const updatedPlayer: Update<Player> = {
           id: player.id,
           changes: player
         };
         this.store.dispatch(updatePlayer({player: updatedPlayer}));
+        this.form.patchValue({'playedUps': player.playedUps});
+        if (event.target.value) {
+          event.target.value = '';
+        }
       }
     );
   }
-  get playedUps() {
-    return this.form.get('playedUps');
+
+  removePlayedUpDate(index: number, id: number) {
+    this.teamService.removePlayedUp(id, this.player.id, this.seasonId).subscribe(
+      (player) => {
+        const updatedPlayer: Update<Player> = {
+          id: player.id,
+          changes: player
+        };
+        this.store.dispatch(updatePlayer({player: updatedPlayer}));
+        this.form.patchValue({'playedUps': player.playedUps});
+      }
+    );
+    //this.form.controls.playedUps.value.splice(index, 1);
   }
 
-
-  onCancel(): void {
-    //
-  }
-
-  save() {
-   // console.log(this.copyOfPlayedUpData);
+  close(): void {
+   this.dialogRef.close();
   }
 
 }
