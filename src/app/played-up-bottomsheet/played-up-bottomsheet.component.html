@@ -1,0 +1,4 @@
+<h4>{{ player.forename }} {{ player.surname }}</h4>
+<mat-chip-list>
+  <mat-chip *ngFor="let playedUp of player.playedUps">{{playedUp.played_up_date | date: 'longDate'}}</mat-chip>
+</mat-chip-list>

@@ -6,6 +6,8 @@ import {Player} from "../models/player";
 import {selectPlayers} from "../team/team.selectors";
 import {loadAllPlayedUpPlayers} from "../team/team.actions";
 import {selectCurrentSeasonId} from "../season/season.selectors";
+import {MatBottomSheet} from "@angular/material";
+import {PlayedUpBottomsheetComponent} from "../played-up-bottomsheet/played-up-bottomsheet.component";
 
 @Component({
   selector: 'app-played-up',
@@ -14,9 +16,10 @@ import {selectCurrentSeasonId} from "../season/season.selectors";
 })
 export class PlayedUpComponent implements OnInit {
   players$: Observable<Player[]>;
-  columnsToDisplay = ['name', 'teamName', 'playedUpCount'];
+  columnsToDisplay = ['name', 'teamName', 'playedUpCount', 'info'];
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit() {
@@ -28,6 +31,12 @@ export class PlayedUpComponent implements OnInit {
         this.players$ = this.store.pipe(
           select(selectPlayers)
         );
+    });
+  }
+
+  showDates(player: Player) {
+    const bottomSheetRef = this.bottomSheet.open(PlayedUpBottomsheetComponent, {
+      data: {player}
     });
   }
 

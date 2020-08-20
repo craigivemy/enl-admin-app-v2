@@ -39,7 +39,7 @@ export class TeamService {
   }
 
   getPlayedUpPlayers(seasonId: number): Observable<Player[]> {
-    return this.http.get(`${this.playersApiUrl}?playedUp=1`)
+    return this.http.get(`${this.playersApiUrl}?seasonId=${seasonId}`)
       .pipe(
         map(players => players["data"])
       );

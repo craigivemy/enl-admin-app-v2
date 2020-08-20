@@ -28,6 +28,7 @@ export class PlayedUpDialogComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
+    // todo - make this form so can edit
     this.forename = data.player.forename;
     this.player = data.player;
   }
@@ -65,7 +66,6 @@ export class PlayedUpDialogComponent implements OnInit {
         this.form.patchValue({'playedUps': player.playedUps});
       }
     );
-    //this.form.controls.playedUps.value.splice(index, 1);
   }
 
   close(): void {

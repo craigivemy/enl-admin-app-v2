@@ -45,6 +45,9 @@ import * as fromTable from './tables/table.reducer';
 import { TableEffects } from './tables/table.effects';
 import { TeamDialogComponent } from './team-dialog/team-dialog.component';
 import { PlayedUpDialogComponent } from './played-up-dialog/played-up-dialog.component';
+import { PlayedUpBottomsheetComponent } from './played-up-bottomsheet/played-up-bottomsheet.component';
+import { DeductPointsComponent } from './deduct-points/deduct-points.component';
+import { DeductPointsDialogComponent } from './deduct-points-dialog/deduct-points-dialog.component';
 
 registerLocaleData(localeGb);
 
@@ -65,7 +68,10 @@ registerLocaleData(localeGb);
     MatchDialogComponent,
     TeamComponent,
     TeamDialogComponent,
-    PlayedUpDialogComponent
+    PlayedUpDialogComponent,
+    PlayedUpBottomsheetComponent,
+    DeductPointsComponent,
+    DeductPointsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +113,8 @@ registerLocaleData(localeGb);
     MatchDialogComponent,
     TeamDialogComponent,
     PlayedUpDialogComponent,
+    PlayedUpBottomsheetComponent,
+    DeductPointsDialogComponent
   ],
   bootstrap: [AppComponent]
 })

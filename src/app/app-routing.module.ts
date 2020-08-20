@@ -11,6 +11,7 @@ import {ResultListingComponent} from './result-listing/result-listing.component'
 import {TeamComponent} from './team/team.component';
 import {TeamResolverService} from './team/team-resolver.service';
 import {PlayedUpComponent} from "./played-up/played-up.component";
+import {DeductPointsComponent} from "./deduct-points/deduct-points.component";
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'results', component: ResultListingComponent, data: { displayTitle: 'Results' } },
   { path: 'new-season', component: NewSeasonComponent, data: { displayTitle: 'New Season' } },
   { path: 'configure-teams', component: AllTeamsListingComponent, data: { displayTitle: 'Configure Teams' } },
-  { path: 'played-up-table', component: PlayedUpComponent, data: { displayTitle: 'Played Up Table' } }
+  { path: 'played-up-table', component: PlayedUpComponent, data: { displayTitle: 'Played Up Table' } },
+  { path: 'deduct-points', component: DeductPointsComponent, data: { displayTitle: 'Deduct Points' }}
 
 ];
 

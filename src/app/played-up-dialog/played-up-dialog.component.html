@@ -4,16 +4,16 @@
     <mat-form-field>
       <mat-chip-list #playedUpDates formControlName="playedUps">
         <mat-chip *ngFor="let playedUp of form.get('playedUps').value; let i = index" removable="true" (removed)="removePlayedUpDate(i, playedUp.id)">
-          {{ playedUp.played_up_date | date:'dd/MM/yyyy' }}
+          {{ playedUp.played_up_date | date:'longDate' }}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
         <input matInput
                [matChipInputFor]="playedUpDates"
                (matChipInputTokenEnd)="addPlayedUpDate($event)"
                (dateChange)="addPlayedUpDate($event)"
-               [matDatepicker]="startDate" placeholder="Start date">
-        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-        <mat-datepicker #startDate></mat-datepicker>
+               [matDatepicker]="playedUpDate" placeholder="Select date">
+        <mat-datepicker-toggle matSuffix [for]="playedUpDate"></mat-datepicker-toggle>
+        <mat-datepicker #playedUpDate></mat-datepicker>
       </mat-chip-list>
     </mat-form-field>
     <mat-datepicker></mat-datepicker>

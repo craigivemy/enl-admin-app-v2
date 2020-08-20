@@ -8,11 +8,19 @@
         </ng-container>
         <ng-container matColumnDef="teamName">
           <th mat-header-cell *matHeaderCellDef>Team</th>
-          <td mat-cell *matCellDef="let player">{{player.team.name}}</td>
+          <td mat-cell *matCellDef="let player">{{player.team[0].name}}</td>
         </ng-container>
         <ng-container matColumnDef="playedUpCount">
-          <th mat-header-cell *matHeaderCellDef>Played Up</th>
-          <td mat-cell *matCellDef="let player">{{player.playedUpCount}}</td>
+          <th mat-header-cell *matHeaderCellDef>Played Up Count</th>
+          <td mat-cell *matCellDef="let player">
+            {{player.playedUpCount}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="info">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td class="edit-column" mat-cell *matCellDef="let player">
+            <button (click)="showDates(player)" mat-icon-button><mat-icon>info_outlined</mat-icon></button>
+          </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>

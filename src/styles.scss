@@ -22,5 +22,9 @@ h4 {
     width: 600px;
   }
 }
-
+button {
+  &:active, &:hover, &:focus, &:visited {
+    outline: none;
+  }
+}
 
