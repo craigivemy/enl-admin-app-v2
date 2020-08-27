@@ -3,6 +3,8 @@ import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
 import {selectCurrentSeasonId} from "../season/season.selectors";
 import {Observable} from "rxjs";
+import {Label, MultiDataSet, SingleDataSet, ThemeService} from "ng2-charts";
+import {ChartType} from "chart.js";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,12 @@ import {Observable} from "rxjs";
 })
 export class HomeComponent implements OnInit {
   currentSeasonId: Observable<number>;
-  constructor(private store: Store<AppState>) { }
+  public doughnutChartData: SingleDataSet = [1, 2, 3];
+  public doughnutChartLabels: Label[] = ['A', 'B', 'C'];
+  public doughnutChartType: ChartType = 'doughnut';
+  constructor(
+    private store: Store<AppState>,
+  ) { }
 
   ngOnInit() {
     this.currentSeasonId = this.store

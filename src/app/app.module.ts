@@ -48,6 +48,7 @@ import { PlayedUpDialogComponent } from './played-up-dialog/played-up-dialog.com
 import { PlayedUpBottomsheetComponent } from './played-up-bottomsheet/played-up-bottomsheet.component';
 import { DeductPointsComponent } from './deduct-points/deduct-points.component';
 import { DeductPointsDialogComponent } from './deduct-points-dialog/deduct-points-dialog.component';
+import {ChartsModule, ThemeService} from "ng2-charts";
 
 registerLocaleData(localeGb);
 
@@ -88,6 +89,7 @@ registerLocaleData(localeGb);
     MatListModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    ChartsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
@@ -108,6 +110,7 @@ registerLocaleData(localeGb);
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },
+    ThemeService
   ],
   entryComponents: [
     MatchDialogComponent,
