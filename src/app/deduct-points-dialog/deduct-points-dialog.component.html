@@ -1,2 +1,27 @@
-<h4>{{ team.team_name }}</h4>
-<p>{{ team.point_adjustment }}</p>
+<h1 mat-dialog-title>{{ team.team_name }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="deductPointsForm">
+    <div formArrayName="deductions" *ngFor="let item of deductPointsForm.controls['deductions'].controls; let i = index;">
+        <div [formGroupName]="i" [ngClass]="{'mb-4': i === 0}">
+          <mat-form-field class="pr-2" floatLabel="never">
+            <input type="number" max="0" matInput formControlName="deduction" placeholder="Minus points?">
+          </mat-form-field>
+          <mat-form-field class="pr-2">
+            <input matInput formControlName="reason" placeholder="What is the reason?">
+          </mat-form-field>
+          <mat-form-field class="pr-2">
+            <input matInput formControlName="reasonDate" [matDatepicker]="picker" placeholder="Date of deduction">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <button mat-icon-button (click)="removeControl(i)"><mat-icon>cancel_outline</mat-icon></button>
+          <button class="d-block" *ngIf="i === 0" (click)="addControl()" mat-mini-fab color="accent"><mat-icon>add</mat-icon></button>
+        </div>
+    </div>
+    <button class="d-block" *ngIf="formEmpty" (click)="addControl()" mat-mini-fab color="accent"><mat-icon>add</mat-icon></button>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="save()" mat-raised-button color="primary">Save</button>
+  <button (click)="cancel()" mat-button color="accent">Cancel</button>
+</div>

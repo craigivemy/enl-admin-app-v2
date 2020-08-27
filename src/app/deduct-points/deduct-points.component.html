@@ -6,7 +6,7 @@
           <ng-template mat-tab-label>
             {{ division.name }}
           </ng-template>
-          <mat-list>
+          <mat-list class="mt-5">
             <mat-list-item *ngFor="let team of teams$ | async" (click)="editDeductions(team)">
               <svg class="bib-icon" matListAvatar width="152px" height="91px" viewBox="0 0 152 91" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g id="Team---directory" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -26,10 +26,10 @@
                 </g>
               </svg>
               <h3 matLine> {{ team.team_name }} </h3>
-              <p matLine>
-                <span>  </span>
-                <span class="demo-2"> {{ team.point_adjustment }} </span>
+              <p matLine class="py-2">
+                <mat-icon matBadge="{{ team.point_adjustment }}" matBadgeColor="warn" matBadgePosition="below after" matBadgeOverlap="false">trending_down</mat-icon>
               </p>
+              <mat-divider></mat-divider>
             </mat-list-item>
           </mat-list>
         </mat-tab>
