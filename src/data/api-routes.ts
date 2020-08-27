@@ -7,5 +7,6 @@ export enum ApiRoutes {
   Matches = 'matches',
   Players = 'players',
   Tables = 'divisions-tables',
-  Settings = 'settings'
+  Settings = 'settings',
+  Statistics = 'statistics'
 }

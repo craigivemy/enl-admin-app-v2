@@ -5,6 +5,8 @@ import {selectCurrentSeasonId} from "../season/season.selectors";
 import {Observable} from "rxjs";
 import {Label, MultiDataSet, SingleDataSet, ThemeService} from "ng2-charts";
 import {ChartType} from "chart.js";
+import {StatisticService} from "../statistic.service";
+import {skipWhile} from "rxjs/operators";
 
 @Component({
   selector: 'app-home',
@@ -12,19 +14,33 @@ import {ChartType} from "chart.js";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  currentSeasonId: Observable<number>;
-  public doughnutChartData: SingleDataSet = [1, 2, 3];
-  public doughnutChartLabels: Label[] = ['A', 'B', 'C'];
+  currentSeasonId: number;
+  stats: [];
+  public doughnutChartData: SingleDataSet = [];
   public doughnutChartType: ChartType = 'doughnut';
+  public donughtColors: any = [
+    {
+      backgroundColor: "#4E546C"
+    }
+  ];
   constructor(
     private store: Store<AppState>,
+    private statisticService: StatisticService
   ) { }
 
   ngOnInit() {
-    this.currentSeasonId = this.store
+    this.store
       .pipe(
-        select(selectCurrentSeasonId)
-      );
+        select(selectCurrentSeasonId),
+        skipWhile(seasonId => seasonId < 0)
+      ).subscribe(seasonId => {
+        this.currentSeasonId = seasonId;
+        this.statisticService.getBasicStatistics(seasonId).subscribe(
+          stats => {
+            this.doughnutChartData.push(stats.teamsInSeason);
+          }
+        );
+      });
   }
 
 }
