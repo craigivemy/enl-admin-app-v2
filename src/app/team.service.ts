@@ -52,8 +52,8 @@ export class TeamService {
       );
   }
 
-  addPlayer(player: Player): Observable<Player> {
-    return this.http.post(`${this.playersApiUrl}`, {player})
+  addPlayer(player: Player, teamId: number, seasonId: number): Observable<Player> {
+    return this.http.post(`${this.playersApiUrl}`, {player, teamId, seasonId})
       .pipe(
         map(newPlayer => newPlayer["data"])
       );

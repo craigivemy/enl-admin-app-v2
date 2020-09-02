@@ -5,7 +5,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {Player} from '../models/player';
 import {addPlayer, loadPlayersFromTeam, updatePlayer} from './team.actions';
-import {selectIfPlayersLoading, selectPlayers, selectPlayersByTeamId} from './team.selectors';
+import {selectIfPlayersLoading, selectPlayers} from './team.selectors';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {TeamService} from '../team.service';
@@ -25,6 +25,7 @@ export class TeamComponent implements OnInit {
   columnsToDisplay = ['select', 'forename', 'surname', 'playedUpCount'];
   footerColumnsToDisplay = ['select', 'forename', 'surname', 'playedUpCount'];
   dataSource;
+  seasonId;
   newPlayer = new Player();
   playersLoading: Observable<boolean>;
 
@@ -40,13 +41,14 @@ export class TeamComponent implements OnInit {
       .pipe(
         select(selectCurrentSeasonId)
       ).subscribe(seasonId => {
-      this.route.data.subscribe(
-        (data: { team: Team }) => {
-          this.team = data.team;
-          this.store.dispatch(loadPlayersFromTeam({teamId: data.team.id, seasonId}));
-          this.store.pipe(select(selectPlayers)).subscribe(players => this.dataSource = new MatTableDataSource(players));
-          this.playersLoading = this.store.pipe(select(selectIfPlayersLoading));
-        }
+        this.seasonId = seasonId;
+        this.route.data.subscribe(
+          (data: { team: Team }) => {
+            this.team = data.team;
+            this.store.dispatch(loadPlayersFromTeam({teamId: data.team.id, seasonId}));
+            this.store.pipe(select(selectPlayers)).subscribe(players => this.dataSource = new MatTableDataSource(players));
+            this.playersLoading = this.store.pipe(select(selectIfPlayersLoading));
+          }
       );
     });
   }
@@ -82,10 +84,9 @@ export class TeamComponent implements OnInit {
         forename:  this.newPlayer.forename.trim(),
         surname: this.newPlayer.surname.trim(),
         playedUpCount: 0,
-        playedUps: [],
-        teamId: this.team.id
+        playedUps: []
       };
-      this.teamService.addPlayer(player)
+      this.teamService.addPlayer(player, this.team.id, this.seasonId)
         .subscribe(newPlayer => {
           this.store.dispatch(addPlayer({player: newPlayer}));
           this.newPlayer = new Player();

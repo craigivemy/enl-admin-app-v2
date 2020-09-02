@@ -1,52 +1,85 @@
-<div class="container-fluid py-4">
+<div class="container py-4">
   <div class="row justify-content-center">
-    <div class="col-12 col-lg-6 col-xl-3 mb-5">
+    <div class="col-12 col-lg-6 col-xl-4">
       <mat-card class="card h-100 mat-card bg-1">
         <mat-card-header class="mat-elevation-z3">
           <mat-card-title>
             <h4 class="mb-0">Next Fixture</h4>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="d-flex flex-column align-items-center h-100 justify-content-center">
-          <h4 class="spaced-card-title">
+        <mat-card-content class="text-center h-100 d-flex flex-column">
+          <div class="xl-card-icon">
+            <mat-icon [inline]="true">date_range</mat-icon>
+          </div>
+          <h4>
             {{ nextMatchDate | date: 'EEEE dd MMMM' }}
           </h4>
+          <button [routerLink]="'/fixtures'" mat-raised-button color="primary">View Fixtures</button>
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-12 col-lg-6 col-xl-3 mb-5">
+    <div class="col-12 col-lg-6 col-xl-4">
       <mat-card class="card h-100 mat-card bg-2">
         <mat-card-header class="mat-elevation-z3">
           <mat-card-title>
             <h4 class="mb-0">Played Up Stats</h4>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          <canvas baseChart
-                  [data]="doughnutChartData"
-                  [labels]="doughnutChartLabels"
-                  [chartType]="doughnutChartType"
-                  [colors]="doughnutColors"
-                  [options]="doughnutOptions">
-          </canvas>
+        <mat-card-content class="text-center h-100 d-flex flex-column">
+          <div class="canvas-container">
+            <canvas baseChart
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType"
+                    [colors]="doughnutColors"
+                    [options]="doughnutOptions">
+            </canvas>
+          </div>
+          <button [routerLink]="'/played-up-table'" mat-raised-button color="primary">View Played Up Table</button>
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-12 col-lg-6 col-xl-3 mb-5">
+    <div class="col-12 col-lg-6 col-xl-4">
       <mat-card class="card h-100 mat-card bg-3">
         <mat-card-header class="mat-elevation-z3">
           <mat-card-title>
             <h4 class="mb-0">Results</h4>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          {{ nextMatchDate | date: 'EEEE dd MMMM' }}
+        <mat-card-content class="text-center h-100 d-flex flex-column">
+          <div class="xl-card-icon">
+            <mat-icon [inline]="true">assessment</mat-icon>
+          </div>
+          <h4 class="mb-0" *ngIf="missingResultsFromLastSevenDays > 0; else noMissingResults">
+            There are missing results from the last 7 days
+          </h4>
+          <button *ngIf="missingResultsFromLastSevenDays > 0; else noMissingResultsButton" [routerLink]="'/results'" mat-raised-button color="primary">Enter them now</button>
+          <ng-template #noMissingResults>
+            <h4 class="mb-0" *ngIf="missingResultsFromLastSevenDays === 0">You're all up to date!</h4>
+          </ng-template>
+          <ng-template #noMissingResultsButton>
+            <button [routerLink]="'/results'" mat-raised-button color="primary">Enter them now</button>
+          </ng-template>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
-  <div class="row mt-3 justify-content-center">
-    This season stuff - teams, rounds, goals so far
+  <div class="row under-stats">
+    <div class="col-12">
+      <h4 class="text-center">This Season</h4>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4 text-center">
+      <ng2-odometer style="font-size: 80px; color: #66bb6a;" [number]="teamsInSeason" animation="count"></ng2-odometer>
+      <p>Teams</p>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4 text-center">
+      <ng2-odometer style="font-size: 80px; color: #ffa726;" [number]="roundsInSeason" animation="count"></ng2-odometer>
+      <p>Rounds</p>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4 text-center">
+      <ng2-odometer style="font-size: 80px; color: #ef5350;" [number]="goalsInSeason" animation="count"></ng2-odometer>
+      <p>Goals Scored</p>
+    </div>
   </div>
 
 

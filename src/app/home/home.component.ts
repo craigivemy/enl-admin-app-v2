@@ -15,8 +15,11 @@ import {skipWhile} from "rxjs/operators";
 })
 export class HomeComponent implements OnInit {
   currentSeasonId: number;
-  goalsInSeason;
   nextMatchDate;
+  missingResultsFromLastSevenDays;
+  teamsInSeason;
+  roundsInSeason;
+  goalsInSeason;
   public doughnutChartData: MultiDataSet = [];
   public doughnutChartLabels: Label[] = ['Played Up Once', 'Played Up Twice', 'Played Up More Than Twice'];
   public doughnutChartType: ChartType = 'doughnut';
@@ -26,12 +29,11 @@ export class HomeComponent implements OnInit {
     }
   ];
   public doughnutOptions: any = {
-    // tooltips: {
-    //   enabled: false
-    // }
     legend: {
-      //display: false,
-      position: 'bottom'
+      position: 'bottom',
+    },
+    labels: {
+      boxWidth: '15'
     }
   };
   constructor(
@@ -51,8 +53,11 @@ export class HomeComponent implements OnInit {
             this.doughnutChartData.push([stats.playedUpStats.once]);
             this.doughnutChartData.push([stats.playedUpStats.twice]);
             this.doughnutChartData.push([stats.playedUpStats.moreThanTwice]);
-            this.goalsInSeason = stats.goalsInSeason;
             this.nextMatchDate = stats.nextMatchAndDatetime;
+            this.missingResultsFromLastSevenDays = stats.missingResultsFromLastSevenDays;
+            this.goalsInSeason = stats.goalsInSeason;
+            this.teamsInSeason = stats.teamsInSeason;
+            this.roundsInSeason = stats.roundsInSeason;
           }
         );
       });
