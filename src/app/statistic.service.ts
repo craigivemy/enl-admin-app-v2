@@ -14,7 +14,7 @@ export class StatisticService {
   ) { }
 
   getBasicStatistics(seasonId: number) {
-    return this.http.get(`${this.statisticsApiUrl}?seasonId=${seasonId}&basicStats=1`)
+    return this.http.get(`${this.statisticsApiUrl}?seasonId=${seasonId}&basicAdminStats=1`)
       .pipe(
         tap(data => console.log(data)),
         map(stats => stats["data"])

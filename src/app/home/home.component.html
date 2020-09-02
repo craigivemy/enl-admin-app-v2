@@ -1,11 +1,62 @@
-<div class="container py-4">
-  <div class="row">
-    <div class="col-12">
-      <canvas baseChart
-              [data]="doughnutChartData"
-              [chartType]="doughnutChartType"
-              [colors]="donughtColors">
-      </canvas>
+<div class="container-fluid py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-6 col-xl-3 mb-5">
+      <mat-card class="card h-100 mat-card bg-1">
+        <mat-card-header class="mat-elevation-z3">
+          <mat-card-title>
+            <h4 class="mb-0">Next Fixture</h4>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="d-flex flex-column align-items-center h-100 justify-content-center">
+          <h4 class="spaced-card-title">
+            {{ nextMatchDate | date: 'EEEE dd MMMM' }}
+          </h4>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-3 mb-5">
+      <mat-card class="card h-100 mat-card bg-2">
+        <mat-card-header class="mat-elevation-z3">
+          <mat-card-title>
+            <h4 class="mb-0">Played Up Stats</h4>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <canvas baseChart
+                  [data]="doughnutChartData"
+                  [labels]="doughnutChartLabels"
+                  [chartType]="doughnutChartType"
+                  [colors]="doughnutColors"
+                  [options]="doughnutOptions">
+          </canvas>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-3 mb-5">
+      <mat-card class="card h-100 mat-card bg-3">
+        <mat-card-header class="mat-elevation-z3">
+          <mat-card-title>
+            <h4 class="mb-0">Results</h4>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          {{ nextMatchDate | date: 'EEEE dd MMMM' }}
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
-</div>
+  <div class="row mt-3 justify-content-center">
+    This season stuff - teams, rounds, goals so far
+  </div>
+
+
+
+<!--      <ng2-odometer style="font-size: 130px; color: #3f51b5; font-family: Roboto" [number]="goalsInSeason" animation="count"></ng2-odometer>-->
+<!--      <p>GOALS IN SEASON</p>-->
+
+<!--    <div class="col-6">-->
+<!--      Next Match Date-->
+<!--      -->
+
+
+  </div>

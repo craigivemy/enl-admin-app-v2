@@ -1,0 +1,28 @@
+mat-card-header.mat-card-header {
+  margin-top: -35px;
+  border-radius: 3px;
+  background: linear-gradient(60deg,#ab47bc,#8e24aa);
+}
+.mat-card-content.flex-column h4{
+  margin-top: -35px;
+  margin-bottom: 0;
+  color: #555C78;
+  font-weight: bold;
+}
+.bg-1 .mat-card-header {
+  background: linear-gradient(60deg, #66bb6a, #43a047);
+}
+.bg-2 .mat-card-header {
+  background: linear-gradient(60deg,#ffa726,#fb8c00);
+}
+.bg-3 .mat-card-header {
+  background: linear-gradient(60deg,#ef5350,#e53935);
+}
+mat-card-title.mat-card-title {
+  margin-bottom: 0;
+  padding: 20px 0;
+  color: #FFF;
+}
+mat-card {
+  margin-top: 50px;
+}

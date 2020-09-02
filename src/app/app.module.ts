@@ -49,6 +49,7 @@ import { PlayedUpBottomsheetComponent } from './played-up-bottomsheet/played-up-
 import { DeductPointsComponent } from './deduct-points/deduct-points.component';
 import { DeductPointsDialogComponent } from './deduct-points-dialog/deduct-points-dialog.component';
 import {ChartsModule, ThemeService} from "ng2-charts";
+import {Ng2OdometerModule} from "ng2-odometer";
 
 registerLocaleData(localeGb);
 
@@ -90,6 +91,7 @@ registerLocaleData(localeGb);
     MatFormFieldModule,
     MatCheckboxModule,
     ChartsModule,
+    Ng2OdometerModule.forRoot(),
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {

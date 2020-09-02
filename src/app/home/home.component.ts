@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
 import {selectCurrentSeasonId} from "../season/season.selectors";
-import {Observable} from "rxjs";
+import {concat, Observable, of} from "rxjs";
 import {Label, MultiDataSet, SingleDataSet, ThemeService} from "ng2-charts";
 import {ChartType} from "chart.js";
 import {StatisticService} from "../statistic.service";
@@ -15,14 +15,25 @@ import {skipWhile} from "rxjs/operators";
 })
 export class HomeComponent implements OnInit {
   currentSeasonId: number;
-  stats: [];
-  public doughnutChartData: SingleDataSet = [];
+  goalsInSeason;
+  nextMatchDate;
+  public doughnutChartData: MultiDataSet = [];
+  public doughnutChartLabels: Label[] = ['Played Up Once', 'Played Up Twice', 'Played Up More Than Twice'];
   public doughnutChartType: ChartType = 'doughnut';
-  public donughtColors: any = [
+  public doughnutColors: any = [
     {
-      backgroundColor: "#4E546C"
+      backgroundColor: ['#2DD1AC', '#4E546C', '#ef5350']
     }
   ];
+  public doughnutOptions: any = {
+    // tooltips: {
+    //   enabled: false
+    // }
+    legend: {
+      //display: false,
+      position: 'bottom'
+    }
+  };
   constructor(
     private store: Store<AppState>,
     private statisticService: StatisticService
@@ -37,10 +48,15 @@ export class HomeComponent implements OnInit {
         this.currentSeasonId = seasonId;
         this.statisticService.getBasicStatistics(seasonId).subscribe(
           stats => {
-            this.doughnutChartData.push(stats.teamsInSeason);
+            this.doughnutChartData.push([stats.playedUpStats.once]);
+            this.doughnutChartData.push([stats.playedUpStats.twice]);
+            this.doughnutChartData.push([stats.playedUpStats.moreThanTwice]);
+            this.goalsInSeason = stats.goalsInSeason;
+            this.nextMatchDate = stats.nextMatchAndDatetime;
           }
         );
       });
+
   }
 
 }
