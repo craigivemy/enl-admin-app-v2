@@ -50,6 +50,7 @@ import { DeductPointsComponent } from './deduct-points/deduct-points.component';
 import { DeductPointsDialogComponent } from './deduct-points-dialog/deduct-points-dialog.component';
 import {ChartsModule, ThemeService} from "ng2-charts";
 import {Ng2OdometerModule} from "ng2-odometer";
+import { EditTeamDialogComponent } from './edit-team-dialog/edit-team-dialog.component';
 
 registerLocaleData(localeGb);
 
@@ -73,7 +74,8 @@ registerLocaleData(localeGb);
     PlayedUpDialogComponent,
     PlayedUpBottomsheetComponent,
     DeductPointsComponent,
-    DeductPointsDialogComponent
+    DeductPointsDialogComponent,
+    EditTeamDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +121,8 @@ registerLocaleData(localeGb);
     TeamDialogComponent,
     PlayedUpDialogComponent,
     PlayedUpBottomsheetComponent,
-    DeductPointsDialogComponent
+    DeductPointsDialogComponent,
+    EditTeamDialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -15,6 +15,7 @@ import {selectCurrentSeasonId} from "../season/season.selectors";
 import {PlayedUpDialogComponent} from "../played-up-dialog/played-up-dialog.component";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
+import {EditTeamDialogComponent} from "../edit-team-dialog/edit-team-dialog.component";
 
 @Component({
   selector: 'app-team',
@@ -72,7 +73,6 @@ export class TeamComponent implements OnInit {
   }
 
   save(changes) {
-    console.log(changes);
     if (this.basicDetailsForm.valid) {
       this.teamService.updateTeam(changes, this.team.id)
         .subscribe(updatedTeam => {
@@ -84,6 +84,13 @@ export class TeamComponent implements OnInit {
         });
     }
   }
+
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditTeamDialogComponent, {
+      data: {id: this.team.id}
+    });
+  }
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;

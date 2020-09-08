@@ -1,21 +1,21 @@
-<h1 mat-dialog-title>Add Team</h1>
+<h1 mat-dialog-title>Edit Team</h1>
 <div mat-dialog-content>
-  <form [formGroup]="addTeamForm">
+  <form [formGroup]="editTeamForm">
     <div>
       <mat-form-field>
         <mat-label>Team Name</mat-label>
-        <input matInput formControlName="name">
+        <input #teamName matInput formControlName="name">
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <mat-label>About {{ teamName }}</mat-label>
+        <mat-label>About {{ teamName.value }}</mat-label>
         <textarea matInput formControlName="narrative"></textarea>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="fill">
-        <mat-select formControlName="primaryColour">
+        <mat-select formControlName="primary_colour">
           <mat-option>-- None --</mat-option>
           <mat-option class="red" value="rgb(244, 67, 54)">Red</mat-option>
           <mat-option class="pink" value="rgb(233, 30, 99)">Pink</mat-option>
@@ -44,7 +44,7 @@
     </div>
     <div>
       <mat-form-field appearance="fill">
-        <mat-select formControlName="secondaryColour">
+        <mat-select formControlName="secondary_colour">
           <mat-option>-- None --</mat-option>
           <mat-option class="red" value="rgb(244, 67, 54)">Red</mat-option>
           <mat-option class="pink" value="rgb(233, 30, 99)">Pink</mat-option>
@@ -73,7 +73,7 @@
     </div>
     <div>
       <mat-form-field appearance="fill">
-        <mat-select formControlName="tertiaryColour">
+        <mat-select formControlName="tertiary_colour">
           <mat-option>-- None --</mat-option>
           <mat-option class="red" value="rgb(244, 67, 54)">Red</mat-option>
           <mat-option class="pink" value="rgb(233, 30, 99)">Pink</mat-option>
@@ -104,5 +104,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="saveTeam()">Save</button>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
 </div>
