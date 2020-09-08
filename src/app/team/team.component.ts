@@ -4,7 +4,7 @@ import {Team} from '../models/team';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {Player} from '../models/player';
-import {addPlayer, loadPlayersFromTeam, updatePlayer} from './team.actions';
+import {addPlayer, loadPlayersFromTeam, updatePlayer, updateTeam} from './team.actions';
 import {selectIfPlayersLoading, selectPlayers} from './team.selectors';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatDialog, MatTableDataSource} from '@angular/material';
@@ -13,6 +13,8 @@ import {Observable} from 'rxjs';
 import {Update} from '@ngrx/entity';
 import {selectCurrentSeasonId} from "../season/season.selectors";
 import {PlayedUpDialogComponent} from "../played-up-dialog/played-up-dialog.component";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-team',
@@ -28,13 +30,16 @@ export class TeamComponent implements OnInit {
   seasonId;
   newPlayer = new Player();
   playersLoading: Observable<boolean>;
+  basicDetailsForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private teamService: TeamService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {
+  }
 
   ngOnInit() {
     this.store
@@ -48,9 +53,36 @@ export class TeamComponent implements OnInit {
             this.store.dispatch(loadPlayersFromTeam({teamId: data.team.id, seasonId}));
             this.store.pipe(select(selectPlayers)).subscribe(players => this.dataSource = new MatTableDataSource(players));
             this.playersLoading = this.store.pipe(select(selectIfPlayersLoading));
+            this.basicDetailsForm = this.fb.group({
+              teamName: [this.team.name, Validators.required],
+              teamNarrative: [this.team.narrative]
+            });
           }
       );
     });
+    this.basicDetailsForm.controls.teamName.valueChanges.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+    ).subscribe(changes => this.save({name: changes}));
+
+    this.basicDetailsForm.controls.teamNarrative.valueChanges.pipe(
+      debounceTime(1500),
+      distinctUntilChanged(),
+    ).subscribe(changes => this.save({narrative: changes}));
+  }
+
+  save(changes) {
+    console.log(changes);
+    if (this.basicDetailsForm.valid) {
+      this.teamService.updateTeam(changes, this.team.id)
+        .subscribe(updatedTeam => {
+          const team: Update<Team> = {
+            id: this.team.id,
+            changes
+          };
+          this.store.dispatch(updateTeam({team}));
+        });
+    }
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -110,17 +142,6 @@ export class TeamComponent implements OnInit {
     const dialogRef = this.dialog.open(PlayedUpDialogComponent, {
       data: {player}
     });
-
-    // let changes;
-    // this.teamService.updatePlayer(changes, player.id).subscribe(
-    //   () => {
-    //     const updatedPlayer: Update<Player> = {
-    //       id: player.id,
-    //       changes
-    //     };
-    //     this.store.dispatch(updatePlayer({player: updatedPlayer}));
-    //   }
-    // );
   }
 
 }

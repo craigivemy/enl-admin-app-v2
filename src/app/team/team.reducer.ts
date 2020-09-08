@@ -25,6 +25,9 @@ const teamReducer = createReducer(
   }),
   on(TeamActions.addTeam, (state, {team}) => {
     return adapter.addOne(team, state);
+  }),
+  on(TeamActions.updateTeam, (state, {team}) => {
+    return adapter.updateOne(team, state);
 })
 
 );

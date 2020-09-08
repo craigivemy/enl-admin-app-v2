@@ -32,26 +32,5 @@ export class DivisionsTeamsListingComponent implements OnInit {
             select(selectAllDivisionsWithTeams)
           );
     });
-
-  //   const toGroups = this.divisionsWithTeams$.pipe(
-  //     map(division => {
-  //       return new FormGroup({
-  //         name: new FormControl(division.name, Validators.required)
-  //       });
-  //     })
-  //   );
-  //   this.controls = new FormArray(toGroups);
-  // }
-  //
-  // getControl(index: number, field: string) {
-  //   return this.controls.at(index).get(field);
-  // }
-
-
-
-  }
-
-  addTeam() {
-    alert('hello');
   }
 }
