@@ -8,6 +8,7 @@ import {Team} from "../models/team";
 import {selectTeamById} from "../team/team.selectors";
 import {updateTeam} from "../team/team.actions";
 import {Update} from "@ngrx/entity";
+import {Moment} from "moment";
 
 @Component({
   selector: 'app-edit-team-dialog',

@@ -19,7 +19,7 @@
             </ng-container>
             <ng-container matColumnDef="time">
               <th mat-header-cell *matHeaderCellDef>Time</th>
-              <td mat-cell *matCellDef="let fixture"> {{fixture.matchDate | date: 'h a'}} </td>
+              <td mat-cell *matCellDef="let fixture"> {{fixture.matchDate | date: 'h:m a'}} </td>
             </ng-container>
             <ng-container matColumnDef="court">
               <th mat-header-cell *matHeaderCellDef>Court</th>

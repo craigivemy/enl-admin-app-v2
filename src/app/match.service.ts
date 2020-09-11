@@ -23,8 +23,16 @@ export class MatchService {
       );
   }
 
+  updateFixture(changes: Partial<Match>, id: number) {
+    return this.http.put(`${this.matchesApiUrl}/${id}/?fixture=1`, changes)
+      .pipe(
+        tap((val) => console.log(val)),
+        map(updatedFixture => updatedFixture["data"])
+      );
+  }
+
   saveMatch(matchId: number, changes: Partial<Match>) {
-    return this.http.put(`${this.matchesApiUrl}/${matchId}`, changes);
+    return this.http.put(`${this.matchesApiUrl}/${matchId}?result=1`, changes);
   }
 
 }

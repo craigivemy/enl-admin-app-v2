@@ -1,14 +1,31 @@
-<form [formGroup]="editFixtureForm">
-  <mat-form-field class="app-select" appearance="fill">
-    <!-- todo - use fixture times setting on season -->
-    <mat-select formControlName="fixtureTime">
-      <mat-optgroup *ngFor="let timeGroup of fixtureTimeGroups" [label]="timeGroup.name">
-        <mat-option *ngFor="let time of timeGroup.times" [value]="time.value">
-          {{ time.viewValue }}
-        </mat-option>
-      </mat-optgroup>
-    </mat-select>
-  </mat-form-field>
-  <input formControlName="fixtureTime">
-  <input formControlName="fixtureDate">
-</form>
+<h1 mat-dialog-title>Edit Fixture</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editFixtureForm">
+    <mat-form-field class="app-select pr-2" appearance="fill">
+      <mat-label>Match Time</mat-label>
+      <!-- todo - use fixture times setting on season -->
+      <mat-select formControlName="fixtureTime">
+        <mat-optgroup *ngFor="let timeGroup of fixtureTimeGroups" [label]="timeGroup.name">
+          <mat-option *ngFor="let time of timeGroup.times" [value]="time.value">
+            {{ time.viewValue }}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="pr-2" appearance="fill">
+      <mat-label>Match Date</mat-label>
+      <input formControlName="fixtureDate" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="pr-2" appearance="fill">
+      <mat-label>Court</mat-label>
+      <!-- todo - use number/name of court setting on season -->
+      <input type="number" matInput formControlName="court" min="1" max="4">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close();">Cancel</button>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+</div>
