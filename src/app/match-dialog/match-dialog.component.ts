@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSlideToggleChange} from '@angular/material';
 import {distinctUntilChanged, tap} from 'rxjs/operators';
 import {Update} from '@ngrx/entity';
+import {MessengerService} from "../messenger.service";
 
 @Component({
   selector: 'app-match-dialog',
@@ -22,6 +23,7 @@ export class MatchDialogComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private matchService: MatchService,
+    private messengerService: MessengerService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<MatchDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data ) {
@@ -63,6 +65,7 @@ export class MatchDialogComponent implements OnInit {
         };
         this.store.dispatch(matchUpdated({match}));
         this.dialogRef.close({updated: true});
+        this.messengerService.sendMessage('Result Updated');
       }
     );
   }

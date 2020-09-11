@@ -1,0 +1,14 @@
+<form [formGroup]="editFixtureForm">
+  <mat-form-field class="app-select" appearance="fill">
+    <!-- todo - use fixture times setting on season -->
+    <mat-select formControlName="fixtureTime">
+      <mat-optgroup *ngFor="let timeGroup of fixtureTimeGroups" [label]="timeGroup.name">
+        <mat-option *ngFor="let time of timeGroup.times" [value]="time.value">
+          {{ time.viewValue }}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+  <input formControlName="fixtureTime">
+  <input formControlName="fixtureDate">
+</form>

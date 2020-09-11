@@ -42,6 +42,7 @@ import * as fromTeam from './team/team.reducer';
 import { TeamEffects } from './team/team.effects';
 import * as fromPlayer from './team/player.reducer';
 import * as fromTable from './tables/table.reducer';
+import * as fromUmpire from './umpire-listing/umpire.reducer';
 import { TableEffects } from './tables/table.effects';
 import { TeamDialogComponent } from './team-dialog/team-dialog.component';
 import { PlayedUpDialogComponent } from './played-up-dialog/played-up-dialog.component';
@@ -51,6 +52,12 @@ import { DeductPointsDialogComponent } from './deduct-points-dialog/deduct-point
 import {ChartsModule, ThemeService} from "ng2-charts";
 import {Ng2OdometerModule} from "ng2-odometer";
 import { EditTeamDialogComponent } from './edit-team-dialog/edit-team-dialog.component';
+import { UmpireListingComponent } from './umpire-listing/umpire-listing.component';
+import { UmpireEffects } from './umpire-listing/umpire.effects';
+import { EditUmpireDialogComponent } from './edit-umpire-dialog/edit-umpire-dialog.component';
+import { AddUmpireDialogComponent } from './add-umpire-dialog/add-umpire-dialog.component';
+import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+import { EditFixtureDialogComponent } from './edit-fixture-dialog/edit-fixture-dialog.component';
 
 registerLocaleData(localeGb);
 
@@ -75,7 +82,12 @@ registerLocaleData(localeGb);
     PlayedUpBottomsheetComponent,
     DeductPointsComponent,
     DeductPointsDialogComponent,
-    EditTeamDialogComponent
+    EditTeamDialogComponent,
+    UmpireListingComponent,
+    EditUmpireDialogComponent,
+    AddUmpireDialogComponent,
+    ConfirmDeleteComponent,
+    EditFixtureDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,10 +119,11 @@ registerLocaleData(localeGb);
     StoreModule.forFeature(fromDivision.divisionFeatureKey, fromDivision.reducer),
     StoreModule.forFeature(fromMatch.matchFeatureKey, fromMatch.reducer),
     StoreModule.forFeature(fromTeam.teamFeatureKey, fromTeam.reducer),
-    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects, TableEffects]),
+    EffectsModule.forFeature([SeasonEffects, DivisionEffects, MatchEffects, TeamEffects, TableEffects, UmpireEffects]),
     StoreModule.forFeature(fromPlayer.playerFeatureKey, fromPlayer.reducer),
     FormsModule,
-    StoreModule.forFeature(fromTable.tableFeatureKey, fromTable.reducer)
+    StoreModule.forFeature(fromTable.tableFeatureKey, fromTable.reducer),
+    StoreModule.forFeature(fromUmpire.umpireFeatureKey, fromUmpire.reducer)
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },
@@ -122,7 +135,11 @@ registerLocaleData(localeGb);
     PlayedUpDialogComponent,
     PlayedUpBottomsheetComponent,
     DeductPointsDialogComponent,
-    EditTeamDialogComponent
+    EditTeamDialogComponent,
+    EditUmpireDialogComponent,
+    AddUmpireDialogComponent,
+    ConfirmDeleteComponent,
+    EditFixtureDialogComponent,
   ],
   bootstrap: [AppComponent]
 })

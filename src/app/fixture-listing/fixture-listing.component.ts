@@ -6,6 +6,9 @@ import {loadMatches} from '../match/match.actions';
 import {selectAllMatches} from '../match/match.selectors';
 import {filter, groupBy, mergeMap, take, toArray} from 'rxjs/operators';
 import * as moment from 'moment';
+import {Match} from "../models/match";
+import {MatDialog} from "@angular/material";
+import {EditFixtureDialogComponent} from "../edit-fixture-dialog/edit-fixture-dialog.component";
 
 @Component({
   selector: 'app-fixture-listing',
@@ -14,9 +17,10 @@ import * as moment from 'moment';
 })
 export class FixtureListingComponent implements OnInit {
   fixtures$;
-  columnsToDisplay = ['homeTeamName', 'awayTeamName', 'division', 'time', 'court'];
+  columnsToDisplay = ['homeTeamName', 'awayTeamName', 'division', 'time', 'court', 'edit'];
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -35,4 +39,10 @@ export class FixtureListingComponent implements OnInit {
           );
         });
       }
+
+  openEditDialog(fixture: Match) {
+    const dialogRef = this.dialog.open(EditFixtureDialogComponent, {
+      data: {fixture}
+    });
+  }
 }

@@ -1,0 +1,29 @@
+<div class="container-fluid py-3">
+  <div class="row">
+    <div class="col justify-content-end d-flex">
+      <button (click)="openAddDialog()" mat-fab color="accent"><mat-icon>add</mat-icon></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <mat-list>
+        <mat-list-item *ngFor="let umpire of umpires$ | async">
+          {{ umpire.forename }} {{ umpire.surname }} <button class="ml-auto" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button (click)="openEditDialog(umpire)" mat-menu-item>
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button (click)="delete(umpire.id)" mat-menu-item>
+              <mat-icon>delete_outline</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </div>
+  </div>
+</div>
+
+

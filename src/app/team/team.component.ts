@@ -16,6 +16,7 @@ import {PlayedUpDialogComponent} from "../played-up-dialog/played-up-dialog.comp
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
 import {EditTeamDialogComponent} from "../edit-team-dialog/edit-team-dialog.component";
+import {MessengerService} from "../messenger.service";
 
 @Component({
   selector: 'app-team',
@@ -37,6 +38,7 @@ export class TeamComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private teamService: TeamService,
+    private messengerService: MessengerService,
     public dialog: MatDialog,
     private fb: FormBuilder
   ) {
@@ -81,13 +83,15 @@ export class TeamComponent implements OnInit {
             changes
           };
           this.store.dispatch(updateTeam({team}));
+          this.messengerService.sendMessage('Team Details Updated');
         });
     }
   }
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(EditTeamDialogComponent, {
-      data: {id: this.team.id}
+      data: {id: this.team.id},
+      panelClass: 'wide-dialog'
     });
   }
 
@@ -129,6 +133,7 @@ export class TeamComponent implements OnInit {
         .subscribe(newPlayer => {
           this.store.dispatch(addPlayer({player: newPlayer}));
           this.newPlayer = new Player();
+          this.messengerService.sendMessage('Player Added');
         });
     }
   }

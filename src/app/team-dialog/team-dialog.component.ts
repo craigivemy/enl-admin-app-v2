@@ -6,6 +6,7 @@ import {TeamService} from "../team.service";
 import {MatDialogRef} from "@angular/material";
 import {Team} from "../models/team";
 import {addTeam} from "../team/team.actions";
+import {MessengerService} from "../messenger.service";
 
 @Component({
   selector: 'app-team-dialog',
@@ -18,11 +19,12 @@ export class TeamDialogComponent implements OnInit {
     private store: Store<AppState>,
     private fb: FormBuilder,
     private teamService: TeamService,
+    private messengerService: MessengerService,
     public dialogRef: MatDialogRef<TeamDialogComponent>
   ) {
     this.addTeamForm = this.fb.group({
       name: ['', Validators.required],
-      narrative: ['', Validators.required],
+      narrative: [''],
       primaryColour: [''],
       secondaryColour: [''],
       tertiaryColour: ['']
@@ -42,6 +44,7 @@ export class TeamDialogComponent implements OnInit {
         newTeam => {
           this.store.dispatch(addTeam({team: newTeam}));
           this.dialogRef.close();
+          this.messengerService.sendMessage('Team Added', 1000);
         }
       );
     }

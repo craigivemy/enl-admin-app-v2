@@ -58,7 +58,6 @@ export class EditTeamDialogComponent implements OnInit {
             window.location.reload();
           }
         );
-      // todo - resolve for this 'Team Component' means store isn't updated, need to change whole setup to get rid of this refresh
     }
   }
 

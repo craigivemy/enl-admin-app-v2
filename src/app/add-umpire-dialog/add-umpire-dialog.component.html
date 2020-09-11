@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Add Umpire</h1>
+<div mat-dialog-content>
+  <form [formGroup]="addUmpireForm">
+    <div>
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input #forename matInput formControlName="forename">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input #surname matInput formControlName="surname">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>About {{ forename.value }} {{ surname.value }}</mat-label>
+        <textarea  matInput formControlName="about"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{ forename.value }} {{ surname.value }}'s Email</mat-label>
+        <input  matInput formControlName="email">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>{{ forename.value }} {{ surname.value }}'s Phone Number</mat-label>
+        <input  matInput formControlName="phone">
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-raised-button (click)="save()" color="primary">Save</button>
+</mat-dialog-actions>
