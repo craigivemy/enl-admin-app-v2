@@ -1,9 +1,9 @@
 <div class="container py-4">
   <div class="row">
-    <div class="col-12" *ngFor="let group of fixtures$ | async">
+    <div class="col-12" *ngFor="let group of fixtures$ | async; let i = index;">
       <h5>{{ group[0]?.matchDate | date: 'EEEE d MMMM yyyy' }}</h5>
       <div class="row mb-5">
-          <table class="w-100" mat-table [dataSource]="group">
+          <table #fixtureTable class="w-100" mat-table [dataSource]="group">
             <!-- Position Column -->
             <ng-container matColumnDef="homeTeamName">
               <th mat-header-cell *matHeaderCellDef>Team Name</th>
@@ -19,7 +19,7 @@
             </ng-container>
             <ng-container matColumnDef="time">
               <th mat-header-cell *matHeaderCellDef>Time</th>
-              <td mat-cell *matCellDef="let fixture"> {{fixture.matchDate | date: 'h:m a'}} </td>
+              <td mat-cell *matCellDef="let fixture"> {{fixture.matchDate | date: 'h:mm a'}} </td>
             </ng-container>
             <ng-container matColumnDef="court">
               <th mat-header-cell *matHeaderCellDef>Court</th>

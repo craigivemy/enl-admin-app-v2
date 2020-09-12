@@ -58,7 +58,7 @@ export class UmpireListingComponent implements OnInit {
   }
 
   delete(id: number) {
-    const dialogRef = this.dialog.open(ConfirmDeleteComponent)
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         this.umpireService.deleteUmpire(id).subscribe(

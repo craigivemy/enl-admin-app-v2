@@ -27,6 +27,20 @@
                 <input matInput type="number" label="Rounds"  formControlName="rounds">
               </mat-form-field>
             </div>
+            <div class="row">
+              <mat-form-field class="col-4">
+                <mat-label>Number of Courts in Use</mat-label>
+                <input matInput type="number" formControlName="number_of_courts">
+              </mat-form-field>
+              <mat-form-field class="col-4">
+                <mat-label>Default Match Times</mat-label>
+                <mat-select formControlName="match_times" multiple>
+                  <mat-option *ngFor="let time of fixtureTimes" [value]="time.value">
+                    {{ time.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
           </form>
         </mat-step>
         <mat-step [stepControl]="scoringDetailsForm">

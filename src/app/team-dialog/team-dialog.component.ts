@@ -7,6 +7,8 @@ import {MatDialogRef} from "@angular/material";
 import {Team} from "../models/team";
 import {addTeam} from "../team/team.actions";
 import {MessengerService} from "../messenger.service";
+import {catchError} from "rxjs/operators";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-team-dialog',
@@ -37,6 +39,10 @@ export class TeamDialogComponent implements OnInit {
     );
   }
 
+  get name() {
+    return this.addTeamForm.get('name');
+  }
+
   saveTeam() {
     if (this.addTeamForm.valid) {
       const team: Team = this.addTeamForm.value;
@@ -45,6 +51,14 @@ export class TeamDialogComponent implements OnInit {
           this.store.dispatch(addTeam({team: newTeam}));
           this.dialogRef.close();
           this.messengerService.sendMessage('Team Added', 1000);
+        },
+        err => {
+          if (err.status === 409) {
+            this.addTeamForm.get('name').setErrors({duplicateExists: 'Duplicate Exists'});
+          } else {
+            this.messengerService.sendMessage('A problem occured, please try again');
+            return of([]);
+          }
         }
       );
     }

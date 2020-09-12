@@ -20,10 +20,11 @@ export class SeasonService {
       );
   }
 
-  save(season: Season, divisionsTeams: any, settings: any): Observable<Season> {
+  save(season: Season, divisionsTeams: any, basicDetails: any, settings: any): Observable<Season> {
     return this.http.post(`${this.seasonsApiUrl}`, {
       season,
       divisionsTeams,
+      basicDetails,
       settings
     })
       .pipe(

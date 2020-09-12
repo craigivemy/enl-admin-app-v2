@@ -10,6 +10,9 @@ import {Update} from "@ngrx/entity";
 import {Match} from "../models/match";
 import {matchUpdated} from "../match/match.actions";
 import {MessengerService} from "../messenger.service";
+import {SettingService} from "../setting.service";
+import {map, tap} from "rxjs/operators";
+import {range} from "rxjs";
 
 @Component({
   selector: 'app-edit-fixture-dialog',
@@ -22,21 +25,20 @@ export class EditFixtureDialogComponent implements OnInit {
     {
       name: 'Scheduled Times',
       times: [
-        {value: "18:30", viewValue: '6:30pm'},
-        {value: "19:30", viewValue: '7:30pm'},
-        {value: "20:30", viewValue: '8:30pm'},
       ]
     },
     {
-      name: 'Unscheduled Times',
+      name: 'All',
       times: fixtureTimes
     },
   ];
+  courts = [];
   constructor(
     private store: Store<AppState>,
     public dialogRef: MatDialogRef<EditFixtureDialogComponent>,
     private matchService: MatchService,
     private messengerService: MessengerService,
+    private settingsService: SettingService,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
@@ -44,10 +46,31 @@ export class EditFixtureDialogComponent implements OnInit {
     this.editFixtureForm = this.fb.group({
       fixtureTime: [moment(this.data.fixture.matchDate).format('HH:mm'), Validators.required],
       fixtureDate: [new Date(moment(this.data.fixture.matchDate).format('M/D/Y')), Validators.required],
-      court: [this.data.fixture.court, Validators.required]
+      court: [this.data.fixture.court, Validators.required],
       // todo - some sort of check for dupes, or for teams not playing one another?
       // todo too much to do async? Maybe a button to run checks? - probably less annoying
     });
+    this.settingsService.getSettings().pipe(
+      tap(val => console.log(val)),
+      map(settings => {
+          settings.map(setting => {
+            if (setting.name === 'match_times') {
+              const times = JSON.parse(setting.settingValue);
+              for (let time of times) {
+                this.fixtureTimeGroups[0].times
+                  .push({value: moment(time, 'HH:mm').format('HH:mm'), viewValue: moment(time, 'HH:mm').format('h:mm a')});
+              }
+            } else if (setting.name === 'number_of_courts') {
+              const courtsRange = [];
+              for (let i = 1; i < parseInt(setting.settingValue); i++) {
+                courtsRange.push(i);
+              }
+              this.courts = courtsRange;
+            }
+          });
+        }
+      )
+    ).subscribe(() => console.log(this.fixtureTimeGroups[0].times));
   }
 
   ngOnInit() {

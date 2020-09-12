@@ -28,8 +28,10 @@ const teamReducer = createReducer(
   }),
   on(TeamActions.updateTeam, (state, {team}) => {
     return adapter.updateOne(team, state);
-})
-
+  }),
+  on(TeamActions.deleteTeam,
+    (state, action) => adapter.removeOne(action.id, state)
+  ),
 );
 
 export function reducer(state: TeamState | undefined, action: Action) {

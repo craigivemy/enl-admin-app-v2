@@ -4,7 +4,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {TeamService} from '../team.service';
 import * as TeamActions from './team.actions';
-import {filter, map, mergeMap, skipWhile, withLatestFrom} from 'rxjs/operators';
+import {concatMap, filter, map, mergeMap, skipWhile, withLatestFrom} from 'rxjs/operators';
 import {selectIfAllTeamsLoaded} from "./team.selectors";
 
 
@@ -43,10 +43,11 @@ export class TeamEffects {
   // todo - makes the call eveb when they are all ready loaded at the moment
   loadTeams$ = createEffect(() => this.actions$.pipe(
     ofType(TeamActions.loadTeams),
+    skipWhile(action => action.seasonId <= 0),
     withLatestFrom(this.store.pipe(select(selectIfAllTeamsLoaded))),
     filter(([action, allTeamsLoaded]) => !allTeamsLoaded),
-    mergeMap(() =>
-      this.teamService.getTeams().pipe(
+    concatMap(([action, data]) =>
+      this.teamService.getTeams(action.seasonId).pipe(
         map(teams => TeamActions.loadTeamsSuccess({teams}))
       )),
   ));

@@ -18,10 +18,13 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <mat-form-field class="pr-2" appearance="fill">
+    <mat-form-field class="app-select pr-2" appearance="fill">
       <mat-label>Court</mat-label>
-      <!-- todo - use number/name of court setting on season -->
-      <input type="number" matInput formControlName="court" min="1" max="4">
+      <mat-select formControlName="court">
+        <mat-option *ngFor="let court of courts" [value]="court">
+          {{ court }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </form>
 </div>

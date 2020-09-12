@@ -1,49 +1,50 @@
-<!-- have division-table as component -->
-<div class="container py-4">
+<div class="container-fluid py-4">
   <div class="row">
-    <mat-tab-group (selectedTabChange)="test($event)">
-      <mat-tab *ngFor="let division of activeDivisions$ | async" label="{{division.id}}">
-        <ng-template mat-tab-label>
-          {{ division.name }}
-        </ng-template>
-          <table mat-table [dataSource]="tables$" class="w-100">
+    <div class="col">
+      <mat-tab-group (selectedTabChange)="test($event)">
+        <mat-tab *ngFor="let division of activeDivisions$ | async" label="{{division.id}}">
+          <ng-template mat-tab-label>
+            {{ division.name }}
+          </ng-template>
+          <mat-table [dataSource]="tables$" class="w-100">
             <ng-container matColumnDef="teamName">
-              <th mat-header-cell *matHeaderCellDef>Team Name</th>
-              <td mat-cell *matCellDef="let team"> {{team.team_name}} </td>
+              <mat-header-cell *matHeaderCellDef>Team Name</mat-header-cell>
+              <mat-cell *matCellDef="let team"> {{team.team_name}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="win">
-              <th mat-header-cell *matHeaderCellDef>Wins</th>
-              <td mat-cell *matCellDef="let team"> {{team.win}} </td>
+              <mat-header-cell *matHeaderCellDef>Wins</mat-header-cell>
+              <mat-cell *matCellDef="let team"> {{team.win}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="loss">
-              <th mat-header-cell *matHeaderCellDef>Losses</th>
-              <td mat-cell *matCellDef="let team"> {{team.loss}} </td>
+              <mat-header-cell *matHeaderCellDef>Losses</mat-header-cell>
+              <mat-cell *matCellDef="let team"> {{team.loss}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="draw">
-              <th mat-header-cell *matHeaderCellDef>Draws</th>
-              <td mat-cell *matCellDef="let team"> {{team.draw}} </td>
+              <mat-header-cell *matHeaderCellDef>Draws</mat-header-cell>
+              <mat-cell *matCellDef="let team"> {{team.draw}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="goalsFor">
-              <th mat-header-cell *matHeaderCellDef>Goals For</th>
-              <td mat-cell *matCellDef="let team"> {{team.goals_for}} </td>
+              <mat-header-cell *matHeaderCellDef>Goals For</mat-header-cell>
+              <mat-cell *matCellDef="let team"> {{team.goals_for}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="goalsAgainst">
-              <th mat-header-cell *matHeaderCellDef>Goals Against</th>
-              <td mat-cell *matCellDef="let team"> {{team.goals_against}} </td>
+              <mat-header-cell *matHeaderCellDef>Goals Against</mat-header-cell>
+              <mat-cell *matCellDef="let team"> {{team.goals_against}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="goalDifference">
-              <th mat-header-cell *matHeaderCellDef>Goal Difference</th>
-              <td mat-cell *matCellDef="let team"> {{team.goal_difference}} </td>
+              <mat-header-cell *matHeaderCellDef>Goal Difference</mat-header-cell>
+              <mat-cell *matCellDef="let team"> {{team.goal_difference}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="points">
-              <th mat-header-cell *matHeaderCellDef>Points</th>
-              <td mat-cell *matCellDef="let team"> {{team.points}} </td>
+              <mat-header-cell *matHeaderCellDef>Points</mat-header-cell>
+              <mat-cell *matCellDef="let team"> {{team.points}} </mat-cell>
             </ng-container>
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-          </table>
-      </mat-tab>
-    </mat-tab-group>
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+        </mat-table>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </div>
 

@@ -4,7 +4,7 @@ import {environment} from '../environments/environment';
 import {ApiRoutes} from '../data/api-routes';
 import {Observable, of} from 'rxjs';
 import {Team} from './models/team';
-import {map, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {Player} from './models/player';
 import {PlayedUp} from "./models/playedUp";
 
@@ -16,8 +16,9 @@ export class TeamService {
   playersApiUrl = environment.baseApiUrl + ApiRoutes.Players;
   constructor(private http: HttpClient) { }
 
-  getTeams(): Observable<Team[]> {
-    return this.http.get(this.teamsApiUrl)
+  // gets all teams, returns 1 if team active in passed season id, 0 if not
+  getTeams(currentSeasonId?: number): Observable<Team[]> {
+    return this.http.get(`${this.teamsApiUrl}/?seasonId=${currentSeasonId}`)
       .pipe(
         map(teams => teams["data"])
       );
@@ -33,8 +34,7 @@ export class TeamService {
   getPlayersByTeamId(teamId: number, seasonId: number): Observable<Player[]> {
     return this.http.get(`${this.playersApiUrl}?teamId=${teamId}&seasonId=${seasonId}`)
       .pipe(
-        tap(() => console.log(`${this.playersApiUrl}?teamId=${teamId}&seasonId=${seasonId}`)),
-        map(players => players["data"])
+        map(players => players ? players["data"] : [])
       );
   }
 

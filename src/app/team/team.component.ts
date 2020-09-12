@@ -90,7 +90,7 @@ export class TeamComponent implements OnInit {
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(EditTeamDialogComponent, {
-      data: {id: this.team.id},
+      data: {id: this.team.id, needsReload: true},
       panelClass: 'wide-dialog'
     });
   }

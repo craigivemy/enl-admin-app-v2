@@ -5,7 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './app-material.module';
-import {MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -127,6 +134,7 @@ registerLocaleData(localeGb);
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {disableClose: true, hasBackdrop: true}},
     ThemeService
   ],
   entryComponents: [

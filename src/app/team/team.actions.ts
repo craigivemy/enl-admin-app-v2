@@ -5,7 +5,8 @@ import {Update} from '@ngrx/entity';
 import {PlayedUp} from "../models/playedUp";
 
 export const loadTeams = createAction(
-  '[Team] Load Teams'
+  '[Team] Load Teams',
+  props<{seasonId: number}>()
 );
 
 export const loadTeamsSuccess = createAction(
@@ -71,6 +72,11 @@ export const updatePlayer = createAction(
 export const addPlayedUp = createAction(
   'Team Add Played Ups',
   props<{playedUp: PlayedUp, playerId: number, seasonId: number}>()
+);
+
+export const deleteTeam = createAction(
+  '[Team] Team Deleted',
+  props<{id: number}>()
 );
 
 /* todo - should I be loading all teams to start with, then just selecting based on divison ID?

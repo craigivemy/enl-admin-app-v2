@@ -8,11 +8,15 @@ import {TeamService} from '../team.service';
 import * as moment from 'moment';
 import {Season} from "../models/season";
 import {SeasonService} from "../season.service";
-import {Store} from "@ngrx/store";
+import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
 import {addSeason} from "../season/season.actions";
 import {SettingService} from '../setting.service';
-import {map} from 'rxjs/operators';
+import {map, skipWhile, tap} from 'rxjs/operators';
+import {fixtureTimes} from "../../data/fixture-times";
+import {selectCurrentSeasonId} from "../season/season.selectors";
+import {loadTeams} from "../team/team.actions";
+import {selectOnlyNonDeletedTeams} from "../team/team.selectors";
 
 @Component({
   selector: 'app-new-season',
@@ -24,11 +28,16 @@ export class NewSeasonComponent implements OnInit {
   teams: Team[];
   dynamicDivisionSteps: Division[] = [];
   teamsInDivisions = {};
+  fixtureTimes = fixtureTimes;
 
   basicDetailsForm = this.fb.group({
     name: ['', Validators.required],
     startDate: ['', Validators.required],
-    rounds: [2, Validators.required]
+    rounds: [2, Validators.required],
+    number_of_courts: [4, Validators.required],
+    match_times: [
+      ['14:30', '12:30', '10:30']
+    ]
   });
   scoringDetailsForm = this.fb.group({
     win_value: [3],
@@ -52,6 +61,7 @@ export class NewSeasonComponent implements OnInit {
   ngOnInit() {
     this.divisions = this.divisionService.getDivisions();
     this.settingService.getSettings().pipe(
+      tap(settings => console.log(settings)),
       map(settings => {
         settings.map(setting => {
           if (setting.name === 'win_value') {
@@ -70,12 +80,22 @@ export class NewSeasonComponent implements OnInit {
             this.scoringDetailsForm.patchValue({walkover_deducted_points: setting.settingValue});
           } else if (setting.name === 'walkover_awarded_goals') {
             this.scoringDetailsForm.patchValue({walkover_awarded_goals: setting.settingValue});
+          } else if (setting.name === 'number_of_courts') {
+            this.basicDetailsForm.patchValue({number_of_courts: setting.settingValue});
+          } else if (setting.name === 'match_times') {
+            this.basicDetailsForm.patchValue({match_times: JSON.parse(setting.settingValue)});
           }
         });
       })
     ).subscribe();
-    this.teamService.getTeams().subscribe(teams => {
-      this.teams = teams.filter(team => !team.deletedAt);
+    this.store.pipe(
+      select(selectCurrentSeasonId),
+      skipWhile(seasonId => seasonId < 0)
+    )
+      .subscribe(seasonId => {
+      this.teamService.getTeams(seasonId).subscribe(teams => {
+        this.teams = teams.filter(team => !team.deletedAt);
+      });
     });
   }
 
@@ -125,7 +145,12 @@ export class NewSeasonComponent implements OnInit {
     };
     const divisionsTeams = this.teamsInDivisions;
 
-    this.seasonService.save(newSeason, divisionsTeams, this.scoringDetailsForm.value).subscribe(
+    const moreBasicDetails = {
+      number_of_courts: this.basicDetailsForm.controls.number_of_courts.value,
+      match_times: JSON.stringify(this.basicDetailsForm.controls.match_times.value)
+    };
+
+    this.seasonService.save(newSeason, divisionsTeams, moreBasicDetails, this.scoringDetailsForm.value).subscribe(
       season => this.store.dispatch(addSeason({season}))
     );
   }

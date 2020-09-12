@@ -9,6 +9,8 @@ import {selectTeamById} from "../team/team.selectors";
 import {updateTeam} from "../team/team.actions";
 import {Update} from "@ngrx/entity";
 import {Moment} from "moment";
+import {of} from "rxjs";
+import {MessengerService} from "../messenger.service";
 
 @Component({
   selector: 'app-edit-team-dialog',
@@ -19,14 +21,17 @@ export class EditTeamDialogComponent implements OnInit {
   editTeamForm: FormGroup;
   team: Team;
   teamId: number;
+  needsReload: boolean;
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
     private teamService: TeamService,
+    private messengerService: MessengerService,
     public dialogRef: MatDialogRef<EditTeamDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
     this.teamId = data.id;
+    this.needsReload = data.needsReload;
   }
 
   ngOnInit() {
@@ -35,7 +40,7 @@ export class EditTeamDialogComponent implements OnInit {
     ).subscribe(team => this.team = team);
     this.editTeamForm = this.fb.group({
       name: [this.team.name, Validators.required],
-      narrative: [this.team.narrative, Validators.required],
+      narrative: [this.team.narrative],
       primary_colour: [this.team.primaryColour],
       secondary_colour: [this.team.secondaryColour],
       tertiary_colour: [this.team.tertiaryColour]
@@ -56,10 +61,26 @@ export class EditTeamDialogComponent implements OnInit {
               changes
             };
             this.store.dispatch(updateTeam({team: updatedTeam}));
-            window.location.reload();
+            if (this.needsReload) {
+              window.location.reload();
+            } else {
+              this.dialogRef.close();
+            }
+          },
+          err => {
+            if (err.status === 409) {
+              this.editTeamForm.get('name').setErrors({duplicateExists: 'Duplicate Exists'});
+            } else {
+              this.messengerService.sendMessage('A problem occured, please try again');
+              return of([]);
+            }
           }
         );
     }
+  }
+
+  get teamName() {
+    return this.editTeamForm.get('name').value;
   }
 
 }

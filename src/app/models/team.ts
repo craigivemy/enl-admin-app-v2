@@ -9,6 +9,7 @@ export class Team {
   logoUrl?: string;
   narrative?: string;
   players?: Player[];
+  activeThisSeason?: number;
   addedToSeason?: number;
   deletedAt?: string;
 }

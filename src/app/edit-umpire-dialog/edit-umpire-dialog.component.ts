@@ -31,11 +31,15 @@ export class EditUmpireDialogComponent implements OnInit {
       surname: [this.data.umpire.surname, Validators.required],
       about: [this.data.umpire.about],
       phone: [this.data.umpire.phone],
-      email: [this.data.umpire.email],
+      email: [this.data.umpire.email, Validators.email],
     });
   }
 
   ngOnInit() {
+  }
+
+  get email() {
+    return this.editUmpireForm.get('name');
   }
 
   save() {
