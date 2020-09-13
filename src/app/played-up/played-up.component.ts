@@ -36,7 +36,8 @@ export class PlayedUpComponent implements OnInit {
 
   showDates(player: Player) {
     const bottomSheetRef = this.bottomSheet.open(PlayedUpBottomsheetComponent, {
-      data: {player}
+      data: {player},
+      panelClass: 'bg-semi-dark'
     });
   }
 

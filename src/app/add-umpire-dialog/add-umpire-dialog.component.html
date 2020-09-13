@@ -21,14 +21,17 @@
     </div>
     <div>
       <mat-form-field>
-        <mat-label>{{ forename.value }} {{ surname.value }}'s Email</mat-label>
-        <input  matInput formControlName="email">
+        <mat-label *ngIf="forename.value; else shortEmailLabel">{{ forename.value }}'s Email</mat-label>
+        <ng-template #shortEmailLabel><mat-label>Email</mat-label></ng-template>
+        <input type="email" email  matInput formControlName="email">
+        <mat-error>Please enter a valid email address</mat-error>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <mat-label>{{ forename.value }} {{ surname.value }}'s Phone Number</mat-label>
-        <input  matInput formControlName="phone">
+        <mat-label *ngIf="forename.value; else shortPhoneLabel">{{ forename.value }}'s Phone Number</mat-label>
+        <ng-template #shortPhoneLabel><mat-label>Phone</mat-label></ng-template>
+        <input matInput formControlName="phone">
       </mat-form-field>
     </div>
   </form>

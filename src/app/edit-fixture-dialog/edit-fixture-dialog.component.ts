@@ -51,7 +51,6 @@ export class EditFixtureDialogComponent implements OnInit {
       // todo too much to do async? Maybe a button to run checks? - probably less annoying
     });
     this.settingsService.getSettings().pipe(
-      tap(val => console.log(val)),
       map(settings => {
           settings.map(setting => {
             if (setting.name === 'match_times') {
@@ -79,24 +78,28 @@ export class EditFixtureDialogComponent implements OnInit {
 
   save() {
     if (this.editFixtureForm.valid) {
-      const date = moment(this.editFixtureForm.controls.fixtureDate.value).format('YYYY-MM-DD');
-      const time = moment(this.editFixtureForm.controls.fixtureTime.value, 'HH:mm:ss').format('HH:mm:ss');
-      const dateTime = moment(date + ' ' + time).format('YYYY-MM-DD HH:mm:ss');
-      const changes = this.editFixtureForm.value;
-      changes.match_date = dateTime;
-      delete changes.fixtureDate;
-      delete changes.fixtureTime;
-      console.log(changes);
-      this.matchService.updateFixture(changes, this.data.fixture.id)
-        .subscribe(() => {
-          const updatedFixture: Update<Match> = {
-            id: this.data.fixture.id,
-            changes
-          };
-          this.store.dispatch(matchUpdated({match: updatedFixture}));
-          this.dialogRef.close();
-          this.messengerService.sendMessage('Saved', 1000);
-        });
+      if (this.editFixtureForm.dirty) {
+        const date = moment(this.editFixtureForm.controls.fixtureDate.value).format('YYYY-MM-DD');
+        const time = moment(this.editFixtureForm.controls.fixtureTime.value, 'HH:mm:ss').format('HH:mm:ss');
+        const dateTime = moment(date + ' ' + time).format('YYYY-MM-DD HH:mm:ss');
+        const changes = this.editFixtureForm.value;
+        changes.match_date = dateTime;
+        delete changes.fixtureDate;
+        delete changes.fixtureTime;
+        console.log(changes);
+        this.matchService.updateFixture(changes, this.data.fixture.id)
+          .subscribe(() => {
+            const updatedFixture: Update<Match> = {
+              id: this.data.fixture.id,
+              changes
+            };
+            this.store.dispatch(matchUpdated({match: updatedFixture}));
+            this.dialogRef.close();
+            this.messengerService.sendMessage('Saved', 1000);
+          });
+      } else {
+        this.dialogRef.close();
+      }
     }
   }
 }

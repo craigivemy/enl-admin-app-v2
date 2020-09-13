@@ -39,22 +39,26 @@ export class EditUmpireDialogComponent implements OnInit {
   }
 
   get email() {
-    return this.editUmpireForm.get('name');
+    return this.editUmpireForm.get('email');
   }
 
   save() {
     if (this.editUmpireForm.valid) {
-      const changes = this.editUmpireForm.value;
-      this.umpireService.updateUmpire(changes, this.currentUmpireDetails.id)
-        .subscribe(() => {
-          const updatedUmpire: Update<Umpire> = {
-            id: this.currentUmpireDetails.id,
-            changes
-          };
-          this.store.dispatch(updateUmpire({umpire: updatedUmpire}));
-          this.dialogRef.close();
-          this.messengerService.sendMessage('Saved', 1000);
-        });
+      if (this.editUmpireForm.dirty) {
+        const changes = this.editUmpireForm.value;
+        this.umpireService.updateUmpire(changes, this.currentUmpireDetails.id)
+          .subscribe(() => {
+            const updatedUmpire: Update<Umpire> = {
+              id: this.currentUmpireDetails.id,
+              changes
+            };
+            this.store.dispatch(updateUmpire({umpire: updatedUmpire}));
+            this.dialogRef.close();
+            this.messengerService.sendMessage('Saved', 1000);
+          });
+      } else {
+        this.dialogRef.close();
+      }
     }
   }
 }

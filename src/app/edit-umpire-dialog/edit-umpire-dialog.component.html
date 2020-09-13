@@ -10,25 +10,27 @@
     <div>
       <mat-form-field>
         <mat-label>Last Name</mat-label>
-        <input #surname matInput formControlName="surname">
+        <input matInput formControlName="surname">
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <mat-label>About {{ forename.value }} {{ surname.value }}</mat-label>
+        <mat-label>About {{ forename.value }}</mat-label>
         <textarea  matInput formControlName="about"></textarea>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <mat-label>{{ forename.value }} {{ surname.value }}'s Email</mat-label>
+        <mat-label *ngIf="forename.value; else shortEmailLabel">{{ forename.value }}'s Email</mat-label>
+        <ng-template #shortEmailLabel><mat-label>Email</mat-label></ng-template>
         <input type="email" email matInput formControlName="email">
         <mat-error>Please enter a valid email address</mat-error>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <mat-label>{{ forename.value }} {{ surname.value }}'s Phone Number</mat-label>
+        <mat-label *ngIf="forename.value; else shortPhoneLabel">{{ forename.value }}'s Phone Number</mat-label>
+        <ng-template #shortPhoneLabel><mat-label>Phone</mat-label></ng-template>
         <input  matInput formControlName="phone">
       </mat-form-field>
     </div>

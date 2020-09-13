@@ -52,30 +52,36 @@ export class EditTeamDialogComponent implements OnInit {
   }
 
   save() {
+    console.log(this.editTeamForm.dirty ? 'yes' : 'no');
     if (this.editTeamForm.valid) {
-      const changes = this.editTeamForm.value;
-      this.teamService.updateTeam(changes, this.teamId)
-        .subscribe(update => {
-            const updatedTeam: Update<Team> = {
-              id: this.teamId,
-              changes
-            };
-            this.store.dispatch(updateTeam({team: updatedTeam}));
-            if (this.needsReload) {
-              window.location.reload();
-            } else {
-              this.dialogRef.close();
+      if (this.editTeamForm.dirty) {
+        const changes = this.editTeamForm.value;
+        this.teamService.updateTeam(changes, this.teamId)
+          .subscribe(update => {
+              const updatedTeam: Update<Team> = {
+                id: this.teamId,
+                changes
+              };
+              this.store.dispatch(updateTeam({team: updatedTeam}));
+              if (this.needsReload) {
+                window.location.reload();
+              } else {
+                this.dialogRef.close();
+                this.messengerService.sendMessage('Team Updated');
+              }
+            },
+            err => {
+              if (err.status === 409) {
+                this.editTeamForm.get('name').setErrors({duplicateExists: 'Duplicate Exists'});
+              } else {
+                this.messengerService.sendMessage('A problem occured, please try again');
+                return of([]);
+              }
             }
-          },
-          err => {
-            if (err.status === 409) {
-              this.editTeamForm.get('name').setErrors({duplicateExists: 'Duplicate Exists'});
-            } else {
-              this.messengerService.sendMessage('A problem occured, please try again');
-              return of([]);
-            }
-          }
-        );
+          );
+      } else {
+        this.dialogRef.close();
+      }
     }
   }
 

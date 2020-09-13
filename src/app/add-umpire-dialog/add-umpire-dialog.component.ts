@@ -26,11 +26,15 @@ export class AddUmpireDialogComponent implements OnInit {
       surname: ['', Validators.required],
       about: [''],
       phone: [''],
-      email: [''],
+      email: ['', Validators.email],
     });
   }
 
   ngOnInit() {
+  }
+
+  get email() {
+    return this.addUmpireForm.get('email');
   }
 
   save() {
