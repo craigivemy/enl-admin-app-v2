@@ -42,14 +42,19 @@ export const selectInactiveTeams = createSelector(
   teams => teams.filter(team => !team.activeThisSeason && !team.deletedAt)
 );
 
-export const selectPlayers = createSelector(
+export const selectAllPlayers = createSelector(
   selectPlayerState,
   fromPlayer.selectAll
 );
 
+export const selectIfAllPlayersLoaded = createSelector(
+  selectPlayerState,
+  playerState => playerState.allPlayersLoaded
+);
+
 // todo get this to work ie datasource to update
 // export const selectPlayersByTeamId = teamId => createSelector(
-//   selectPlayers,
+//   selectAllPlayers,
 //   allPlayers => allPlayers.filter(player => player.teamId === teamId)
 // );
 

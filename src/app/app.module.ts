@@ -65,6 +65,7 @@ import { EditUmpireDialogComponent } from './edit-umpire-dialog/edit-umpire-dial
 import { AddUmpireDialogComponent } from './add-umpire-dialog/add-umpire-dialog.component';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { EditFixtureDialogComponent } from './edit-fixture-dialog/edit-fixture-dialog.component';
+import { MovePlayerDialogComponent } from './move-player-dialog/move-player-dialog.component';
 
 registerLocaleData(localeGb);
 
@@ -95,6 +96,7 @@ registerLocaleData(localeGb);
     AddUmpireDialogComponent,
     ConfirmDeleteComponent,
     EditFixtureDialogComponent,
+    MovePlayerDialogComponent,
   ],
   imports: [
     BrowserModule,

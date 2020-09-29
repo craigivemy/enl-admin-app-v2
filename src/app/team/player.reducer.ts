@@ -8,12 +8,14 @@ export const playerFeatureKey = 'player';
 
 export interface PlayerState extends EntityState<Player> {
   playersLoading: boolean;
+  allPlayersLoaded: boolean;
 }
 
 const adapter: EntityAdapter<Player> = createEntityAdapter<Player>();
 
 export const initialPlayerState: PlayerState = adapter.getInitialState({
-  playersLoading: false
+  playersLoading: false,
+  allPlayersLoaded: false
 });
 
 const playerReducer = createReducer(
@@ -24,8 +26,11 @@ const playerReducer = createReducer(
       playersLoading: true
     };
   }),
-  on(TeamActions.loadPlayersSuccess, (state, {players}) => {
+  on(TeamActions.loadPlayersFromTeamSuccess, (state, {players}) => {
     return adapter.addAll(players, {...state, playersLoading: false});
+  }),
+  on(TeamActions.loadAllPlayersSuccess, (state, {players}) => {
+    return adapter.addAll(players, {...state, allPlayersLoaded: true});
   }),
   on(TeamActions.addPlayer, (state, {player}) => {
     return adapter.addOne(player, state);

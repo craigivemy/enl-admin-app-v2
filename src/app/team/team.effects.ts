@@ -4,8 +4,8 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {TeamService} from '../team.service';
 import * as TeamActions from './team.actions';
-import {concatMap, filter, map, mergeMap, skipWhile, withLatestFrom} from 'rxjs/operators';
-import {selectIfAllTeamsLoaded} from "./team.selectors";
+import {concatMap, filter, map, mergeMap, skipWhile, tap, withLatestFrom} from 'rxjs/operators';
+import {selectIfAllPlayersLoaded, selectIfAllTeamsLoaded} from "./team.selectors";
 
 
 
@@ -24,12 +24,22 @@ export class TeamEffects {
     ));
 
   // todo - necessary to make another call here - or just get players from above call?
-  loadPlayers$ = createEffect(() => this.actions$.pipe(
+  loadPlayersFromTeam$ = createEffect(() => this.actions$.pipe(
     ofType(TeamActions.loadPlayersFromTeam),
     skipWhile(action => action.seasonId <= 0),
     mergeMap(action => this.teamService.getPlayersByTeamId(action.teamId, action.seasonId)),
-    map(players => TeamActions.loadPlayersSuccess({players}))
+    map(players => TeamActions.loadPlayersFromTeamSuccess({players}))
   ));
+
+  loadAllPlayers$ = createEffect(() => this.actions$.pipe(
+    ofType(TeamActions.loadAllPlayers),
+    withLatestFrom(this.store.pipe(select(selectIfAllPlayersLoaded))),
+    filter(([action, allPlayersLoaded]) => !allPlayersLoaded),
+    concatMap(([action, data]) =>
+      this.teamService.getAllPlayers().pipe(
+        map(players => TeamActions.loadAllPlayersSuccess({players}))
+      ))
+    ));
 
   loadPlayedUpPlayers = createEffect(() => this.actions$.pipe(
     ofType(TeamActions.loadAllPlayedUpPlayers),

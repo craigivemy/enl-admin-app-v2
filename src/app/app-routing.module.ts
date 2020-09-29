@@ -26,7 +26,8 @@ const routes: Routes = [
   { path: 'new-season', component: NewSeasonComponent, data: { displayTitle: 'New Season' } },
   { path: 'configure-teams', component: AllTeamsListingComponent, data: { displayTitle: 'Configure Teams' } },
   { path: 'played-up-table', component: PlayedUpComponent, data: { displayTitle: 'Played Up Table' } },
-  { path: 'deduct-points', component: DeductPointsComponent, data: { displayTitle: 'Deduct Points' }}
+  { path: 'deduct-points', component: DeductPointsComponent, data: { displayTitle: 'Deduct Points' }},
+  { path: 'configure-players', component: AllPlayersListingComponent, data: { displayTitle: 'Players' }}
 
 ];
 

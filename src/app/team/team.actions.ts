@@ -44,8 +44,17 @@ export const loadPlayersFromTeam = createAction(
   props<{teamId: number, seasonId: number}>()
 );
 
-export const loadPlayersSuccess = createAction(
-  '[Team] Load Players Success',
+export const loadPlayersFromTeamSuccess = createAction(
+  '[Team] Load Players from Team Success',
+  props<{players: Player[]}>()
+);
+
+export const loadAllPlayers = createAction(
+  '[Player] Load All Players'
+);
+
+export const loadAllPlayersSuccess = createAction(
+  'Player] Load All `Players Success',
   props<{players: Player[]}>()
 );
 

@@ -3,7 +3,7 @@ import {select, Store} from "@ngrx/store";
 import {AppState} from "../reducers";
 import {Observable} from "rxjs";
 import {Player} from "../models/player";
-import {selectPlayers} from "../team/team.selectors";
+import {selectAllPlayers} from "../team/team.selectors";
 import {loadAllPlayedUpPlayers} from "../team/team.actions";
 import {selectCurrentSeasonId} from "../season/season.selectors";
 import {MatBottomSheet} from "@angular/material";
@@ -29,7 +29,7 @@ export class PlayedUpComponent implements OnInit {
       ).subscribe(seasonId => {
         this.store.dispatch(loadAllPlayedUpPlayers({seasonId}));
         this.players$ = this.store.pipe(
-          select(selectPlayers)
+          select(selectAllPlayers)
         );
     });
   }
