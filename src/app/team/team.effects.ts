@@ -61,4 +61,12 @@ export class TeamEffects {
         map(teams => TeamActions.loadTeamsSuccess({teams}))
       )),
   ));
+
+  loadTeamsFromAllSeasons$ = createEffect(() => this.actions$.pipe(
+    ofType(TeamActions.loadTeamsFromAllSeasons),
+    mergeMap(() =>
+      this.teamService.getTeams().pipe(
+        map(teams => TeamActions.loadTeamsFromAllSeasonsSuccess({teams}))
+      )),
+  ));
 }

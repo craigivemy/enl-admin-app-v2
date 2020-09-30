@@ -19,6 +19,15 @@ export const loadTeamsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadTeamsFromAllSeasons = createAction(
+  '[Team] Load Teams From All Seasons'
+);
+
+export const loadTeamsFromAllSeasonsSuccess = createAction(
+  '[Team] Load Teams From All Seasons Success',
+  props<{ teams: Team[] }>()
+);
+
 export const loadTeam = createAction(
   '[Team] Load Team',
   props<{teamId: number}>()

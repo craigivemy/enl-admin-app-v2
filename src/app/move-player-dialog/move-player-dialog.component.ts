@@ -43,7 +43,7 @@ export class MovePlayerDialogComponent implements OnInit {
       this.store.dispatch(loadTeams({seasonId}));
       this.teams$ = this.store.pipe(
         // todo - compare this to activeTeams
-        select(selectAllTeams)
+        select(selectActiveTeams)
       );
     });
   }

@@ -20,6 +20,9 @@ const teamReducer = createReducer(
   on(TeamActions.loadTeamsSuccess, (state, {teams}) => {
     return adapter.addAll(teams, {...state, allTeamsLoaded: true});
   }),
+  on(TeamActions.loadTeamsFromAllSeasonsSuccess, (state, {teams}) => {
+    return adapter.addAll(teams, {...state, allTeamsLoaded: true});
+  }),
   on(TeamActions.loadTeamSuccess, (state, {team}) => {
     return adapter.addOne(team, state);
   }),

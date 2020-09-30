@@ -39,7 +39,6 @@ export class AllPlayersListingComponent implements OnInit {
       .subscribe(seasonId => {
         this.seasonId = seasonId;
         this.store.dispatch(loadTeams({seasonId}));
-        // todo - all or just active?
         this.teams$ = this.store.pipe(
           select(selectActiveTeams)
         );
