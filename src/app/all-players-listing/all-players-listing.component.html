@@ -1,6 +1,6 @@
 <div class="container-fluid py-3">
   <div class="row">
-    <div *ngFor="let team of teams$ | async; let i = index" class="col-3">
+    <div *ngFor="let team of teams$ | async; let i = index" class="col-6 col-lg-3">
       <mat-card>
         <mat-card-header>
           <svg width="152px" height="91px" viewBox="0 0 152 91" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -27,11 +27,12 @@
         </mat-card-header>
         <mat-divider></mat-divider>
         <mat-card-content>
-          <mat-selection-list [(ngModel)]="selectedPlayers" (ngModelChange)="updateSelectedTeamId(team.id)">
+          <mat-selection-list [(ngModel)]="selectedPlayers" (ngModelChange)="updateSelectedTeamId(team)">
             <mat-list-option *ngFor="let player of team.players" [value]="player.id" checkboxPosition="before">
               {{ player.forename }} {{ player.surname }}
             </mat-list-option>
           </mat-selection-list>
+          <button (click)="addPlayer(team)" class="floating-add" mat-mini-fab><mat-icon>add</mat-icon></button>
         </mat-card-content>
       </mat-card>
     </div>
@@ -40,7 +41,7 @@
   <div id="custom-player-snackbar" class="mat-simple-snackbar" [ngClass]="selectedPlayers?.length ? 'd-flex align-items-center' : 'd-none'">
     <span>{{ selectedPlayers?.length }} {{ selectedPlayers?.length > 1 ? 'Players' : 'Player' }} Selected.</span>
     <span class="ml-auto">
-      <button color="accent" mat-button class="mat-button mat-button-base">MOVE</button>
+      <button (click)="movePlayers()" color="accent" mat-button class="mat-button mat-button-base">MOVE</button>
       <button (click)="deletePlayers()" color="warn" mat-button class="mat-button mat-button-base">DELETE</button>
     </span>
   </div>

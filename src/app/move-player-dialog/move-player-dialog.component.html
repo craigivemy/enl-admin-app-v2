@@ -1,1 +1,15 @@
-<p>move-player-dialog works!</p>
+<h1 mat-dialog-title>Move Players</h1>
+<div mat-dialog-content>
+  Move from {{ fromTeamName }} to
+  <mat-form-field>
+    <mat-select [(value)]="newTeam">
+      <mat-option *ngFor="let team of teams$ | async" [value]="team" [disabled]="team.id === fromTeamId">
+        {{ team.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="movePlayers(newTeam)">Save</button>
+</div>

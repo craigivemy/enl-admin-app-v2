@@ -17,12 +17,20 @@ export class TeamService {
   constructor(private http: HttpClient) { }
 
   // gets all teams, returns 1 if team active in passed season id, 0 if not
-  getTeams(seasonId: number): Observable<Team[]> {
-    return this.http.get(`${this.teamsApiUrl}/?seasonId=${seasonId}&withPlayers=1`)
-      .pipe(
-        tap(data => console.log(data)),
-        map(teams => teams["data"])
-      );
+  getTeams(seasonId?: number): Observable<Team[]> {
+    if (seasonId) {
+      return this.http.get(`${this.teamsApiUrl}/?seasonId=${seasonId}&withPlayers=1`)
+        .pipe(
+          tap(data => console.log(data)),
+          map(teams => teams["data"])
+        );
+    } else {
+      return this.http.get(`${this.teamsApiUrl}`)
+        .pipe(
+          tap(data => console.log(data)),
+          map(teams => teams["data"])
+        );
+    }
   }
 
   getTeamById(teamId: number): Observable<Team> {
@@ -81,8 +89,29 @@ export class TeamService {
         map(updatedTeam => updatedTeam["data"])
       );
   }
+
+  addPlayersToTeam(teamId: number, players: Player[], seasonId: number) {
+    return this.http.put(`${this.teamsApiUrl}/${teamId}?addPlayers=1`, {
+      players,
+      seasonId
+    })
+      .pipe(
+        map(updatedTeams => updatedTeams["data"])
+      );
+  }
+
+  movePlayers(teamId, ids: number[], seasonId, newTeamId: number) {
+    return this.http.put(`${this.teamsApiUrl}/${teamId}?movePlayers=1`, {
+      ids,
+      newTeamId,
+      seasonId
+    })
+      .pipe(
+        map(updatedTeams => updatedTeams["data"])
+      );
+  }
 // teamId: number, playerId: number
-  deletePlayersFromTeam(teamId, ids: number[], seasonId) {
+  deletePlayersFromTeam(teamId, ids: number[], seasonId: number) {
     return this.http.put(`${this.teamsApiUrl}/${teamId}?deletePlayers=1`, {
       ids,
       seasonId

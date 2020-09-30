@@ -10,10 +10,10 @@ export class MessengerService {
     private snackbar: MatSnackBar
   ) { }
 
-  sendMessage(message: string, delay?: number) {
+  sendMessage(message: string, delay: number = 500, duration: number = 2000) {
     setTimeout(() => {
       return this.snackbar.open(message, '', {
-        duration: 2000
+        duration
       });
     }, delay);
   }

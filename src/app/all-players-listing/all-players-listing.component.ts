@@ -10,6 +10,10 @@ import {Team} from "../models/team";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {TeamService} from "../team.service";
 import {Update} from "@ngrx/entity";
+import {ConfirmDeleteComponent} from "../confirm-delete/confirm-delete.component";
+import {MessengerService} from "../messenger.service";
+import {MovePlayerDialogComponent} from "../move-player-dialog/move-player-dialog.component";
+import {AddPlayerDialogComponent} from "../add-player-dialog/add-player-dialog.component";
 
 @Component({
   selector: 'app-all-players-listing',
@@ -20,12 +24,14 @@ export class AllPlayersListingComponent implements OnInit {
   teams$: Observable<Team[]>;
   selectedPlayers: [];
   selectedTeamId: number;
+  selectedTeamName: string;
   seasonId: number;
   constructor(
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private teamService: TeamService
+    private teamService: TeamService,
+    public messengerService: MessengerService
   ) { }
 
   ngOnInit() {
@@ -40,18 +46,47 @@ export class AllPlayersListingComponent implements OnInit {
       });
   }
 
-  updateSelectedTeamId(teamId: number) {
-    this.selectedTeamId = teamId;
+  updateSelectedTeamId(team: Team) {
+    if (team) {
+      this.selectedTeamId = team.id;
+      this.selectedTeamName = team.name;
+    }
   }
 
   deletePlayers() {
-    this.teamService.deletePlayersFromTeam(this.selectedTeamId, this.selectedPlayers, this.seasonId).subscribe(updates => {
-        const updatedTeam: Update<Team> = {
-          id: this.selectedTeamId,
-          changes: updates
-        };
-        this.store.dispatch(updateTeam({team: updatedTeam}));
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent);
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.teamService.deletePlayersFromTeam(this.selectedTeamId, this.selectedPlayers, this.seasonId).subscribe(updates => {
+            const updatedTeam: Update<Team> = {
+              id: this.selectedTeamId,
+              changes: updates
+            };
+            this.store.dispatch(updateTeam({team: updatedTeam}));
+            this.selectedPlayers = [];
+            this.messengerService.sendMessage('Successfully removed from season');
+          }
+        );
+      } else {
+        dialogRef.close();
       }
+    });
+  }
+
+  movePlayers() {
+    const dialogRef = this.dialog.open(MovePlayerDialogComponent, {
+      data: {teamName: this.selectedTeamName, teamId: this.selectedTeamId, playerIds: this.selectedPlayers}
+    });
+    dialogRef.afterClosed().subscribe(
+      () => this.selectedPlayers = []
     );
   }
+
+  addPlayer(team) {
+    this.selectedPlayers = [];
+    const dialogRef = this.dialog.open(AddPlayerDialogComponent, {
+      data: {team}
+    });
+  }
+
 }

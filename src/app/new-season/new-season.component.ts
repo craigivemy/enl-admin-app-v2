@@ -93,7 +93,7 @@ export class NewSeasonComponent implements OnInit {
       skipWhile(seasonId => seasonId < 0)
     )
       .subscribe(seasonId => {
-      this.teamService.getTeams(seasonId).subscribe(teams => {
+      this.teamService.getTeams().subscribe(teams => {
         this.teams = teams.filter(team => !team.deletedAt);
       });
     });

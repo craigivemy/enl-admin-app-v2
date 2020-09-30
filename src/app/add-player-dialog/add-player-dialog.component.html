@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Add Players to {{ team.name }}</h1>
+<div mat-dialog-content>
+    <div *ngFor="let player of players.controls; let i = index;">
+      <ng-container [formGroup]="player" class="flex-column">
+        <mat-form-field class="mr-2">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="forename" />
+        </mat-form-field>
+        <mat-form-field class="mr-1">
+          <mat-label>Surname</mat-label>
+          <input matInput formControlName="surname" />
+        </mat-form-field>
+        <button (click)="removePlayerGroup(i)" mat-icon-button><mat-icon>remove_circle_outline</mat-icon></button>
+      </ng-container>
+    </div>
+  <button class="float-right" (click)="addPlayerGroup()" mat-icon-button><mat-icon>add_circle_outline</mat-icon></button>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+</div>

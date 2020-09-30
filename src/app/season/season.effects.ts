@@ -32,7 +32,7 @@ export class SeasonEffects {
   addSeasonRedirect$ = createEffect(() => this.actions$.pipe(
     // todo - should be add season success?
     ofType(SeasonActions.addSeason),
-    tap(() => window.location.href = '/teams')
+    tap(() => window.location.href = '/configure-players')
   ),
 {dispatch: false}
   );

@@ -28,9 +28,10 @@ mat-card {
   margin-top: 50px;
   padding-top: 0;
   min-height: 504px;
+  position: relative;
   .mat-card-content {
-    max-height: 400px;
-    min-height: 400px;
+    max-height: 395px;
+    min-height: 395px;
     overflow: scroll;
   }
 }
@@ -38,4 +39,9 @@ svg {
   max-width: 120px;
   margin-left: auto;
   margin-top: -35px;
+}
+.floating-add {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
 }
