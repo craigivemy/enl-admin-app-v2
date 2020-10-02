@@ -4,20 +4,20 @@
     <div class="row align-items-center flex-column h-100">
       <div class="col-10 col-md-6 col-lg-4">
         <img class="enl-large-type" src="../../assets/img/enl-words.png">
-        <form>
+        <form [formGroup]="loginForm" (submit)="submit()">
           <div class="form-header">
             <h4 class="text-center">Welcome to ENL</h4>
           </div>
           <div class="form-inner">
             <mat-form-field>
               <mat-label>Username</mat-label>
-              <input matInput>
+              <input formControlName="email" matInput>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Password</mat-label>
-              <input type="password" matInput>
+              <input formControlName="password" type="password" matInput>
             </mat-form-field>
-            <button class="w-100 btn-submit my-4" mat-button type="submit">Login</button>
+            <button class="w-100 btn-submit my-4" mat-button>Login</button>
           </div>
         </form>
       </div>

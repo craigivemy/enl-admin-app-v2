@@ -8,5 +8,6 @@ export enum ApiRoutes {
   Players = 'players',
   Tables = 'divisions-tables',
   Settings = 'settings',
-  Statistics = 'statistics'
+  Statistics = 'statistics',
+  Authenticate = 'oauth/token'
 }

@@ -20,7 +20,7 @@ import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
 import { HomeComponent } from './home/home.component';
 import { NewSeasonComponent } from './new-season/new-season.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -68,6 +68,7 @@ import { EditFixtureDialogComponent } from './edit-fixture-dialog/edit-fixture-d
 import { MovePlayerDialogComponent } from './move-player-dialog/move-player-dialog.component';
 import { AddPlayerDialogComponent } from './add-player-dialog/add-player-dialog.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
+import {TokenInterceptorService} from "./token-interceptor.service";
 
 registerLocaleData(localeGb);
 
