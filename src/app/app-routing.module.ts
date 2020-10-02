@@ -13,21 +13,28 @@ import {TeamResolverService} from './team/team-resolver.service';
 import {PlayedUpComponent} from "./played-up/played-up.component";
 import {DeductPointsComponent} from "./deduct-points/deduct-points.component";
 import {UmpireListingComponent} from "./umpire-listing/umpire-listing.component";
+import {AppWrapperComponent} from "./app-wrapper/app-wrapper.component";
+import {LoginScreenComponent} from "./login-screen/login-screen.component";
+import {AppComponent} from "./app.component";
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, data: { displayTitle: 'Home' } },
-  { path: 'teams', component: DivisionsTeamsListingComponent, data: { displayTitle: 'Teams' } },
-  { path: 'teams/:id', component: TeamComponent, resolve: { team: TeamResolverService }},
-  { path: 'tables', component: TablesComponent, data: { displayTitle: 'Tables' } },
-  { path: 'fixtures', component: FixtureListingComponent, data: { displayTitle: 'Fixtures' } },
-  { path: 'results', component: ResultListingComponent, data: { displayTitle: 'Results' } },
-  { path: 'umpires', component: UmpireListingComponent, data: { displayTitle: 'Umpires' } },
-  { path: 'new-season', component: NewSeasonComponent, data: { displayTitle: 'New Season' } },
-  { path: 'configure-teams', component: AllTeamsListingComponent, data: { displayTitle: 'Configure Teams' } },
-  { path: 'played-up-table', component: PlayedUpComponent, data: { displayTitle: 'Played Up Table' } },
-  { path: 'deduct-points', component: DeductPointsComponent, data: { displayTitle: 'Deduct Points' }},
-  { path: 'configure-players', component: AllPlayersListingComponent, data: { displayTitle: 'Players' }}
+  { path: 'login', component: LoginScreenComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
+      { path: '', component: AppWrapperComponent, children: [
+          { path: 'dashboard', component: HomeComponent, data: { displayTitle: 'Home' } },
+          { path: 'teams', component: DivisionsTeamsListingComponent, data: { displayTitle: 'Teams' } },
+          { path: 'teams/:id', component: TeamComponent, resolve: { team: TeamResolverService }},
+          { path: 'tables', component: TablesComponent, data: { displayTitle: 'Tables' } },
+          { path: 'fixtures', component: FixtureListingComponent, data: { displayTitle: 'Fixtures' } },
+          { path: 'results', component: ResultListingComponent, data: { displayTitle: 'Results' } },
+          { path: 'umpires', component: UmpireListingComponent, data: { displayTitle: 'Umpires' } },
+          { path: 'new-season', component: NewSeasonComponent, data: { displayTitle: 'New Season' } },
+          { path: 'configure-teams', component: AllTeamsListingComponent, data: { displayTitle: 'Configure Teams' } },
+          { path: 'played-up-table', component: PlayedUpComponent, data: { displayTitle: 'Played Up Table' } },
+          { path: 'deduct-points', component: DeductPointsComponent, data: { displayTitle: 'Deduct Points' }},
+          { path: 'configure-players', component: AllPlayersListingComponent, data: { displayTitle: 'Players' }}
+        ]}
 
 ];
 

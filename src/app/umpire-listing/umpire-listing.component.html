@@ -1,14 +1,22 @@
-<div class="container-fluid py-3">
+<div class="container py-3">
   <div class="row">
-    <div class="col justify-content-end d-flex">
+    <div class="col justify-content-end d-flex mb-5">
       <button (click)="openAddDialog()" mat-fab color="accent"><mat-icon>add</mat-icon></button>
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-sm-6">
-      <mat-list>
-        <mat-list-item *ngFor="let umpire of umpires$ | async">
-          {{ umpire.forename }} {{ umpire.surname }} <button class="ml-auto" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+    <div *ngFor="let umpire of umpires$ | async; let i = index;" class="col-6 col-lg-4 mb-3">
+      <mat-card class="h-100 d-flex flex-column">
+      <mat-card-header>
+        <div mat-card-avatar class="initials-avatar palette index-{{ i + 1 }} d-flex flex-column align-items-center justify-content-center"><span>{{ umpire.forename.charAt(0) }}{{ umpire.surname.charAt(0) }}</span></div>
+        <mat-card-title>{{ umpire.forename }} {{ umpire.surname }}</mat-card-title>
+        <mat-card-subtitle>{{ umpire.email}}<br>{{ umpire.phone }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        {{ umpire.about }}
+      </mat-card-content>
+        <mat-card-actions class="mt-auto">
+          <button class="ml-auto" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
           <mat-menu #menu="matMenu">
             <button (click)="openEditDialog(umpire)" mat-menu-item>
               <mat-icon>edit</mat-icon>
@@ -18,12 +26,19 @@
               <mat-icon>delete_outline</mat-icon>
               <span>Delete</span>
             </button>
+            <a href="mailto:{{ umpire.email }}" mat-menu-item>
+              <mat-icon>alternate_email</mat-icon>
+              <span>Email</span>
+            </a>
+            <a href="tel:{{ umpire.phone }}" mat-menu-item>
+              <mat-icon>phone</mat-icon>
+              <span>Phone</span>
+            </a>
           </mat-menu>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-      </mat-list>
+        </mat-card-actions>
+    </mat-card>
     </div>
-  </div>
+    </div>
 </div>
 
 

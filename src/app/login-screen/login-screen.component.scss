@@ -1,0 +1,39 @@
+.fullscreen-bg {
+  background-image: linear-gradient(27deg, #5A0891 8%, #830BD3 100%);
+  height: 100vh;
+  padding: 25px;
+  overflow: hidden;
+}
+form {
+  background: #EEF4F9;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 5px 40px;
+  .mat-form-field {
+    width: 100%;
+  }
+}
+.form-inner {
+  padding: 25px;
+}
+.form-header {
+  padding-top: 25px;
+  font-family: "Roboto Slab", serif;
+}
+.btn-submit {
+  background-image: linear-gradient(27deg, #830BD3 8%, #5A0891 100%);
+  color: #FFF;
+ // font-weight: bold;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 14px;
+}
+.enl-large-type {
+  position: relative;
+  left: 25px;
+  width: 300px;
+  height: auto;
+}
+.logo-login {
+  width: 100px;
+  height: auto;
+}

@@ -1,3 +1,13 @@
-.mat-list-item {
-  background: #FFF;
+.initials-avatar {
+  text-transform: uppercase;
+  color: #FFF;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: bold;
+}
+::ng-deep .mat-card-header-text {
+  width: calc(100% - 66px);
+  margin-right: 0 !important;
 }

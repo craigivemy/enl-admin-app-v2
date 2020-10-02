@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="433px" height="312px" viewBox="0 0 433 312" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 7</title>
+    <defs>
+        <filter x="-1.0%" y="-4.3%" width="101.9%" height="108.5%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-1.6%" y="-3.9%" width="103.2%" height="107.8%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-1.5%" y="-3.9%" width="103.0%" height="107.8%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Home" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-7" transform="translate(3.000000, 4.152193)">
+            <g id="Group" filter="url(#filter-1)" transform="translate(213.500000, 58.000000) rotate(-3.000000) translate(-213.500000, -58.000000) translate(3.000000, 11.000000)">
+                <polygon id="Rectangle" fill="#FFFFFF" fill-rule="nonzero" points="0.25074911 0.776787431 416.069341 0.360183033 415.977964 93.3044805 0.159371258 93.7210849"></polygon>
+                <text id="Encouraging" font-family="Helvetica" font-size="70" font-weight="normal" line-spacing="80" fill="#111111">
+                    <tspan x="13.7351641" y="71.4277173">Encouraging</tspan>
+                </text>
+            </g>
+            <g id="Group-Copy-2" filter="url(#filter-2)" transform="translate(191.208225, 249.747579) rotate(1.000000) translate(-191.208225, -249.747579) translate(64.708225, 198.247579)">
+                <polygon id="Rectangle-Copy-3" fill="#FFFFFF" fill-rule="nonzero" points="1.16906332 3.37805839 252.565507 0.0591505806 251.525056 98.6684055 0.128612066 101.987313"></polygon>
+                <text id="Locally" font-family="Helvetica" font-size="70" font-weight="normal" line-spacing="80" fill="#111111">
+                    <tspan x="13.9638631" y="78.1613804">Locally</tspan>
+                </text>
+            </g>
+            <g id="Group-Copy" filter="url(#filter-3)" transform="translate(125.828693, 101.047693)">
+                <polygon id="Rectangle-Copy-2" fill="#FFFFFF" fill-rule="nonzero" points="1.10531368 3.66814295 267.383658 0.714140098 266.484131 98.9157581 0.205786496 101.869761"></polygon>
+                <text id="Netball" font-family="Helvetica" font-size="70" font-weight="normal" line-spacing="80" fill="#111111">
+                    <tspan x="15.5879182" y="76.804622">Netball</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

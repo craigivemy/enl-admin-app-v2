@@ -67,6 +67,7 @@ import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.componen
 import { EditFixtureDialogComponent } from './edit-fixture-dialog/edit-fixture-dialog.component';
 import { MovePlayerDialogComponent } from './move-player-dialog/move-player-dialog.component';
 import { AddPlayerDialogComponent } from './add-player-dialog/add-player-dialog.component';
+import { LoginScreenComponent } from './login-screen/login-screen.component';
 
 registerLocaleData(localeGb);
 
@@ -99,6 +100,7 @@ registerLocaleData(localeGb);
     EditFixtureDialogComponent,
     MovePlayerDialogComponent,
     AddPlayerDialogComponent,
+    LoginScreenComponent,
   ],
   imports: [
     BrowserModule,
