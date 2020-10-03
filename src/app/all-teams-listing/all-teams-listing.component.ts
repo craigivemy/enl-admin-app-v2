@@ -18,6 +18,7 @@ import {selectCurrentSeasonId} from "../season/season.selectors";
 import {EditTeamDialogComponent} from "../edit-team-dialog/edit-team-dialog.component";
 import {ConfirmDeleteComponent} from "../confirm-delete/confirm-delete.component";
 import {MessengerService} from "../messenger.service";
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-all-teams-listing',
@@ -35,8 +36,11 @@ export class AllTeamsListingComponent implements OnInit {
     private store: Store<AppState>,
     private teamService: TeamService,
     private messengerService: MessengerService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private pageTitleService: PageTitleService
+  ) {
+    pageTitleService.title.next('All Teams');
+  }
 
   ngOnInit() {
     this.store.pipe(select(selectCurrentSeasonId))

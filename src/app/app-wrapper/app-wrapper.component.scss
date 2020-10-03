@@ -5,12 +5,15 @@
   width: 250px;
   background: #4E546C;
 }
-.mat-expansion-panel {
+.mat-expansion-panel, .logout {
   background: #4E546C;
   box-shadow: none;
 }
-.mat-expansion-panel-header {
+.mat-expansion-panel-header, .logout {
   padding: 0 16px;
+}
+.logout {
+  border: none;
 }
 ::ng-deep .nav-submenu .mat-expansion-panel-body {
   padding: 0;

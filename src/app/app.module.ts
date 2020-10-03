@@ -68,6 +68,9 @@ import { EditFixtureDialogComponent } from './edit-fixture-dialog/edit-fixture-d
 import { MovePlayerDialogComponent } from './move-player-dialog/move-player-dialog.component';
 import { AddPlayerDialogComponent } from './add-player-dialog/add-player-dialog.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
+import {JwtModule} from "@auth0/angular-jwt";
+import {JwtInterceptor} from "./_helpers/jwt.interceptor";
+import {ErrorInterceptor} from "./_helpers/error.interceptor";
 registerLocaleData(localeGb);
 
 @NgModule({
@@ -125,6 +128,18 @@ registerLocaleData(localeGb);
         strictActionImmutability: true,
       }
     }),
+    // JwtModule.forRoot({
+    //   config: {
+    //     tokenGetter: () => {
+    //       const user: any = localStorage.getItem('currentUser');
+    //       console.log(user);
+    //       return user;
+    //     },
+    //     skipWhenExpired: true,
+    //     whitelistedDomains: ['api.enl.cidev.com'],
+    //     // todo - add whitelisted domains here
+    //   }
+    // }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
     StoreModule.forFeature(fromSeason.seasonFeatureKey, fromSeason.reducer),
@@ -140,6 +155,8 @@ registerLocaleData(localeGb);
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {disableClose: true, hasBackdrop: true}},
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ThemeService
   ],
   entryComponents: [

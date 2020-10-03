@@ -15,8 +15,7 @@ import {SettingService} from '../setting.service';
 import {map, skipWhile, tap} from 'rxjs/operators';
 import {fixtureTimes} from "../../data/fixture-times";
 import {selectCurrentSeasonId} from "../season/season.selectors";
-import {loadTeams} from "../team/team.actions";
-import {selectOnlyNonDeletedTeams} from "../team/team.selectors";
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-new-season',
@@ -56,7 +55,11 @@ export class NewSeasonComponent implements OnInit {
     private divisionService: DivisionService,
     private settingService: SettingService,
     private teamService: TeamService,
-    private seasonService: SeasonService) { }
+    private seasonService: SeasonService,
+    private pageTitleService: PageTitleService
+  ) {
+    pageTitleService.title.next('Set Up a New Season');
+  }
 
   ngOnInit() {
     this.divisions = this.divisionService.getDivisions();

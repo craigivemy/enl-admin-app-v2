@@ -13,6 +13,7 @@ import {tap} from "rxjs/operators";
 import {ConfirmDeleteComponent} from "../confirm-delete/confirm-delete.component";
 import {UmpireService} from "../umpire.service";
 import {MessengerService} from "../messenger.service";
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-umpire-listing',
@@ -25,8 +26,11 @@ export class UmpireListingComponent implements OnInit {
     private store: Store<AppState>,
     private dialog: MatDialog,
     private umpireService: UmpireService,
-    private messengerService: MessengerService
-  ) { }
+    private messengerService: MessengerService,
+    private pageTitleService: PageTitleService
+  ) {
+    pageTitleService.title.next('Umpires');
+  }
 
   ngOnInit() {
     this.store.dispatch(loadUmpires());

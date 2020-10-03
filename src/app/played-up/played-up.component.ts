@@ -8,6 +8,7 @@ import {loadAllPlayedUpPlayers} from "../team/team.actions";
 import {selectCurrentSeasonId} from "../season/season.selectors";
 import {MatBottomSheet} from "@angular/material";
 import {PlayedUpBottomsheetComponent} from "../played-up-bottomsheet/played-up-bottomsheet.component";
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-played-up',
@@ -19,8 +20,11 @@ export class PlayedUpComponent implements OnInit {
   columnsToDisplay = ['name', 'teamName', 'playedUpCount', 'info'];
   constructor(
     private store: Store<AppState>,
-    public bottomSheet: MatBottomSheet
-  ) { }
+    public bottomSheet: MatBottomSheet,
+    private pageTitleService: PageTitleService
+  ) {
+    pageTitleService.title.next('Played Up Table');
+  }
 
   ngOnInit() {
     this.store

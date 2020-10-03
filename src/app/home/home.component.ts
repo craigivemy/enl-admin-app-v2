@@ -7,6 +7,7 @@ import {Label, MultiDataSet, SingleDataSet, ThemeService} from "ng2-charts";
 import {ChartType} from "chart.js";
 import {StatisticService} from "../statistic.service";
 import {skipWhile} from "rxjs/operators";
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-home',
@@ -38,8 +39,11 @@ export class HomeComponent implements OnInit {
   };
   constructor(
     private store: Store<AppState>,
-    private statisticService: StatisticService
-  ) { }
+    private statisticService: StatisticService,
+    private pageTitleService: PageTitleService
+  ) {
+    pageTitleService.title.next('Dashboard');
+  }
 
   ngOnInit() {
     this.store

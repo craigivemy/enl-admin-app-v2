@@ -15,13 +15,12 @@ import {DeductPointsComponent} from "./deduct-points/deduct-points.component";
 import {UmpireListingComponent} from "./umpire-listing/umpire-listing.component";
 import {AppWrapperComponent} from "./app-wrapper/app-wrapper.component";
 import {LoginScreenComponent} from "./login-screen/login-screen.component";
-import {AppComponent} from "./app.component";
-
+import {AuthGuard} from "./_helpers/auth.guard";
 
 const routes: Routes = [
   { path: 'login', component: LoginScreenComponent },
   { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
-      { path: '', component: AppWrapperComponent, children: [
+      { path: '', component: AppWrapperComponent, canActivate: [AuthGuard], children: [
           { path: 'dashboard', component: HomeComponent, data: { displayTitle: 'Home' } },
           { path: 'teams', component: DivisionsTeamsListingComponent, data: { displayTitle: 'Teams' } },
           { path: 'teams/:id', component: TeamComponent, resolve: { team: TeamResolverService }},

@@ -9,6 +9,7 @@ import {filter} from "rxjs/operators";
 import {loadTables} from "./table.actions";
 import {Table} from "../models/table";
 import {selectAllTables, selectTableByDivisionId} from './table.selectors';
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-tables',
@@ -22,8 +23,11 @@ export class TablesComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private divisionService: DivisionService,
+    private pageTitleService: PageTitleService
 
-  ) { }
+  ) {
+    pageTitleService.title.next('Tables');
+  }
 
   ngOnInit() {
     this.store.pipe(

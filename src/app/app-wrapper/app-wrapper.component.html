@@ -63,12 +63,25 @@
             </mat-nav-list>
           </mat-expansion-panel>
         </mat-accordion>
+        <button class="logout" mat-list-item (click)="logout()">
+          <i class="material-icons pr-2">power_settings_new</i>
+          Logout
+        </button>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
       <mat-toolbar color="primary">
         <button (click)="drawer.toggle()" mat-icon-button><mat-icon>menu</mat-icon></button>
         <h1 class="mat-headline">{{ displayTitle }}</h1>
+        <button [matMenuTriggerFor]="loggedInUserMenu" class="initials-avatar palette index-2 d-flex flex-column align-items-center justify-content-center ml-auto">
+          {{ currentUser.first_name.charAt(0) }}{{ currentUser.last_name.charAt(0) }}
+        </button>
+        <mat-menu #loggedInUserMenu="matMenu">
+          <button (click)="logout()" mat-menu-item>
+            <mat-icon>power_settings_new</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
       </mat-toolbar>
       <router-outlet class="bg"></router-outlet>
     </mat-sidenav-content>

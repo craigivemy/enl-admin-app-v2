@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticateService} from "../authenticate.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-screen',
@@ -10,10 +10,13 @@ import {Router} from "@angular/router";
 })
 export class LoginScreenComponent implements OnInit {
   loginForm: FormGroup;
+  returnUrl: string;
+  error = '';
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticateService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -22,6 +25,7 @@ export class LoginScreenComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
 
   submit() {
@@ -33,11 +37,9 @@ export class LoginScreenComponent implements OnInit {
       client_secret: 'Cbgm6niSmTPhx795IMua9T2uskFcTrjIFDNR17XO',
       scope: '*'
     };
-    console.log(data);
     this.authService.login(data).subscribe(
       (response: any) => {
-        localStorage.setItem('token', response.access_token);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate([this.returnUrl]);
       }
     );
   }

@@ -13,6 +13,7 @@ import {FormControl} from '@angular/forms';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {Match} from '../models/match';
 import {MatchDialogComponent} from '../match-dialog/match-dialog.component';
+import {PageTitleService} from "../page-title.service";
 
 moment.locale('en-gb');
 
@@ -30,8 +31,11 @@ export class ResultListingComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private divisionService: DivisionService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private pageTitleService: PageTitleService
+  ) {
+    pageTitleService.title.next('Results');
+  }
 
   ngOnInit() {
     this.store.pipe(

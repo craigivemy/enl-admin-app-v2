@@ -14,6 +14,7 @@ import {ConfirmDeleteComponent} from "../confirm-delete/confirm-delete.component
 import {MessengerService} from "../messenger.service";
 import {MovePlayerDialogComponent} from "../move-player-dialog/move-player-dialog.component";
 import {AddPlayerDialogComponent} from "../add-player-dialog/add-player-dialog.component";
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-all-players-listing',
@@ -31,8 +32,11 @@ export class AllPlayersListingComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private teamService: TeamService,
-    public messengerService: MessengerService
-  ) { }
+    public messengerService: MessengerService,
+    private pageTitleService: PageTitleService
+  ) {
+    pageTitleService.title.next('Players');
+  }
 
   ngOnInit() {
     this.store.pipe(select(selectCurrentSeasonId))

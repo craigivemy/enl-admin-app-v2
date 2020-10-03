@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import {Match} from "../models/match";
 import {MatDialog, MatTable} from "@angular/material";
 import {EditFixtureDialogComponent} from "../edit-fixture-dialog/edit-fixture-dialog.component";
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-fixture-listing',
@@ -22,8 +23,10 @@ export class FixtureListingComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private pageTitleService: PageTitleService
   ) {
+    pageTitleService.title.next('Fixtures');
   }
 
   ngOnInit() {

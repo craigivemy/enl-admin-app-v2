@@ -8,6 +8,7 @@ import {Division} from "../models/division";
 import {selectAllDivisionsWithTeams} from "../division/division.selectors";
 import {map} from 'rxjs/operators';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-team-listing',
@@ -20,7 +21,10 @@ export class DivisionsTeamsListingComponent implements OnInit {
   controls: FormArray;
   constructor(
     private store: Store<AppState>,
-  ) { }
+    private pageTitleService: PageTitleService
+  ) {
+    pageTitleService.title.next('Teams');
+  }
 
   ngOnInit() {
     this.store

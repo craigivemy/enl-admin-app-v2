@@ -15,6 +15,7 @@ import {selectTableByDivisionId} from "../tables/table.selectors";
 import {Table} from "../models/table";
 import {MatDialog} from "@angular/material";
 import {DeductPointsDialogComponent} from "../deduct-points-dialog/deduct-points-dialog.component";
+import {PageTitleService} from "../page-title.service";
 
 @Component({
   selector: 'app-deduct-points',
@@ -28,8 +29,11 @@ export class DeductPointsComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private divisionService: DivisionService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private pageTitleService: PageTitleService
+  ) {
+    pageTitleService.title.next('Deduct Points');
+  }
 
   ngOnInit() {
     this.store.pipe(
