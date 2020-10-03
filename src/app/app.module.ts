@@ -68,8 +68,6 @@ import { EditFixtureDialogComponent } from './edit-fixture-dialog/edit-fixture-d
 import { MovePlayerDialogComponent } from './move-player-dialog/move-player-dialog.component';
 import { AddPlayerDialogComponent } from './add-player-dialog/add-player-dialog.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
-import {TokenInterceptorService} from "./token-interceptor.service";
-
 registerLocaleData(localeGb);
 
 @NgModule({
