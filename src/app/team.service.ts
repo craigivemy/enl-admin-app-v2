@@ -62,7 +62,7 @@ export class TeamService {
   }
 
   addTeam(team: Team): Observable<Team> {
-    return this.http.post(`${this.teamsApiUrl}`, {team})
+    return this.http.post(`${this.teamsApiUrl}`, {team }, )
       .pipe(
         map(newTeam => newTeam["data"])
       );

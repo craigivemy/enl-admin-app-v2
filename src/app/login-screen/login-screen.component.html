@@ -16,9 +16,11 @@
             <mat-form-field>
               <mat-label>Password</mat-label>
               <input formControlName="password" type="password" matInput>
+              <mat-error *ngIf="loginForm.controls.password.hasError('credentials')">Invalid credentials</mat-error>
             </mat-form-field>
             <button class="w-100 btn-submit my-4" mat-button>Login</button>
           </div>
+
         </form>
       </div>
     </div>
