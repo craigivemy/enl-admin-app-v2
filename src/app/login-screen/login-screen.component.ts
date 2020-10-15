@@ -38,8 +38,8 @@ export class LoginScreenComponent implements OnInit {
       username: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
       grant_type: 'password',
-      client_id: '7',
-      client_secret: 'hiZ1ZFdH8xF612RxuXIx0PHhraAIb2VkXHHMhkFK',
+      client_id: '2',
+      client_secret: '9bG0bU541YIpEH6kCT32EWx2r8H0k4dUoX6qqGW6',
       scope: '*'
     };
     this.authService.login(data).subscribe(
